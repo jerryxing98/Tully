@@ -3,3 +3,4 @@
 *.pyc
 *.bak
 local_settings.py
+blogenv/*.*
