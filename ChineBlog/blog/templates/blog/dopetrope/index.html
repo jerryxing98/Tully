@@ -1,0 +1,16 @@
+{% extends "blog/dopetrope/base.html" %}
+
+{% block css %}
+	<link type="text/css" rel="stylesheet" href="/static/blog/coolblue/css/SyntaxHighlighter/shCoreEclipse.css"><link>
+{% endblock %}
+
+{% block js %}
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shCore.js"></script> 
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shAutoloader.js"></script>
+	<script language="JavaScript" src="/static/blog/coolblue/js/loadSyntaxHighlighter.js"></script>
+{% endblock %}
+
+{% block main %}
+	<!-- Content -->
+	{% include "blog/dopetrope/articles.html" %}
+{% endblock %}

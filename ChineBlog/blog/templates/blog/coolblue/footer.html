@@ -1,0 +1,121 @@
+<!-- extra -->
+<div id="extra-wrap"><div id="extra" class="clearfix">
+
+	    <div class="col first">
+
+		    <h3>联系信息</h3>
+
+		    <p>
+			<strong>QQ： </strong>419964206<br/>
+			</p>
+	
+	        <p><strong>E-mail: </strong>jerryxing98@gmail.com</p>
+			<p><strong>更多信息 - 请访问</strong> <a href="{% url blog_about %}">关于作者</a></p>
+
+            <h3>获取更新</h3>
+
+            <ul class="subscribe-stuff">
+      	        <li><a title="RSS" href="{% url blog_rss %}" rel="nofollow">
+				<img alt="RSS" title="RSS" src="/static/blog/coolblue/images/social_rss.png" /></a>
+			    </li>
+      	        <li><a title="Renren" href="http://www.renren.com/profile.do?id=722143160" rel="nofollow">
+				<img alt="Renren" title="Renren" src="/static/blog/coolblue/images/renren.png" style="width: 48px; height: 48px;" /></a>
+			    </li>
+			    <li><a title="Weibo" href="http://t.sina.com.cn/chinekingseu" rel="nofollow">
+				<img alt="Weibo" title="Weibo" src="/static/blog/coolblue/images/WeiBo.png" /></a>
+			    </li>
+			    <li><a title="通过邮件订阅" href="#" rel="nofollow">
+				<img alt="通过邮件订阅" title="通过邮件订阅" src="/static/blog/coolblue/images/social_email.png" /></a>
+			    </li>
+            </ul>
+
+            <p style="width: 200px;">保持更新，通过订阅
+		    <a href="{% url blog_rss %}">RSS</a>, <a href="http://www.renren.com/profile.do?id=722143160">人人</a>,
+			<a href="http://t.sina.com.cn/chinekingseu">新浪微博</a> or <a href="index">Email</a>
+		    </p>
+
+	    </div>
+
+	    <div class="col">
+
+   	        <h3>网站链接</h3>
+
+		    <div class="footer-list">
+			    <ul>
+				    <li id="current"><a href="{% url blog_index %}">首页</a></li>
+					<li><a href="{% url blog_categories %}">分类</a></li>
+					<li><a href="{% url blog_contact %}">留言板</a></li>
+					<li><a href="{% url blog_about %}">关于</a></li>
+			    </ul>
+		    </div>
+
+            <h3>好友列表</h3>
+
+		    <div class="footer-list">
+			    <ul>
+				    {% for friend in friends %}
+					<li><a href="{{ friend.site }}"{% if not friend.site %} onclick="return false;"{% endif %}>{{ friend.username }}</a></li>
+					{% endfor %}
+			    </ul>
+		    </div>
+
+	    </div>
+
+        <div class="col">
+
+            <h3>最新评论</h3>
+
+	        <div class="recent-comments">
+                <ul>
+                	{% for comment in recent_comments %}
+			        <li><a href="{% if comment.comment_obj.get_absolute_url %}{{ comment.comment_obj.get_absolute_url }}{% else %}/contact/{% endif %}#comment-{{ comment.id }}" title="{{ comment.content }}">{{ comment.content|safe }}</a><br /> &#45; <cite>{{ comment.username }}</cite></li>
+					{% endfor %}
+			    </ul>
+		    </div>
+
+        </div>
+
+        <div class="col">
+
+            <h3>所有分类</h3>
+
+	        <div class="footer-list">
+			    <ul>
+			    	{% for category in categories %}
+				    <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+				    {% endfor %}
+			    </ul>
+		    </div>
+
+            <h3>友情链接</h3>
+
+	        <div class="footer-list">
+			    <ul>
+			    	{% for link in links %}
+				    <li><a href="{{ link.site }}" title="{{ link.name }}" target="_blank">{{ link.name }}</a></li>
+					{% endfor %}
+			    </ul>
+		    </div>
+
+	    </div>
+
+<!-- /extra -->
+</div></div>
+
+<!-- footer -->
+<footer>
+
+	<p class="footer-left">
+		&copy; 2013 Copyright Info &nbsp; &nbsp; &nbsp;
+		<a href="#" title="翻墙乐趣的博客">翻墙乐趣的博客</a> powered by <a href="http://www.djangoproject.com/" target="_blank">Django</a>
+	</p>
+
+	<p class="footer-right">
+	   	<a href="{% url blog_index %}">Home</a> |
+		<a href="/sitemap.xml">Sitemap</a> |
+		<a href="{% url blog_rss %}">RSS Feed</a> |
+        <a href="#top" class="back-to-top">Back to Top</a>
+    </p>
+
+<!-- /footer -->
+</footer>

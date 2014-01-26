@@ -1,0 +1,23 @@
+{% extends "blog/dopetrope/base.html" %}
+
+{% block title %}
+标签{{ tag.name }} -
+{% endblock %}
+
+{% block css %}
+	<link type="text/css" rel="stylesheet" href="/static/blog/coolblue/css/SyntaxHighlighter/shCoreEclipse.css"><link>
+{% endblock %}
+
+{% block js %}
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shCore.js"></script> 
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shAutoloader.js"></script>
+	<script language="JavaScript" src="/static/blog/coolblue/js/loadSyntaxHighlighter.js"></script> 
+{% endblock %}
+
+{% block main %}
+	<article class="box">
+		<h3>文章标签 &#8216;{{ tag.name }}&#8217;</h3>
+	</article>
+
+	{% include "blog/dopetrope/articles.html" with page_type=2 %}
+{% endblock %}

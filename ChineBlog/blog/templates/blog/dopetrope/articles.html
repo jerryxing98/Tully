@@ -1,0 +1,22 @@
+{% for article in articles %}
+<article class="box is-post">
+	<header>
+		<h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
+		<span class="byline">发表于{{ article.created|date:"Y年n月j日 P" }}&nbsp; &nbsp; 
+			位于分类<a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span>
+	</header>
+	<section>
+		{{ article.abstract|safe }}
+	</section>
+	<footer class="actions">
+		<a href="{{ article.get_absolute_url }}" class="button button-icon button-icon-1">继续阅读</a>
+		<a href="{{ article.get_absolute_url }}#comments" class="button button-alt button-icon button-icon-2">{{ article.visible_comments|length }}个评论</a>
+	</footer>
+</article>
+{% endfor %}
+
+{% if p.num_pages > 1 %}
+<article class="box">
+	{% include "blog/dopetrope/paginator.html" with page_type=page_type|default:0 %}
+</article>
+{% endif %}

@@ -1,0 +1,41 @@
+<!-- Header Wrapper -->
+<div id="header-wrapper">
+	<div class="5grid-layout">
+		<div class="row">
+			<div class="12u">
+			
+				<!-- Header -->
+					<section id="header">
+						
+						<!-- Logo -->
+							<h1 id="logo-text"><a href="/">翻墙乐趣的博客</a></h1>
+						
+						<!-- Nav -->
+							<nav id="nav" class="mobileUI-site-nav">
+								<ul>
+									{% if not nav_current %}
+									<li class="current_page_item"><a href="{% url blog_index %}">首页</a></li>
+									{% else %}
+									<li{% ifequal nav_current 0 %} class="current_page_item"{% endifequal %}><a href="{% url blog_index %}">首页</a></li>
+									{% endif %}
+									<li{% ifequal nav_current 1 %} class="current_page_item"{% endifequal %}>
+										<a href="{% url blog_categories %}">分类</a>
+										<ul>
+											{% for category in categories %}
+											<li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+											{% endfor %}
+										</ul>
+									</li>
+									<li{% ifequal nav_current 2 %} class="current_page_item"{% endifequal %}><a href="{% url blog_contact %}">留言板</a></li>
+									<li{% ifequal nav_current 3 %} class="current_page_item"{% endifequal %}><a href="{% url blog_about %}">关于我</a></li>
+									<li><a href="{% url blog_rss %}">RSS</a></li>
+								</ul>
+							</nav>
+
+					</section>
+
+			</div>
+		</div>
+
+	</div>
+</div>

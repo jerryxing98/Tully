@@ -1,0 +1,36 @@
+<div class="post-bottom-section"{% if nodes|length == 0 %} id="comments"{% endif %}>
+
+    <h4>给作者留言</h4>
+
+    <div class="primary">
+
+    	<form action="{% url blog_comment %}" method="post" id="commentform">
+    		{% csrf_token %}
+    		{{ form.avatar }}
+			{{ form.reply_to_comment }}
+			{{ form.content_type }}
+			{{ form.object_id }}
+       	    <div>
+			    <label for="username">昵称 <span>*</span></label>
+				{{ form.username }}
+			</div>
+            <div>
+				<label for="email_address">电子邮箱（会为你保密） <span>*</span></label>
+				{{ form.email_address }}
+			</div>
+            <div>
+				<label for="site">网址</label>
+				{{ form.site }}
+			</div>
+            <div>
+				<label for="content">您的留言 <span>*</span></label>
+				{{ form.content }}
+			</div>
+            <div class="no-border">
+			    <input class="button" type="submit" value="提交评论" tabindex="5" />
+			</div>
+
+       </form>
+
+    </div>
+</div>

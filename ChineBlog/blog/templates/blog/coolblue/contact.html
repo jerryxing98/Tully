@@ -1,0 +1,41 @@
+{% extends "blog/coolblue/base.html" %}
+
+{% block title %}
+给作者留言 - 
+{% endblock %}
+
+{% block js %}
+	<script src="/static/blog/coolblue/js/comment.js"></script> 
+	<script language="JavaScript">
+		ajaxUrl = "/comment/bloguser/";
+		var commentTips = {
+			success: "<i class='icon-ok'></i>留言成功！",
+			miss: "<i class='icon-exclamation-sign'></i>留言失败，请填写所有必填信息！",
+			fail: "<i class='icon-exclamation-sign'></i>留言失败，请确保全部信息填写正确！",
+			nochn: "<i class='icon-exclamation-sign'></i>留言失败，评论中必须包含中文！"
+		}
+	</script>
+{% endblock %}
+
+{% block header %}
+	{% include "blog/coolblue/nav.html" with nav_current=2 %}
+{% endblock %}
+
+{% block main %}
+
+{% if nodes %}
+<div class="post">
+	<p class="highlight">留言给作者</p>
+</div>
+
+{% include "blog/coolblue/comments.html" %}
+
+{% else %}
+<div class="post">
+	<p class="highlight">目前还没有留言</p> 
+</div>
+{% endif %}
+
+{% include "blog/coolblue/commentform.html" with is_contact=True %}
+
+{% endblock %}

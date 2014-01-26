@@ -1,0 +1,110 @@
+<!-- sidebar -->
+<div id="sidebar">
+
+	    <div class="about-me">
+
+ 	    <h3>关于作者</h3>
+
+        <p>
+        <a href="{% url blog_about %}"><img src="{{ author.small_avatar.url }}" width="42" height="42" alt="firefox" class="align-left" /></a>
+        {{ author.abstract|removetags:"img div p"|safe }}<a href="{% url blog_about %}">了解更多...</a>
+	    </p>
+
+    </div>
+
+	<div class="sidemenu">
+
+		<h3>博客分类</h3>
+        <ul>
+        	{% for category in categories %}
+			<li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+			{% endfor %}
+		</ul>
+
+	</div>
+
+    <div class="sidemenu popular">
+
+		<h3>点击排行</h3>
+		<ul>
+		{% for article in populars %}
+		<li><a href="{{ article.get_absolute_url }}">{{ article.title }}
+				<span>发表于{{ article.created|date:"Y年bj日 P" }}</span></a>
+			</li>
+		{% endfor %}
+		</ul>
+
+	</div>
+	
+	<div class="tagclouds">
+		<h3>标签云</h3>
+		<ul>
+        {% for tag in tags %}
+			<li><a href="{{ tag.get_absolute_url }}" style="font-size: {{tag.font_size}}px;">{{ tag.name }}</a>
+			</li>
+	    {% endfor %}
+		</ul>
+	</div>
+	
+	<div>
+		<h3>扫描访问</h3>
+		<img alt="" src="http://goo.gl/WZkcN.qr" />
+    </div>
+	
+	<div>
+		<h3>主题</h3>
+		<a class="more" href="#" onclick="switchTheme('dopetrope'); return false;" style="margin-bottom: 24px;">切换到新主题</a>
+		<div style="clear: both;"></div>
+    </div>
+	
+	<div>
+		<h3>残阳似血的微博</h3>
+		<iframe width="100%" height="400" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=400&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1883113397&verifier=45ddb58d&dpc=1"></iframe>
+	</div>
+	
+	<div>
+		<h3>喜欢这个博客？</h3>
+		<p style="margin-left: 4px;"><g:plusone href="http://qinxuye.me"></g:plusone></p>
+    </div>
+	
+	<div id="log">
+		<h3>登录</h3>
+		{% if blog_user %}
+			{% if blog_user.auth_type == 0 %}
+		<span class="google_log">{{ blog_user.username }}<a href="{% url social_logout %}" rel="tooltip" data-original-title="点击退出Google账户">×</a></span>
+			{% endif %}
+			{% if blog_user.auth_type == 1 %}
+		<span class="weibo_log">{{ blog_user.username }}<a href="{% url social_logout %}" rel="tooltip" data-original-title="点击退出新浪微博账户">×</a></span>
+			{% endif %}
+			{% if blog_user.auth_type == 3 %}
+		<span class="renren_log">{{ blog_user.username }}<a href="{% url social_logout %}" rel="tooltip" data-original-title="点击退出人人网账户">×</a></span>
+			{% endif %}
+			{% if blog_user.auth_type == 2 %}
+		<span class="txweibo_log">{{ blog_user.username }}<a href="{% url social_logout %}" rel="tooltip" data-original-title="点击退出腾讯微博账户">×</a></span>
+			{% endif %}
+		{% else %}
+			{% if settings.google %}
+		<a href="{% url social_google_login %}" class='login' rel="tooltip" data-original-title="点击用Google账号登陆"><img alt="" src="/static/blog/coolblue/images/google_48.png" ></a>
+			{% endif %}
+			{% if settings.weibo %}
+		<a href="{% url social_weibo_login %}" class='login' rel="tooltip" data-original-title="点击用新浪微博账号登陆"><img alt="" src="/static/blog/coolblue/images/weibo_48.png" ></a>
+			{% endif %}
+			{% if settings.txweibo %}
+		<a href="{% url social_qqweibo_login %}" class='login' rel="tooltip" data-original-title="点击用腾讯微博账号登陆"><img alt="" width="48" src="/static/blog/coolblue/images/txweibo.jpg" ></a>
+			{% endif %}
+			{% if settings.renren %}
+		<a href="{% url social_renren_login %}" class='login' rel="tooltip" data-original-title="点击用人人网账号登陆"><img alt="" width="48" src="/static/blog/coolblue/images/renren_100.png" ></a>
+			{% endif %}
+		{% endif %}
+		
+		<script language="JavaScript">
+			$(function() {
+				$('div#log a').tooltip({
+					placement: 'bottom'
+				});
+			});
+		</script>
+	</div>
+
+<!-- /sidebar -->
+</div>

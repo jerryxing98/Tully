@@ -1,0 +1,57 @@
+{% extends "blog/dopetrope/base.html" %}
+
+{% block title %}
+关于作者 - 
+{% endblock %}
+
+{% block meta %}
+<meta property="og:type" content="webpage" />
+<meta property="og:url" content="http://qinxuye.me" />
+<meta property="og:title" content="残阳似血的博客" />
+<meta property="og:description" content="{{ user.info|striptags|slice:":70" }}..." />
+{% endblock%}
+
+{% block js %}
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block header %}
+	{% include "blog/dopetrope/nav.html" with nav_current=3 %}
+{% endblock %}
+
+{% block main %}
+<article class="box">
+	<header>
+		<h2><a href="{% url blog_about %}">关于作者</a></h2>
+	</header>
+	<section>
+		{{ user.info|safe }}
+	</section>
+</article>
+
+<article class="box">
+	<header>
+		<h2>给博客赞</h2>
+	</header>
+	<section class="likes">
+		<span>
+			<g:plusone size="medium" href="http://qinxuye.me{{ article.get_absolute_url }}"></g:plusone>
+		</span>
+		<span>
+			<wb:like appkey="3BcMNP" type="number" skin="silver"></wb:like>
+		</span>
+	</section>
+</article>
+{% endblock %}
+
+{% block footerjs %}
+<script type="text/javascript">
+  window.___gcfg = {lang: 'zh-CN'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+{% endblock %}

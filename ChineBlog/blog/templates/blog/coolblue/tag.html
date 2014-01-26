@@ -1,0 +1,24 @@
+{% extends "blog/coolblue/base.html" %}
+
+{% block title %}
+标签{{ tag.name }} -
+{% endblock %}
+
+{% block css %}
+	<link type="text/css" rel="stylesheet" href="/static/blog/coolblue/css/SyntaxHighlighter/shCoreEclipse.css"><link>
+{% endblock %}
+
+{% block js %}
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shCore.js"></script> 
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shAutoloader.js"></script>
+	<script language="JavaScript" src="/static/blog/coolblue/js/loadSyntaxHighlighter.js"></script> 
+	<script language="JavaScript" src="/static/blog/coolblue/js/keyboardControl.js"></script>
+{% endblock %}
+
+{% block main %}
+	<div class="post">
+		<p class="highlight">文章标签 &#8216;{{ tag.name }}&#8217;</p>
+	</div>
+
+	{% include "blog/coolblue/articles.html" with page_type=2 %}
+{% endblock %}

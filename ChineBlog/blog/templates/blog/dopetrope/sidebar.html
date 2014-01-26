@@ -1,0 +1,121 @@
+<div class="4u">
+											
+	<!-- Sidebar -->
+		<section id="about-box" class="box about-box">
+			<header>
+				<h3>关于作者</h3>
+			</header>
+			<a href="{% url blog_about %}"><img class="img-box" src="{{ author.small_avatar.url }}" /></a>
+			<p> {{ author.abstract|removetags:"img div p"|safe }}</p>
+			<footer>
+				<a href="{% url blog_about %}" class="button button-alt">了解更多</a>
+			</footer>
+			<div style="clear: both;"></div>
+		</section>
+		<section class="box">
+			<header>
+				<h3>博客分类</h3>
+			</header>
+			<ul class="divided">
+				{% for category in categories %}
+				<li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+				{% endfor %}
+			</ul>
+		</section>
+		<section class="box is-search">
+			<header>
+				<h3>搜索</h3>
+			</header>
+			<form method="get" action="{% url blog_search %}">
+				<fieldset>
+					<input type="text" class="text" name="q" placeholder="search" />
+				</fieldset>
+			</form>
+		</section>
+		<section class="box">
+			<header>
+				<h3>点击排行</h3>
+			</header>
+			<ul class="divided">
+				{% for article in populars %}
+				<li><a href="{{ article.get_absolute_url }}">{{ article.title }}
+					<span>发表于{{ article.created|date:"Y年n月j日 P" }}</span></a></li>
+				{% endfor %}
+			</ul>
+		</section>
+		<section class="box tagclouds">
+			<header>
+				<h3>标签云</h3>
+			</header>
+			<ul>
+				{% for tag in tags %}
+					<li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+					</li>
+			    {% endfor %}
+			</ul>
+		</section>
+		<section class="box">
+			<header>
+				<h3>扫描访问</h3>
+			</header>
+			<img class="img-box" alt="" src="http://goo.gl/WZkcN.qr" />
+			<div style="clear: both;"></div>
+		</section>
+		<section class="box">
+			<header>
+				<h3>主题</h3>
+			</header>
+			<footer>
+				<a href="#" class="button button-alt" onclick="switchTheme('coolblue'); return false;">切换到旧主题</a>
+			</footer>
+		</section>
+		<section class="box">
+			<header>
+				<h3>翻墙乐趣的微博</h3>
+			</header>
+			<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=0&isWeibo=1&isFans=0&uid=1883113397&verifier=45ddb58d&colors=ffffff,ffffff,666666,d52349,ecfbfd&dpc=1"></iframe>
+		</section>
+		<section class="box login">
+			<header>
+				<h3>登录</h3>
+			</header>
+				{% if blog_user %}
+				<p>
+					已使用
+					{% if blog_user.auth_type == 0 %}
+					Google
+					{% endif %}
+					{% if blog_user.auth_type == 1 %}
+					新浪微博
+					{% endif %}
+					{% if blog_user.auth_type == 2 %}
+					腾讯微博
+					{% endif %}
+					{% if blog_user.auth_type == 3 %}
+					人人网
+					{% endif %}
+					帐号<strong>{{ blog_user.username }}</strong>
+					登录
+				</p>
+				<footer>
+					<a href="{% url social_logout %}" class="button button-alt">退出登录</a>
+				</footer>
+				{% else %}
+				<ul class="social">
+					{% if settings.google %}
+					<li class="google"><a href="{% url social_google_login %}" class="icon48 icon48-7">Google</a></li>
+					{% endif %}
+					{% if settings.weibo %}
+					<li class="weibo"><a href="{% url social_weibo_login %}" class="icon48 icon48-8">Weibo</a></li>
+					{% endif %}
+					{% if settings.txweibo %}
+					<li class="txweibo"><a href="{% url social_qqweibo_login %}" class="icon48 icon48-9">txweibo</a></li>
+					{% endif %}
+					{% if settings.renren %}
+					<li class="renren"><a href="{% url social_renren_login %}" class="icon48 icon48-10">renren</a></li>
+					{% endif %}
+				</ul>
+				{% endif %}
+		</section>
+
+</div>
