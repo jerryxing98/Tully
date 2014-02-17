@@ -210,9 +210,9 @@ GOOGLE_ACCESS_TOKEN_ENDPOINT = 'https://accounts.google.com/o/oauth2/token'
 GOOGLE_USERINFO_ENDPOINT = 'https://www.googleapis.com/oauth2/v1/userinfo'
 GOOGLE_REDIRECT_URI = '%s/accounts/google/login/done/' % SITE
 
-GOOGLE_SIMPLE_API_KEY = ''
+GOOGLE_SIMPLE_API_KEY = 'AIzaSyCR7GFeC9Fg35ilvACK-SILKQMbSEmIdkY'
 # Google CustomSearch api
-GOOGLE_SEARCH_ENGINE_UNIQUE_ID = ''
+GOOGLE_SEARCH_ENGINE_UNIQUE_ID = '012965477534892467697%3Au26j7iulw4g'
 GOOGLE_CUSTOM_SEARCH_ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 # Google Url Shortener api
 GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
