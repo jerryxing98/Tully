@@ -196,7 +196,7 @@ FILEBROWSER_VERSIONS = {
 FILEBROWSER_ADMIN_VERSIONS = ['small_thumbnail', 'thumbnail','small', 'medium']
 
 #SITE = 'http://127.0.0.1:8000' if DEBUG else 'http://qinxuye.me'
-SITE = 'http://jerryminds.info'
+SITE = 'http://127.0.0.1:8000'
 # Google authorized api
 ENABLE_GOOGLE_ACCOUNT = False
 GOOGLE_API = {
@@ -220,9 +220,9 @@ GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
 # Weibo
 ENABLE_WEIBO_ACCOUNT = True
 WEIBO_API = {
-    'app_key': '',
-    'app_secret': '',
-    'redirect_urls': '',
+    'app_key': '3715718692',
+    'app_secret': '35339152f9bc13d8c1103fbec621b54d',
+    'redirect_urls': '127.0.0.1:8000',
 }
 WEIBO_AUTH_ENDPOINT = 'https://api.weibo.com/oauth2/authorize'
 WEIBO_ACCESS_TOKEN_ENDPOINT = 'https://api.weibo.com/oauth2/access_token'
@@ -233,8 +233,8 @@ WEIBO_API_ENDPOINT = 'https://api.weibo.com/%d/' % WEIBO_OAUTH_VERSION
 # Renren
 ENABLE_RENREN_ACCOUNT = False
 RENREN_API = {
-    'api_key': '',
-    'secret_key': '',
+    'api_key': '6fb3f9cba50e438b96dbb3aaab75672d',
+    'secret_key': '39a1889d1ab94c0f8ae4446b47d1662d',
     'redirect_urls': '',
     'refresh_token': '' # use to sync data when a post is created or else
 }
@@ -246,8 +246,8 @@ RENREN_API_ENDPOINT = 'http://api.renren.com/restserver.do'
 # QQWeibo
 ENABLE_QQWEIBO_ACCOUNT = False
 QQWEIBO_API = {
-    'app_key': '',
-    'app_secret': '',
+    'app_key': '801474292',
+    'app_secret': 'ad6c30a1aa2431e96941e06a4f748a68',
     'redirect_urls': '',
     'access_token_key': '', # use for oauth1 to sync data when a post is created or else
     'access_token_secret': '' # use for oauth1 to sync data when a post is created or else
