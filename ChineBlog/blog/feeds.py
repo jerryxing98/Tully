@@ -9,8 +9,8 @@ from django.contrib.syndication.views import Feed
 from models import Article
 
 class RSSFeed(Feed):    
-    title = u"残阳似血的博客"
-    description = "Lost good things..."
+    title = u"翻墙乐趣的博客"
+    description = "Stay Hungry,Stay Foolish..."
     link = "/"
     
     def items(self):
