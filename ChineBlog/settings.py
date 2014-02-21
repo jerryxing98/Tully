@@ -177,6 +177,7 @@ INSTALLED_APPS = (
     # Filebrowser
     'filebrowser',
     'pagination',
+    'guardian',
     # mptt
     'mptt',
     # Uncomment the next line to enable the admin:
@@ -207,10 +208,19 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters':{
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
         }
     },
     'loggers': {
@@ -219,9 +229,13 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-    }
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+    },
 }
-
 
 
 # Guardian
