@@ -1,0 +1,41 @@
+首先感谢一下broom(http://b2.broom9.com/?page_id=519),虽然我不认识他
+要写搬家工具,但是自己比较菜,不会写,那么最简单的方法就是改别人的程序了,改的就是他的,所以感谢一下
+
+---------------------  强大的分隔线  -------------------------------
+
+1、安装python，推荐用2.5版本
+2、打开cmd，进入本目录，装备开始搬家
+
+163-blog-mover.py
+blog.163.com转wordpress的搬家工具,因为从网易大量使用AJAX，首页找出第一个日志的静态链接实在是太麻烦了，所以偷个懒，大家自己写静态链接吧。
+什么是静态链接？打开首页，比如http://blog.163.com/hn_yh，点击第一条日志（也就是最新的一篇），这时打开的就是静态链接的日志页面，把这个URL COPY出来就行了。
+cmd下输入：python 163-blog-mover.py -f http://blog.163.com/hn_yh/blog/static/497876920086235658945/
+回车后搬家开始啦。
+这时候会看到一堆的出错信息，我也不知道是怎么搞的，python还不熟的说 -___-!! 估计应该是我记录LOG的时候都是使用的中文造成的
+导出完成后，会得到一个XML文件，从wordpress的后台选择 管理->导入->WordPress 导入这个XML就行了
+
+
+hi-baidu-mover.py
+百度空间转wordpress的搬家工具
+百度因为首页就是静态的，所以直接分析一下就能找到最新的一条日志的入口，所以只要输入百度空间地址就行了
+cmd下输入：python hi-baidu-mover.py -s http://hi.baidu.com/yhustc
+就可以把百度空间导出成wordpress可读的XML啦
+
+
+live-space-mover.py
+这是broom写的LIVE SPACE转wordpress的搬家工具，一起打包吧
+cmd下输入：python live-space-mover.py -s http://yhustc.spaces.live.com
+
+---------------------  强大的分隔线  -------------------------------
+
+几个问题
+Q:cmd下输入：python 163-blog-mover.py 显示没有python这个程序
+A:把python所在的目录加入到path里去才可以这样用
+
+Q:只导出了第一页的评论
+A:So Sorry，因为我自己的BLOG评论都不超过5条，所以写程序的时候没有把评论翻页读取写进来 -___-!!
+
+Q:导入后，有的日志的评论条数显示不正确
+A:使用下面的SQL更新一下统计值
+UPDATE `wp_posts` p SET p.`comment_count`=(SELECT COUNT(*) FROM `wp_comments` c WHERE c.`comment_post_ID`=p.`ID` GROUP BY c.`comment_post_ID`)
+
