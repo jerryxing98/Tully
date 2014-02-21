@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load umessages_tags %}
+
+{% block extra_header %}
+{% endblock %}
+
+{% block page_body %}
+  {% block topbar %}
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">翻墙乐趣</a>
+          <script type="text/javascript">
+            var dispatch = function() {
+              q = document.getElementById("q");
+              if (q.value != "") {
+                window.open('http://www.google.com/search?q=site:jstwind.com/t%20' + q.value, "_blank");
+                return false;
+              } else {
+                return false;
+              }
+            }
+          </script>
+          <form action="" onsubmit="return dispatch()" class="navbar-search pull-left">
+            <input name="q" id="q" type="text" placeholder="Search" style="width: 160px">
+          </form>
+          <ul class="nav">
+            <!-- <li><a href=" url "timeline_recommend" ">推荐</a></li> -->
+            <!-- <li><a href=" url "timeline_hot" ">热门</a></li> -->
+			<!-- <li><a href=" url "timeline_last" ">最新</a></li> -->
+            <!-- <li><a href=" url "timeline_tags" ">标签云</a></li> -->
+		  </ul>
+          <ul class="nav pull-right">
+            <!-- <li><a href=" url 'timeline_new' "><span>创建时间线</span></a></li> -->
+            {% if user.is_authenticated %}
+              <li><a href="{% url userena_profile_detail user.username %}#id_tls"><span>我的时间线</span></a></li>
+              <li>
+                <a href="{% url userena_profile_detail user.username %}">
+                  <span> {{ user.username }}的帐号 </span>
+                </a>
+              </li>
+              <li><a href="{% url userena_umessages_list %}">
+                  {% get_unread_message_count_for user as unread_message_count %}
+                  <span id="nav_msg" class="{% if unread_message_count %}have-new-msg{% endif %}">
+                    消息({{unread_message_count}})
+                  </span>
+                </a>
+              </li>
+              <li><a href="{% url userena_signout %}"><span>退出</span></a></li>
+            {% else %}
+              <li><a href="{% url userena_signin %}"><span>{% trans 'Signin' %}</span></a></li>
+              <li><a href="{% url userena_signup %}"><span>{% trans 'Signup' %}</span></a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+  {% block container %}
+    <div class="container">
+      {% if messages %}
+        <div class="alert alert-info">
+          <a class="close" data-dismiss="alert" href="###">&times;</a>
+          <ul>
+            {% for message in messages %}
+              <li> {{message|safe}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      
+      {% block container_top %}
+      {% endblock %}
+
+      {% block sidebar %}
+        <div class="sidebar">
+        </div>
+      {% endblock %}
+
+      {% block content %}
+        <div class="content">
+        </div>
+      {% endblock %}
+
+    </div>
+  {% endblock %}
+
+  {% block footer %}
+    <footer>
+      <div class="container">
+        <p class="adicons"> 
+          <a href="http://www.djangoproject.com/" target="_blank">
+            <img src="https://www.djangoproject.com/m/img/badges/djangosite80x15_grey.gif" border="0" alt="A Django site." title="A Django site." />
+          </a>
+        </p>
+        <p class="lks">
+          <a href=" url timeline_about ">关于</a>
+          <span>|</span>
+          <a href=" url timeline_faq ">FAQ</a>
+          <span>|</span>
+          <a href="http://jerryminds.info" target="_blank">博客</a>
+        </p>
+        <p>
+          &copy; 2012 jstwind.com, all rights reserved 
+        </p>
+      </div>
+    </footer>
+  {% endblock %}
+{% endblock %}        
+
+{% block footer_ext %}
+  {{ block.super }}
+  {% if unread_message_count %}
+    <script type="text/javascript">
+      var nav_msg = $('#nav_msg');
+      setInterval(function(){
+        if (nav_msg.hasClass('have-new-msg')) {
+          nav_msg.removeClass('have-new-msg');
+        } else {
+          nav_msg.addClass('have-new-msg');
+        }
+      }, 600);
+    </script> 
+  {% endif %} 
+{% endblock %}        
