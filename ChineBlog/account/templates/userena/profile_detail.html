@@ -1,5 +1,5 @@
 {% extends 'userena/base_userena.html' %}
-{% load timeline_widget_tags %}
+{# load timeline_widget_tags #}
 {% load i18n %}
 
 {% block title %}
@@ -37,48 +37,48 @@
         <p><strong>最近登录</strong> {{ profile.user.last_login|date:"Y-m-d H:i" }} </p>
         <p><strong>{% trans "Website" %}</strong> <a href="{{ profile.website }}">{{ profile.website }}</a></p>
         <p><strong>{% trans "Location" %}</strong> {{ profile.location }}</p>
-        <p><strong>{% trans "About me" %}</strong><br />{{ profile.about_me|md }}</p>
+        <p><strong>{% trans "About me" %}</strong><br />{# profile.about_me|md #}</p>
       </div>
     </div>
 
     <hr />
-
+	<!--
     <div class="timelines" id="id_tls">
       <h2>{{profile}} 创建的时间线</h2>
-      {% load pagination_tags %}
-      {% autopaginate timelines %}
-      {% if timelines %}
-        {% for o in timelines %}
+      {# load pagination_tags #}
+      {# autopaginate timelines #}
+      {# if timelines #}
+        {#for o in timelines #}
           <div class="timeline">
             <div class="pic">
-              <img src="{{ o.get_cover_url }}"/>
+              <img src="{# o.get_cover_url #}"/>
             </div>
             <div class="info">
               <h3>
-                <a href="{% url timeline_detail o.pk %}">{{o.title}}</a>
-                {% if o.status == "draft" %} (草稿) {% endif %}
+                <a href="{# url timeline_detail o.pk #}">{{o.title}}</a>
+              {# if o.status == "draft" #} (草稿) {# endif #}
               </h3>
               <div class="extinfo">
                 <span>事件: {{o.num_events}}</span>
                 <span>浏览: {{o.num_views}}</span>
                 <span>回复: {{o.num_replies}}</span>
                 <span>by: 
-                  <a href="{% url userena_profile_detail o.created_by.username %}">
+                  <a href="{# url userena_profile_detail o.created_by.username #}">
                     {{o.created_by}}
                   </a>
                 </span>
-                <span>创建: {{ o.created_on|date:"Y-m-d H:i"}}</span>
+                <span>创建: {# o.created_on|date:"Y-m-d H:i"#}</span>
               </div>
-              {{ o.intro|slice:"160"|linebreaksbr }}{% if o.intro|length > 340 %}...{% endif %} 
+              {# o.intro|slice:"160"|linebreaksbr #}{# if o.intro|length > 340 #}...{# endif #} 
             </div>
           </div>
-        {% endfor %}
-        {% paginate %}
-      {% else %}
+        {# endfor #}
+        {# paginate #}
+      {# else #}
         还没有创建任何的时间线
-      {% endif %}
+      {# endif #}
       
     </div>
-
+  -->
   </div>
 {% endblock %}
