@@ -9,9 +9,6 @@ from account.forms import BsPasswordChangeForm
 from account.forms import BsChangeEmailForm 
 
 urlpatterns = patterns('',
-    url(r'p/(?P<username>[\.\w]+)/$',
-       'account.views.profile_detail',
-       name='userena_profile_detail'),
     url(r'^signup/$', userena_views.signup,
         {'signup_form': BsSignupForm}, name='userena_signup'),
     url(r'^signin/$', userena_views.signin,
