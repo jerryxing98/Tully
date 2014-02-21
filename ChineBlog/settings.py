@@ -2,12 +2,14 @@
 #coding=utf-8
 # Django settings for ChineBlog project.
 
-import os
+import os,sys
 
 from utils import get_path
-
+HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.path.join(HERE, '../')
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = True
 
 ADMINS = (
 	('Jerry','jerry_xing8@163.com'),
@@ -18,7 +20,8 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': get_path(('db', 'chine.db')),                      # Or path to database file if using sqlite3.
+        #'NAME': get_path(('db', 'chine.db')),                      # Or path to database file if using sqlite3.
+        'NAME':'db/chine.db',
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -63,6 +66,8 @@ MEDIA_URL = '/static/uploads/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = get_path('static')
+#STATIC_ROOT = os.path.join(HERE, 'collectedstatic')
+
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -79,14 +84,19 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     get_path('root_static'),
+    os.path.join(HERE, 'static/'),
+    #get_path('static'),
 )
+
+
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -96,8 +106,25 @@ SECRET_KEY = 'j*c*g$p3s)!!_ec-=+uiaa)a^iy(=kb60x=!g5^pq(l1ali0#6'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
+
+
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    get_path('templates'),
+    get_path('blog/templates'),
+    get_path('account/templates'),
+    get_path('templates_plus'),
+    #os.path.join(HERE, 'templates_plus'),
+    #os.path.join(HERE, 'templates'),
+    #os.path.join(HERE, 'blog/templates'),
+    #os.path.join(HERE, 'account/templates'),
+)
+
+
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -105,23 +132,36 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'userena.middleware.UserenaLocaleMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
+
+
+#guardian.backends
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
 
 ROOT_URLCONF = 'ChineBlog.urls'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    get_path('templates'),
-)
+
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.request",
+    "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
-    'django.contrib.messages.context_processors.messages',
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.request",
+    "django.contrib.messages.context_processors.messages",
 )
+
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -136,6 +176,7 @@ INSTALLED_APPS = (
     'grappelli',
     # Filebrowser
     'filebrowser',
+    'pagination',
     # mptt
     'mptt',
     # Uncomment the next line to enable the admin:
@@ -143,11 +184,20 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'south',
+    'compressor',
+    'djangohelper',
+    'bootstrap',
     # blog, social
+    'userena',
+    'userena.contrib.umessages',
+    'account',
     'blog',
     'social',
-    'qqweibo'
+    'qqweibo',
 )
+
+
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -171,6 +221,28 @@ LOGGING = {
         },
     }
 }
+
+
+
+# Guardian
+ANONYMOUS_USER_ID = -1
+SYSTEM_USER_ID = 0
+
+# Userena settings
+LOGIN_REDIRECT_URL = '/p/%(username)s/'
+USERENA_SIGNIN_REDIRECT_URL = LOGIN_REDIRECT_URL
+LOGIN_URL = '/account/signin/'
+LOGOUT_URL = '/account/signout/'
+AUTH_PROFILE_MODULE = 'account.Profile'
+
+USERENA_DISABLE_PROFILE_LIST = True
+USERENA_MUGSHOT_SIZE = 80
+USERENA_DEFAULT_PRIVACY = 'open'
+
+
+
+
+
 
 # Self define
 BLOG_THEME = 'coolblue'
