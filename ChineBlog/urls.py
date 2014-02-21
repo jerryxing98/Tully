@@ -3,12 +3,16 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+from django.views.generic import TemplateView
 from filebrowser.sites import site
+from django.conf.urls.static import static
+
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -23,7 +27,21 @@ urlpatterns = patterns('',
     url(r'^admin/weibo/auth/$', 'blog.admin_views.admin_weibo_auth'),
     url(r'^admin/weibo/auth/done/$', 'blog.admin_views.admin_weibo_auth_deal'),
     url(r'^admin/', include(admin.site.urls)),
+    #url(r'^attachments/', include('attachments.urls')),
+    url(r'^about/$', TemplateView.as_view(template_name="about.html"), 
+      name="jerryminds_about"),
+    url(r'^faq/$', TemplateView.as_view(template_name="faq.html"),
+      name="jerryminds_faq"),
 )
+
+
+#sitemap
+'''
+urlpatterns += patterns('django.contrib.sitemaps.views',
+    (r'^sitemap\.xml$', 'index', {'sitemaps': sitemaps}),
+    (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap', {'sitemaps': sitemaps}),
+)
+'''
 
 # Grappelli url mapping
 urlpatterns += patterns('',
@@ -33,13 +51,34 @@ urlpatterns += patterns('',
 
 # Accounts
 urlpatterns += patterns('',
-    (r'^accounts/', include('social.urls'))
+    (r'^accounts/', include('social.urls')),
+    (r'^account/',include('account.urls'))
 )
     
 # Blog
 urlpatterns += patterns('',
-    (r'^', include('blog.urls'))
+    (r'^blog/', include('blog.urls'))
 )
 
+
+#====================================
+#the friend model
+#====================================
+'''
+urlpatterns += patterns('',
+		url(r'^friend/',include('friend.urls')),
+		)
+'''
+#
+
+#timeline
+
+
+
+
+
 # Static files url if DEBUG
-urlpatterns += staticfiles_urlpatterns()
+
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
