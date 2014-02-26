@@ -162,7 +162,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 
-
+ 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -170,6 +170,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.admindocs', 
     'django.contrib.sitemaps',
     # Grapplli
     'grappelli.dashboard',
@@ -191,6 +193,7 @@ INSTALLED_APPS = (
     # blog, social
     'userena',
     'userena.contrib.umessages',
+    'friendship',
     'account',
     'blog',
     'social',
@@ -205,6 +208,7 @@ INSTALLED_APPS = (
 # the site admins on every HTTP 500 error.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+'''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -217,10 +221,6 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        },
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
         }
     },
     'loggers': {
@@ -229,12 +229,26 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+    }
+}
+'''
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
+    },
+    'loggers': {
         'django.db.backends': {
             'handlers': ['console'],
             'propagate': True,
             'level':'DEBUG',
         },
-    },
+    }
 }
 
 
@@ -249,18 +263,24 @@ LOGIN_URL = '/account/signin/'
 LOGOUT_URL = '/account/signout/'
 AUTH_PROFILE_MODULE = 'account.Profile'
 
-USERENA_DISABLE_PROFILE_LIST = True
+USERENA_DISABLE_PROFILE_LIST = False
 USERENA_MUGSHOT_SIZE = 80
 USERENA_DEFAULT_PRIVACY = 'open'
 
+'''
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'jerrymind98' 
-EMAIL_HOST_PASSWORD = '123qweasdZXC'
+EMAIL_HOST_USER = 'jerrymind98@gmail.com' 
+EMAIL_HOST_PASSWORD = '******'
 DEFAULT_FROM_EMAIL = u'翻墙乐趣 <jerryxing98@google.com>'
-
-
-
+EMAIL_USE_TLS=False
+'''
+EMAIL_HOST = 'smtp.126.com'
+EMAIL_PORT = '25'
+EMAIL_HOST_USER = 'jerry_xing8@126.com' 
+EMAIL_HOST_PASSWORD = '5612259'
+DEFAULT_FROM_EMAIL = u'jerry_xing8@126.com'
+EMAIL_USE_TLS = False
 
 
 # Self define

@@ -88,10 +88,7 @@ class ProfileManager(UserenaBaseProfileManager):
         else:
             pass
 
-    def get_query_set(self):
-        
 
-        return (profile for profile in super(ProfileManager, self).get_query_set())
 
 
 
@@ -140,7 +137,7 @@ class Profile(UserenaBaseProfile):
             if birthday > today: return today.year - self.birth_date.year - 1
             else: return today.year - self.birth_date.year
            
-     def is_fans(self,ex_username):
+    def is_fans(self,ex_username):
         username = self.user.username
 
         try:
