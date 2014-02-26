@@ -20,14 +20,13 @@ from django.contrib.auth.models import User
 from userena.models import UserenaBaseProfile
 
 import datetime
-class MyProfileManager(UserenaBaseProfileManager):
+class ProfileManager(UserenaBaseProfileManager):
     def is_fans(self,**kwargs):
         username = kwargs['username']
         try:
             user_id = User.objects.get(username = username)
         except:
             user_id = None
-        
         ex_username = kwargs['ex_username']
         try:
             ex_id = User.objects.get(username = ex_username)
@@ -35,7 +34,7 @@ class MyProfileManager(UserenaBaseProfileManager):
             ex_id = None
         if ex_id and user_id:
             try:
-                a  = FriendShip.objects.get(to_friend = user_id,from_friend = ex_id)
+                a  = Friend.objects.are_friends(user1 = user_id,user2 = ex_id)
                 return True
             except ObjectDoesNotExist:
                 return False
@@ -55,7 +54,7 @@ class MyProfileManager(UserenaBaseProfileManager):
             id = None
         if id and ex_id:
             try:
-                a = FriendShip.objects.get(to_friend = ex_id,from_friend = id)
+                a = Follow.objects.follows(follower = ex_id,followee = id)
                 return True
             except ObjectDoesNotExist:
                 return False
@@ -83,7 +82,8 @@ class MyProfileManager(UserenaBaseProfileManager):
         else:
             return 0
         
-        fans_count = user.friend_set.all().count()
+        #fans_count = user.friend_set.all().count()
+        fans_count = Follow.objects.following(user).count()
         return fans_count
             
     def get_follows_count(self,**kwargs):
@@ -103,9 +103,11 @@ class MyProfileManager(UserenaBaseProfileManager):
         else:
             return 0
         
-        follow_count = user.to_friend_set.all().count()
+        follow_count = Follow.objects.followers(user).count()
+        #follow_count = user.to_friend_set.all().count()
         return follow_count
     
+
     def get_info(self,**kwargs):
         username = kwargs.get('username')
         ex_username = kwargs.get('ex_username')
@@ -116,7 +118,8 @@ class MyProfileManager(UserenaBaseProfileManager):
                 #'tag_count':Tag.objects.user_tag_counts(ex_username),
                 #'bookmark_count':Bookmark.objects.get_user_bookmark_count(ex_username),
                 }
-
+    
+    '''
     def get_fans_list(self,**kwargs):
         username = kwargs.get('username',None)
         ex_username = kwargs.get('ex_username',None)
@@ -135,7 +138,9 @@ class MyProfileManager(UserenaBaseProfileManager):
             if fans.count() > 0:
                 return ({'user':item.to_friend,'info':self.get_info(username = username,ex_username = item.to_friend.username)
                                                } for item in fans) 
-        
+    '''
+    
+    '''
     def get_follows_list(self,**kwargs):
         username = kwargs.get('username')
         ex_username = kwargs.get('ex_username')
@@ -153,13 +158,14 @@ class MyProfileManager(UserenaBaseProfileManager):
             follows = user.to_friend_set.all()
             if follows.count() > 0:
                 return ({'user':item.from_friend,'info':self.get_info(username = username,ex_username = item.from_friend.username)} for item in follows)
+    '''
 
-
+    #共同关注
     def get_same_follows_list(self,**kwargs):
         if kwargs.has_key('username') and kwargs.has_key('ex_username'):
             username,ex_username = [item for item in kwargs.itervalues()]
-            list1 = self.get_follows_list(username = username)
-            list2 = self.get_follows_list(ex_username = ex_username)
+            list1 = Friend.objects.get(to_user=username)
+            list2 = Friend.objects.get(to_user=ex_username)
             same_follows = ({'user':item,'info':self.get_info(username = username,ex_username = item.username)} for item in list1 if item in list2 )
             if len(list(same_follows)) >0 :
                 return same_follows
@@ -170,13 +176,15 @@ class MyProfileManager(UserenaBaseProfileManager):
     def get_second_follows_list(self,**kwargs):
         if kwargs.has_key('username') and kwargs.has_key('ex_username'):
             username,ex_username = [item for item in kwargs.itervalues()]
-            list1 = self.get_follows_list(username = username)
-            list2 = self.get_fans_list(ex_username = ex_username)
+            list1 = Follow.objects.get(follower=username)
+            list2 = Follow.objects.get(follower=ex_username)
             second_follows = ({'user':item,'info':self.get_info(username = username,ex_username = item.username)} for item in list1 if item in list2)
             if len(list(second_follows)) > 0:
                 return second_follows
         else:
             pass
+
+
 
 class Profile(UserenaBaseProfile):
     """ Default profile """
@@ -196,7 +204,7 @@ class Profile(UserenaBaseProfile):
                                               choices=GENDER_CHOICES,
                                               blank=True,
                                               null=True)
-    objects = MyProfileManager()
+    objects = ProfileManager()
 
      #django 1.3
     '''
@@ -222,8 +230,16 @@ class Profile(UserenaBaseProfile):
                 birthday = self.birth_date.replace(year=today.year, day=day)
             if birthday > today: return today.year - self.birth_date.year - 1
             else: return today.year - self.birth_date.year
+           
+             
+
+        
     def __unicode__(self):
         return self.user.username
+
+
+
+
 
 
 
