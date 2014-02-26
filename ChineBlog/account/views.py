@@ -1,19 +1,124 @@
 #-*- coding:utf-8 -*-
 # Create your views here.
 from userena import views as userena_views
-
-
-#signin = userena_views.signin
-
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from friendship.models import Friend,Follow
+from django.views.generic.simple import direct_to_template
 from userena.views import profile_detail as __profile_detail
 #from timeline.models import get_all_timlines
+from userena.utils import signin_redirect, get_profile_model, get_user_model
+#from userena import signals as userena_signals
+from userena import settings as userena_settings
+from guardian.decorators import permission_required_or_403
+from userena.views import ExtraContextTemplateView
+from userena.decorators import secure_required
+import warnings
+from django.views.generic import TemplateView
+from friendship.models import Friend, Follow
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import render_to_response
+
+'''
+class UserProfileListView(ProfileListView):
+    def get_context_data(self, **kwargs):
+        context = super(ProfileListView, self).get_context_data(**kwargs)
+'''     
+    
+
 
 def profile_detail(request, username):
+    print '=========================================='
     ctx = {}
     view_user = get_object_or_404(User, username=username)
     if request.user.is_authenticated() and request.user.username == username:
-        ctx['timelines'] = view_user.timeline_set.exclude(status='del').order_by('-updated_on')
+        ctx['timelines']=''
+        #ctx['timelines'] = view_user.timeline_set.exclude(status='del').order_by('-updated_on')
     else:
-        ctx['timelines'] = get_all_timlines().filter(created_by=view_user)
+        ctx['timelines'] = ''
+        #ctx['timelines'] = get_all_timlines().filter(created_by=view_user)
     return __profile_detail(request, username, extra_context=ctx)
 
+
+@secure_required
+def _friends(request,username,
+                 template_name='friends.html', success_url=None,
+                 extra_context=None):
+    user = get_object_or_404(get_user_model(),
+                             username__iexact=username)
+    profile = user.get_profile()
+    user_initial = {'first_name': user.first_name,
+                    'last_name': user.last_name}
+    data = locals()
+    if not extra_context: extra_context = dict()
+    #extra_context['ftype'] = ftype
+    extra_context['profile'] = profile
+    #extra_context['user'] = user
+    #more_data = {'username':username,'ftype':ftype}
+    #return direct_to_template(template = 'friends.html', kwargs=kwargs)
+    return ExtraContextTemplateView.as_view(template_name=template_name,
+                                            extra_context=extra_context)(request)
+    
+ 
+def friends(request,username,ftype):
+    ctx = {}
+    view_user = get_object_or_404(User, username=username)
+    if request.user.is_authenticated() and request.user.username == username:
+        ctx['ftype']=ftype
+        #ctx['timelines'] = view_user.timeline_set.exclude(status='del').order_by('-updated_on')
+    else:
+        ctx['ftype'] = ''
+        #ctx['timelines'] = get_all_timlines().filter(created_by=view_user)
+    return _friends(request, username, extra_context=ctx)
+    
+def test(request):
+    print '==============================='
+    pass
+    
+
+
+def delete_follow(request):
+    following_created = Following.objects.add_follower(request.user, other_user)
+    pass
+
+def follow(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect(reverse('userena_profile_list'))
+    elif request.method == 'GET':
+        user = request.GET['user']
+        ex_user = request.GET['ex_user']
+        if user and ex_user:
+            user = get_object_or_404(User, username=user)
+            ex_user=get_object_or_404(User,username=ex_user)
+            result = Follow.objects.add_follower(follower=ex_user,followee=user)
+            print 'follow==============',result
+        else:
+            raise Http404
+        return HttpResponseRedirect(reverse('userena_profile_list'))
+    else:
+        raise Http404
+    
+
+def remove_follow(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect(reverse('userena_profile_list'))
+    elif request.method == 'GET':
+        user = get_object_or_404(User, username=request.GET['user'])
+        ex_user=get-object_or_404(User,username=request.GET['ex_user'])
+        if user and ex_user:
+            result=Follow.objects.remove_follower(follower=ex_user,followee=user)     
+            print 'remove_follow========',result
+        else:
+            raise Http404
+        
+        return HttpResponseRedirect(reverse('userena_profile_list'))
+    else:
+        raise Http404
+        
+    
+            
+    
+
+
+    
+    
