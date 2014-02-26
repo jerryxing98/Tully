@@ -6,10 +6,24 @@
 {% block content %}
 <ul id="account_list">
     {% for profile in profile_list %}
-    <li>
-        <a href="{% url userena_profile_detail profile.user.username %}"><img src="{{ profile.get_mugshot_url }}" /></a>
-        <a href="{% url userena_profile_detail profile.user.username %}">{{ profile.user.username }}</a>
-    </li>
+	{% if user.username != profile.user.username %}
+		<li>
+			<a href="{% url userena_profile_detail profile.user.username %}"><img src="{{ profile.get_mugshot_url }}" /></a>
+			<a href="{% url userena_profile_detail profile.user.username %}">{{ profile.user.username }}</a>
+			是否粉丝 {{ profile.is_fans }}，是否关注 {{ profile.is_follows }}
+			{{ profile }}
+			{% if profile.is_fans and profile.is_follows %}
+				 共同关注
+			{% elif profile.is_fans %}
+				 我的粉丝
+			{% elif profile.is_follows %}
+				 <a href={% url friend_delete_follows %}?user={{ user.username }}&ex_user={{ profile.user.username }} >我关注的</a>
+			{% else %}
+                 没有关系
+				 <a href='{% url friend_follows %}?user={{ user.username }}&ex_user={{ profile.user.username }}'>加关注</a>
+		   {% endif %}
+		</li>
+	{% endif %}
     {% endfor %}
 
 </ul>
