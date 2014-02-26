@@ -1,6 +1,6 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
-
+{% load profiletags %}
 {% block content_title %}<h2 class="content-title">{% trans 'Profiles' %}</h2>{% endblock %}
 
 {% block content %}
@@ -10,13 +10,13 @@
 		<li>
 			<a href="{% url userena_profile_detail profile.user.username %}"><img src="{{ profile.get_mugshot_url }}" /></a>
 			<a href="{% url userena_profile_detail profile.user.username %}">{{ profile.user.username }}</a>
-			是否粉丝 {{ profile.is_fans }}，是否关注 {{ profile.is_follows }}
+			是否粉丝 {{ profile|is_fans:user.username }}，是否关注{{ profile|is_follows:user.username }}
 			{{ profile }}
-			{% if profile.is_fans and profile.is_follows %}
+			{% if profile|is_fans:user.username and profile|is_follows:user.username %}
 				 共同关注
-			{% elif profile.is_fans %}
+			{% elif profile|is_fans:user.username %}
 				 我的粉丝
-			{% elif profile.is_follows %}
+			{% elif profile|is_follows:user.username %}
 				 <a href={% url friend_delete_follows %}?user={{ user.username }}&ex_user={{ profile.user.username }} >我关注的</a>
 			{% else %}
                  没有关系
