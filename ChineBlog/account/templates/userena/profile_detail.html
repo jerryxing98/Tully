@@ -22,10 +22,10 @@
         <li><a href="{% url userena_profile_edit user.username %}">{% trans "Edit details" %}</a></li>
         <li><a href="{% url userena_password_change user.username %}">{% trans "Change password" %}</a></li>
         <li><a href="{% url userena_email_change user.username %}">{% trans "Change email" %}</a></li>
-		<li><a href="{% url friend_list username=user.username ftype='follower' %}">{% trans "Follows" %}</a></li>
-		<li><a href="{% url friend_list username=user.username ftype='following' %}">{% trans "Fans" %}</a></li>
-		<li><a href="{% url friend_list username=user.username ftype='friends' %}">{% trans "Friends" %}</a></li>
-		<li><a href="{% url userena_profile_list %}">{% trans "Users" %}</a></li>
+		    <li><a href="{% url friend_list username=user.username ftype='follower' %}">{% trans "Follows" %}</a></li>
+		    <li><a href="{% url friend_list username=user.username ftype='following' %}">{% trans "Fans" %}</a></li>
+		    <li><a href="{% url friend_list username=user.username ftype='friends' %}">{% trans "Friends" %}</a></li>
+		    <li><a href="{% url friend_list username=user.username ftype='lists' %}">{% trans "Users" %}</a></li>
       </ul>
     {% endif %}
 

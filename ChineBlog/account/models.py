@@ -3,26 +3,23 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
-
 # Create your models here.
 from django.contrib.auth.models import User
 from userena.models import UserenaBaseProfile
 from userena.managers import UserenaBaseProfileManager
 from userena.managers import UserenaManager
-#from friend.models import FriendShip
+from friendship.models import Friend,Follow
 #from bookmark.models import Tag,Bookmark
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.base import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
-
 from userena.models import UserenaBaseProfile
-
 import datetime
-class ProfileManager(UserenaBaseProfileManager):
 
-    
+
+class ProfileManager(UserenaBaseProfileManager):
     '''
     def get_fans_list(self,**kwargs):
         username = kwargs.get('username',None)
@@ -42,8 +39,7 @@ class ProfileManager(UserenaBaseProfileManager):
             if fans.count() > 0:
                 return ({'user':item.to_friend,'info':self.get_info(username = username,ex_username = item.to_friend.username)
                                                } for item in fans) 
-    '''
-    
+    '''  
     '''
     def get_follows_list(self,**kwargs):
         username = kwargs.get('username')
@@ -87,8 +83,14 @@ class ProfileManager(UserenaBaseProfileManager):
                 return second_follows
         else:
             pass
-
-
+    
+    def get_profile_list(self,userlist):
+        profile_list =[]
+        for user in userlist:
+            if user:
+                profile=Profile.objects.get(user=user)
+                profile_list.append(profile)
+        return profile_list
 
 
 
@@ -150,8 +152,7 @@ class Profile(UserenaBaseProfile):
             ex_id = None
         if ex_id and user_id:
             try:
-                a  = Friend.objects.are_friends(user1 = user_id,user2 = ex_id)
-                return True
+                return Follow.objects.follows(follower = user_id,followee = ex_id)
             except ObjectDoesNotExist:
                 return False
         else:
@@ -170,8 +171,8 @@ class Profile(UserenaBaseProfile):
             id = None
         if id and ex_id:
             try:
-                a = Follow.objects.follows(follower = ex_id,followee = id)
-                return True
+                return Follow.objects.follows(follower = ex_id,followee = id)
+                
             except ObjectDoesNotExist:
                 return False
         else:
@@ -235,9 +236,7 @@ class Profile(UserenaBaseProfile):
                 #'bookmark_count':Bookmark.objects.get_user_bookmark_count(ex_username),
                 }            
     
-        
-
-        
+      
     def __unicode__(self):
         return self.user.username
 

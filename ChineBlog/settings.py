@@ -178,6 +178,7 @@ INSTALLED_APPS = (
     'grappelli',
     # Filebrowser
     'filebrowser',
+    'easy_thumbnails',
     'pagination',
     'guardian',
     # mptt
@@ -187,6 +188,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'south',
+    'ajax_validation',
     'compressor',
     'djangohelper',
     'bootstrap',
@@ -195,6 +197,10 @@ INSTALLED_APPS = (
     'userena.contrib.umessages',
     'friendship',
     'account',
+    'timeline',
+    'taggit',
+    'taggit_templatetags',
+    'attachments',
     'blog',
     'social',
     'qqweibo',

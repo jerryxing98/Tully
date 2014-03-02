@@ -6,7 +6,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from filebrowser.sites import site
 from django.conf.urls.static import static
-
+from userena.contrib.umessages import views as messages_views
+from account.forms import BsComposeForm
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -27,6 +28,21 @@ urlpatterns = patterns('',
     url(r'^admin/weibo/auth/$', 'blog.admin_views.admin_weibo_auth'),
     url(r'^admin/weibo/auth/done/$', 'blog.admin_views.admin_weibo_auth_deal'),
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^messages/compose/$',
+        messages_views.message_compose,
+        {'compose_form': BsComposeForm},
+        name='userena_umessages_compose'),
+    url(r'^messages/compose/(?P<recipients>[\+\.\w]+)/$',
+        messages_views.message_compose,
+        {'compose_form': BsComposeForm},
+        name='userena_umessages_compose_to'),
+    url(r'^messages/reply/(?P<parent_id>[\d]+)/$',
+        messages_views.message_compose,
+        {'compose_form': BsComposeForm},
+        name='userena_umessages_reply'),
+    url(r'^messages/', include('userena.contrib.umessages.urls')),
+
     #url(r'^attachments/', include('attachments.urls')),
     url(r'^about/$', TemplateView.as_view(template_name="about.html"), 
       name="jerryminds_about"),
@@ -73,7 +89,9 @@ urlpatterns += patterns('',
 
 #timeline
 
-
+urlpatterns += patterns('',
+    (r'^timeline/',include('timeline.urls'))
+)
 
 
 

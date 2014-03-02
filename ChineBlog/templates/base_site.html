@@ -30,9 +30,9 @@
             <!-- <li><a href=" url "timeline_tags" ">标签云</a></li> -->
 		  </ul>
           <ul class="nav pull-right">
-            <!-- <li><a href="{# url 'timeline_new' #}"><span>创建时间线</span></a></li> -->
+            <li><a href="{% url timeline_new %}"><span>创建时间线</span></a></li>
             {% if user.is_authenticated %}
-              <li><a href="{% url userena_profile_detail user.username %}#id_tls"><span>我的时间线</span></a></li>
+              <li><a href="{% url userena_profile_detail user.username %}#id_tls"><span>我的Profile</span></a></li>
               <li>
                 <a href="{% url userena_profile_detail user.username %}">
                   <span> {{ user.username }}的帐号 </span>

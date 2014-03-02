@@ -16,8 +16,11 @@ from userena.decorators import secure_required
 import warnings
 from django.views.generic import TemplateView
 from friendship.models import Friend, Follow
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect,QueryDict
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+
 
 '''
 class UserProfileListView(ProfileListView):
@@ -59,7 +62,7 @@ def _friends(request,username,
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
     
- 
+@login_required
 def friends(request,username,ftype):
     ctx = {}
     view_user = get_object_or_404(User, username=username)
@@ -76,25 +79,26 @@ def test(request):
     pass
     
 
-
+'''
 def delete_follow(request):
     following_created = Following.objects.add_follower(request.user, other_user)
     pass
+'''
 
 def follow(request):
     if request.method == 'POST':
         return HttpResponseRedirect(reverse('userena_profile_list'))
     elif request.method == 'GET':
-        user = request.GET['user']
-        ex_user = request.GET['ex_user']
+        user = get_object_or_404(User, username=request.GET.get('user'))
+        ex_user=get_object_or_404(User,username=request.GET.get('ex_user'))
         if user and ex_user:
             user = get_object_or_404(User, username=user)
             ex_user=get_object_or_404(User,username=ex_user)
-            result = Follow.objects.add_follower(follower=ex_user,followee=user)
-            print 'follow==============',result
+            result = Follow.objects.add_follower(follower=user,followee=ex_user)
+            username = user.username
         else:
             raise Http404
-        return HttpResponseRedirect(reverse('userena_profile_list'))
+        return HttpResponseRedirect(reverse('friend_list',kwargs={'username':username,'ftype':'following'}))
     else:
         raise Http404
     
@@ -103,15 +107,16 @@ def remove_follow(request):
     if request.method == 'POST':
         return HttpResponseRedirect(reverse('userena_profile_list'))
     elif request.method == 'GET':
-        user = get_object_or_404(User, username=request.GET['user'])
-        ex_user=get-object_or_404(User,username=request.GET['ex_user'])
+        user = get_object_or_404(User, username=request.GET.get('user'))
+        ex_user=get_object_or_404(User,username=request.GET.get('ex_user'))
+        username=user.username
         if user and ex_user:
-            result=Follow.objects.remove_follower(follower=ex_user,followee=user)     
-            print 'remove_follow========',result
+            result=Follow.objects.remove_follower(follower=user,followee=ex_user)
+            #rel = Follow.objects.get(follower=user.id, followee=ex_user.id)
+            #rel.delete()     
         else:
             raise Http404
-        
-        return HttpResponseRedirect(reverse('userena_profile_list'))
+        return HttpResponseRedirect(reverse('friend_list',kwargs={'username':username,'ftype':'following'}))
     else:
         raise Http404
         
