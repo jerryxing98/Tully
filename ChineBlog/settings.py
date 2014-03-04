@@ -198,6 +198,7 @@ INSTALLED_APPS = (
     'friendship',
     'account',
     'timeline',
+    'bookmark',
     'taggit',
     'taggit_templatetags',
     'attachments',
