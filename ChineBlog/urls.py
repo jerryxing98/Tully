@@ -76,6 +76,10 @@ urlpatterns += patterns('',
     (r'^blog/', include('blog.urls'))
 )
 
+# Bookmark
+urlpatterns += patterns('',
+    (r'^bookmark/',include('bookmark.urls'))
+)
 
 #====================================
 #the friend model
