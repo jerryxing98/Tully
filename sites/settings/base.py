@@ -271,7 +271,6 @@ LOGGING = {
 
 
 #thumbnail
-TL_COVER_URL = "/static/img/tl-default-small.gif"
 THUMBNAIL_DEBUG = True
 
 # Guardian
