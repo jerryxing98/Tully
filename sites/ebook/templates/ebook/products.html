@@ -1,0 +1,113 @@
+{% extends 'userena/base_userena.html' %}
+
+{% block title %} Product {% endblock %}
+
+{% block heading %} 
+<h1> Product</h1>
+<h2> List Records</h2>
+{% endblock %}
+
+
+
+{% block sidebar %}
+  <div class="sidebar">
+    <div class="well">
+      <h4>最新书籍</h4>
+      <ul>
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="products">
+    {% load pagination_tags %}
+    {% autopaginate products %}
+    {% for o in products %}
+    <div class="row" style="padding-top:10">
+	<div class="span3 media-grid">
+		<a href="#">
+	    <img class="thumbnail" src="{{ o.get_thumbnail_url }}" alt="">
+	    </a>
+	</div>
+	<div class="span-two-thirds">
+		<h4>{{o.title}}</h4>
+		{{o.description}}
+	</div>
+	<div class="span2" style="align:right">
+		<p><a class="btn primary" href="{% url product_detail o.pk %}">查看</a></a> </p>
+		<p><a class="btn success" href="{% url product_edit o.pk %}">编辑</a> </p>
+		<p><a class="btn danger" href="#">删除</a></p>
+	</div>
+</div>
+
+
+	{% comment %}
+    <div class="products">
+      <div class="pic">
+        <img src="{{ o.get_thumbnail_url }}"/>
+      </div>
+      <div class="info">
+        <h3> <a href="{% url product_detail o.pk %}">{{o.title}}</a> </h3>
+        <div class="extinfo">
+          <span>浏览: {{o.num_views}}</span>
+          <span>回复: {{o.num_replies}}</span>
+          <span>by: 
+            <a href="{% url userena_profile_detail o.created_by.username %}">
+              {{o.created_by}}
+            </a>
+          </span>
+          <span>创建: {{ o.created_on|date:"Y-m-d H:i"}}</span>
+        </div>
+        {{ o.intro|slice:"160"|linebreaksbr }}{% if o.intro|length > 340 %}...{% endif %} 
+      </div>
+    </div>
+    {% endcomment %}
+    {% endfor %}
+  </div>
+  {% paginate %}
+</div>
+{% endblock %}
+
+
+{% comment %}
+{% block content %} 
+<table>
+<thead>
+<tr><th>Record</th><th colspan="3">Actions</th></tr>
+{% for item in products %}
+<div class="row" style="padding-top:10">
+	<div class="span3 media-grid">
+		<a href="#">
+	    <img class="thumbnail" src="{{ item.thumbnail }}" alt="">
+	    </a>
+	</div>
+	<div class="span-two-thirds">
+		<h4>{{item.title}}</h4>
+		{{item.description}}
+	</div>
+	<div class="span2" style="align:right">
+		<p><a class="btn primary" href="{% url product_detail item.id %}">查看</a></a> </p>
+		<p><a class="btn success" href="{% url product_edit item.id %}">编辑</a> </p>
+		<p><a class="btn danger" href="#">删除</a></p>
+	</div>
+</div>
+{% endfor %}
+</table>
+<div align="center">
+{% if products.has_previous %}
+    <a href="?page={{ products.previous_page_number }}">Previous</a>
+{% endif %}
+
+<span class="current">
+    Page {{ products.number }} of {{ products.paginator.num_pages }}.
+</span>
+
+{% if products.has_next %}
+        <a href="?page={{ products.next_page_number }}">Next</a>
+{% endif %}
+
+</div>
+{% endblock %}
+{% endcomment %}

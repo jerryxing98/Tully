@@ -1,0 +1,25 @@
+{% if not comment.reply_to_comment %}
+	{% if type == 0 %}
+<p>文章《<a title='{{ comment.comment_obj.title }}' href='{{ site }}{{ comment.comment_obj.get_absolute_url }}'>{{ comment.comment_obj.title }}</a>》被{{ comment.username }}评论了。</p>
+<p>评论内容：{{ comment.content|safe }}</p><p><a titile='' href='{{ site }}{{ comment.comment_obj.get_absolute_url }}#comment-{{ comment.id }}'>查看评论</a></p>
+	{% else %}
+<p><a title='' href='{{ site }}'>翻墙乐趣的博客</a>刚刚收到{{ comment.username }}的留言。</p>
+<p>留言内容：{{ comment.content|safe }}</p><p><a titile='' href='{{ site }}{% url blog_contact %}#comment-{{ comment.id }}'>查看留言</a></p>
+	{% endif %}
+{% else %}
+	{% if type == 0 %}
+<p>您在文章《<a title='{{ comment.comment_obj.title }}' href='{{ site }}{{ comment.comment_obj.get_absolute_url }}'>{{ comment.comment_obj.title }}</a>》中的评论被{{ comment.username }}回复了。</p>
+<p>新的回复：{{ comment.content|safe }}</p>
+<p style='margin:5px 10px; padding:5px; border: 1px solid #D8D8D8;'>您的评论：<br/>{{ comment.reply_to_comment.content }}</p>
+<p><a titile='' href='{{ site }}{{ comment.comment_obj.get_absolute_url }}#comment-{{ comment.id }}'>查看回复</a></p>
+<p><hr />请勿直接回复本邮件</p>
+<p><a title='残阳似血的博客' href='{{ site }}'>翻墙乐趣的博客</a>，欢迎订阅博客<a title='' href='{{ site }}{% url blog_rss %}'>rss</a></p>
+	{% else %}
+<p>您在<a title='' href='{{ site }}'>翻墙乐趣的博客</a>上的留言被{{ comment.username }}回复了。</p>
+<p>新的回复：{{ comment.content|safe }}</p>
+<p style='margin:5px 10px; padding:5px; border: 1px solid #D8D8D8;'>您的留言：<br/>{{ comment.reply_to_comment.content }}</p>
+<p><a titile='' href='{{ site }}{% url blog_contact %}#comment-{{ comment.id }}'>查看回复</a></p>
+<p><hr />请勿直接回复本邮件</p>
+<p><a title='残阳似血的博客' href='{{ site }}'>翻墙乐趣的博客</a>，欢迎订阅博客<a title='' href='{{ site }}{% url blog_rss %}'>rss</a></p>
+	{% endif %}
+{% endif %}

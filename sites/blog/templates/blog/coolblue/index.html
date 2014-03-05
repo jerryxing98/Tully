@@ -1,0 +1,31 @@
+<!--  base.html :1.category 2.comment 3.about 4.search  5.rss -->
+{% extends "blog/coolblue/base.html" %}
+
+{% block css %}
+	<link type="text/css" rel="stylesheet" href="/static/blog/coolblue/css/SyntaxHighlighter/shCoreEclipse.css"><link>
+{% endblock %}
+
+{% block js %}
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shCore.js"></script> 
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shAutoloader.js"></script>
+	<script language="JavaScript" src="/static/blog/coolblue/js/loadSyntaxHighlighter.js"></script>
+	<script language="JavaScript" src="/static/blog/coolblue/js/keyboardControl.js"></script>
+{% endblock %}
+
+{% block main %}
+	<!- blog_detail,blog_list->
+	{% include "blog/coolblue/articles.html" %}
+{% endblock %}
+
+{% block footerjs %}
+<!-- 让整个页面支持GOOGLE+ API -->
+<script type="text/javascript">
+  window.___gcfg = {lang: 'zh-CN'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+{% endblock %}

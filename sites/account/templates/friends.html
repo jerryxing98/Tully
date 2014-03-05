@@ -1,0 +1,55 @@
+{% extends 'userena/base_userena.html' %}
+{% load profiletags %}
+{% load i18n %}
+
+{% block title %}{% trans "FriendShip" %}{% endblock %}
+
+{% block extra_header %}
+  {{block.super}}
+  <style type="text/css">
+    label[for="mugshot-clear_id"] {
+      width:auto;
+      float:none;
+      color: gray;
+    }
+  </style>
+{% endblock %}
+
+{% block content_title %}
+  <h1>
+    {{ profile.user.username }}的帐号
+  </h2>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <ul id="profile-nav" class="nav nav-tabs">
+      <li><a href="{% url userena_profile_detail user.username  %}">{% trans "View profile" %}</a></li>
+      <li><a href="{% url userena_profile_edit user.username  %}">{% trans "Edit details" %}</a></li>
+      <li><a href="{% url userena_password_change user.username  %}">{% trans "Change password" %}</a></li>
+      <li><a href="{% url userena_email_change user.username  %}">{% trans "Change email" %}</a></li>
+	  <li><a href="{% url friend_list username=user.username ftype='fans' %}">{% trans "Fans" %}</a></li>
+	  <li><a href="{% url friend_list username=user.username ftype='following' %}">{% trans "Follows" %}</a></li>
+	  <li><a href="{% url friend_list username=user.username ftype='friends' %}">{% trans "Friends" %}</a></li>
+	  <li><a href="{% url friend_list username=user.username ftype='lists' %}">{% trans "Users" %}</a></li>
+    </ul>
+	{% ifequal ftype "following" %}
+    我的关注
+		{% following request.user %}
+	{% endifequal %}
+	{% ifequal ftype "fans" %}
+    我的粉丝
+		{% followers request.user %}
+	{% endifequal %}
+	{% ifequal ftype "friends" %}
+     互相关注
+		{% followers_following request.user %}
+	{% endifequal %}
+  {% ifequal ftype "lists" %}
+     用户列表
+    {% user_lists request.user %}
+  {% endifequal %}
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+<section id="comments" class="box">
+	<header>
+		{% if is_contact == 1 %}
+		<h3>{{ nodes|length }}条留言</h3>
+		{% else %}
+    	<h3>{{ nodes|length }}个评论</h3>
+		{% endif %}
+	</header>
+	<section>
+		{% load blog_filters %}
+		<ol class="commentlist">
+			{% for node in nodes %}
+			{% with nodes|last as lastnode %}
+			<li id="comment-{{ node.id }}" class="comment{% if node == lastnode %} last{% endif %}">
+				{% if node.level > 0 %}
+					{% for i in node.level|get_range %}
+				<div class="indent">
+					{% endfor %}
+				{% endif %}
+				<article class="comment">
+					<header class="comment-meta comment-author vcard">
+						<img src="{% if node.avatar %}{{ node.avatar_50 }}{% else %}/static/blog/coolblue/images/gravatar.jpg{% endif %}" alt="" class="avatar thumbnail" height="60" width="60" />
+						<cite class="fn">
+							<a class="url" href="{{ node.site }}"{% if not node.site %} onclick="return false;"{%endif%}>{{ node.username }}</a>
+						</cite>
+						<a href="#" onclick="return false;">
+							<time datetime="{{ node.post_date|date:"Y-n-j" }}">{{ node.friend_datestr }}</time>
+						</a>
+						{% if node.is_author %}
+						<strong class="author-sign">作者</strong>
+						{% endif %}
+					</header>
+					<section class="comment-content comment">
+						<p>{{ node.content|safe }}</p>
+					</section>
+					<div class="reply" title="回复这条评论"></div>
+				</article>
+				{% if node.level > 1 %}
+					{% for i in node.level|get_range %}
+				</div>
+					{% endfor %}
+				{% endif %}
+			</li>
+			{% endwith %}
+			{% endfor %}
+		</ol>
+	</section>
+</section>

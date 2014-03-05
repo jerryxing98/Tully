@@ -1,0 +1,51 @@
+{% extends "blog/coolblue/base.html" %}
+
+{% block title %}
+搜索{{ query }} - 
+{% endblock %}
+
+{% block css %}
+	<style>
+		div#Pagination {
+			padding-left: 15px;
+			width: 711px;
+		}
+		div.post {
+			margin: 0 0 20px 0;
+		}
+		article.post {
+			margin: 0 0 20px 0;
+			padding: 0 0 24px 0;
+		}
+	</style>
+{% endblock %}
+
+{% block js %}
+	<script language="JavaScript">
+		$(function(){
+			$('div#Pagination a').each(function(i) {
+				href = $(this).attr('href');
+				$(this).attr('href', href+'?q={{ query }}')
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block main %}
+	<div class="post">
+		<p id="resultCount" class="highlight">共搜索到{{ count }}条结果，以下是{% if start == end %}{{ start }}{% else %}{{ start }} - {{ end }}{% endif %}条</p> 
+	</div>
+	<div class="indent">
+    {% for item in results %}
+	    <article class="post">
+	    	<h3><a href="{{ item.link }}">{{ item.title }}</a></h3>
+			<p>{{ item.htmlSnippet|safe }}</p>
+			<p><a href="{{ item.link }}">{{ item.link }}</a></p>
+		</article>
+	{% endfor %}
+	</div>
+	
+	{% if count > n_per_page %}
+		{% include "blog/coolblue/paginator.html" with page_type=3 %}
+	{% endif %}
+{% endblock %}

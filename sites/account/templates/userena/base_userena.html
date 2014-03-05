@@ -1,0 +1,18 @@
+{% extends "base_site.html" %}
+
+{% block extra_header %}
+  {{block.super}}
+  <style type="text/css">
+    .nav-tabs:after, .nav-pills:after {
+      clear: left;
+    }
+    .container > h1 {
+      margin-bottom: 4px;
+    }
+  </style>
+{% endblock %}
+
+{% block container_top %}
+  {% block content_title %}
+  {% endblock %}
+{% endblock %}

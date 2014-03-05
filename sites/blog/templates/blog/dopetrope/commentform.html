@@ -1,0 +1,38 @@
+<section class="box">
+	<header>
+    	<h3>给作者留言</h3>
+	</header>
+	<section>
+		<form action="{% url blog_comment %}" method="post" id="commentform">
+			{% csrf_token %}
+    		{{ form.avatar }}
+			{{ form.reply_to_comment }}
+			{{ form.content_type }}
+			{{ form.object_id }}
+			<div class="row">
+				<fieldset class="6u">
+					<input name="username" maxlength="50" type="text" id="name" placeholder="昵称" tabindex="1" value="{{ form.username.value }}" />
+				</fieldset>
+				<fieldset class="6u">
+					<input name="email_address" maxlength="75" type="text" id="email" placeholder="邮箱" tabindex="2" value="{{ form.email_address.value }}" />
+				</fieldset>
+			</div>
+			<div class="row">
+				<fieldset class="12u">
+					<input name="site" maxlength="200" type="text" id="website" placeholder="网站（可选）" tabindex="3" value="{{ form.site.value }}" />
+				</fieldset>
+			</div>
+			<div class="row">
+				<fieldset class="12u">
+					<textarea tabindex="4" name="content" id="message"></textarea>
+				</fieldset>
+			</div>
+			<div class="row">
+				<div class="12u">
+					<input class="button" value="提交评论" type="submit" />
+					<input style="display: none;" class="button button-alt" value="取消" type="button" />
+				</div>
+			</div>
+		</form>
+	</section>
+</section>

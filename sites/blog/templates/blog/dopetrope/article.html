@@ -1,0 +1,206 @@
+{% extends "blog/dopetrope/base.html" %}
+
+{% block xmlns %}
+ xmlns:wb="http://open.weibo.com/wb"
+{% endblock %}
+
+{% block title %}
+{{ article.title }} - 
+{% endblock %}
+
+{% block meta %}
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://qinxuye.me{{ article.get_absolute_url }}" />
+<meta property="og:title" content="{{ article.title }}" />
+<meta property="og:description" content="{{ article.abstract|striptags|slice:":70" }}..." />
+{% endblock%}
+
+{% block css %}
+	<link type="text/css" rel="stylesheet" href="/static/blog/coolblue/css/SyntaxHighlighter/shCoreEclipse.css"><link>
+	<link type="text/css" rel="stylesheet" href="/static/blog/coolblue/css/jquery.fancybox.css"><link>
+{% endblock %}
+
+{% block js %}
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shCore.js"></script> 
+	<script language="JavaScript" src="/static/blog/coolblue/js/SyntaxHighlighter/shAutoloader.js"></script>
+	<script language="JavaScript" src="/static/blog/coolblue/js/loadSyntaxHighlighter.js"></script> 
+	<script src="/static/blog/coolblue/js/jquery.fancybox.pack.js"></script>
+	<script src="/static/blog/coolblue/js/jquery.form.js"></script>
+	<script src="/static/blog/dopetrope/js/jquery.blockUI.js"></script>
+	<script src="/static/blog/dopetrope/js/comment.js"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script language="JavaScript">
+		ajaxUrl = "/comment/{{ slug }}/";
+		
+		var commentTips = {
+			success: "评论成功，正在更新评论列表！",
+			miss: "评论失败，请填写所有必填信息！",
+			fail: "评论失败，请确保全部信息填写正确！",
+			nochn: "评论失败，评论中必须包含中文！"
+		}
+		
+		var wzt = encodeURIComponent(document.title);
+		var wztb = escape(document.title);
+		var wzu = encodeURIComponent(location.href);
+		var wzub = escape(location.href);
+		var title = document.title;
+		var sc = location.href;
+		
+		function getSocialLink(s){
+			switch(s){
+				case "renren":
+					return "http://share.renren.com/share/buttonshare.do?link="+wzu+"&title="+wzt;
+				case "kaixin001":
+					return "http://www.kaixin001.com/repaste/share.php?rurl="+wzu+"&rcontent="+wzu+"&rtitle="+wzt;
+				case "qzone":
+				    return "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url="+wzu+"&title="+wzt;
+				case "douban":
+				    return "http://www.douban.com/recommend/?url="+wzu+"&title="+wzt;
+				case "sina-weibo":
+				    return "http://v.t.sina.com.cn/share/share.php?appkey=2233047537&ralateUid=1883113397&url="+wzu+"&title="+wzt;
+				case "qq-weibo":
+				    return "http://v.t.qq.com/share/share.php?appkey=a8eb5c5b39804bac8ef40d2babb55572&title="+wzt+'&url='+wzu;
+				case "sohu-weibo":
+				    return "http://t.sohu.com/third/post.jsp?&url="+wzu+"&title="+wztb;
+				case "delicious":
+					return "http://www.delicious.com/save?v=5&noui&jump=close&url="+wzu+'&title='+title;
+				case "digg":
+					return "http://digg.com/submit?url="+wzu+'&title='+title;
+				case "google+":
+				    return "https://plus.google.com/share?url="+wzu;
+			}
+		}
+		
+		$(function() {
+			$("article.is-post p img").each(function(i){
+				if($(this).parent("a").size() == 0){
+					var imgSrc = $(this).attr("src");
+					$(this).wrap("<a href='"+imgSrc+"' class='fancybox'></a>");
+				}
+			});
+			$('.fancybox').fancybox({
+				wrapCSS    : 'fancybox-custom',
+				closeClick : true,
+
+				helpers : {
+					title : {
+						type : 'inside'
+					},
+					overlay : {
+						css : {
+							'background-color' : '#eee'	
+						}
+					}
+				}
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block main %}
+
+<article class="box is-post">
+	<header>
+		<h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
+		<span class="byline">发表于{{ article.created|date:"Y年n月j日 P" }}&nbsp; &nbsp; 
+			位于分类<a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span>
+	</header>
+	<section>
+		{{ article.content|safe }}
+	</section>
+</article>
+
+<section>
+	<div class="row">
+		<div class="6u">
+			<section class="box tagclouds">
+				<header>
+					<h3>标签</h3>
+				</header>
+				<ul>
+					{% for tag in article.tags.all %}
+					<li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+					</li>
+				    {% endfor %}
+				</ul>
+			</section>
+		</div>
+		<div class="6u">
+			<section class="box">
+				<header>
+					<h3>赞这篇文章</h3>
+				</header>
+				<section class="likes">
+					<span>
+						<g:plusone size="medium" href="http://qinxuye.me{{ article.get_absolute_url }}"></g:plusone>
+					</span>
+					<span>
+						<wb:like appkey="3BcMNP" type="number" skin="silver"></wb:like>
+					</span>
+				</section>
+				<div class="clear"></div>
+			</section>
+		</div>
+	</div>
+</section>
+
+<section class="box">
+	<header>
+		<h3>分享到</h3>
+	</header>
+	<section class="share-box">
+		<ul>
+          	<li><a title="分享到Google+" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('google+'));">
+				<img class="img-box" alt="分享到Google+" src="/static/blog/coolblue/images/sns/32-google-plus.png" /></a>
+			</li>
+          	<li><a title="分享到Delicious" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('delicious'));">
+				<img class="img-box" alt="分享到Delicious" src="/static/blog/coolblue/images/sns/32-delicious.png" /></a>
+			</li>
+			<li><a title="分享到Digg" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('digg'));">
+				<img class="img-box" alt="分享到Digg" src="/static/blog/coolblue/images/sns/32-digg.png" /></a>
+			</li>
+			<li><a title="分享到新浪微博" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('sina-weibo'));">
+				<img class="img-box" alt="分享到新浪微博" src="/static/blog/coolblue/images/sns/32-weibo.png" /></a>
+			</li>
+			<li><a title="分享到腾讯微博" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('qq-weibo'));">
+				<img class="img-box" alt="分享到腾讯微博" src="/static/blog/coolblue/images/sns/32-qqweibo.png" /></a>
+			</li>
+            <li><a title="分享到人人网" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('renren'));">
+				<img class="img-box" alt="分享到人人网" src="/static/blog/coolblue/images/sns/32-renren.png" /></a>
+			</li>
+			<li><a title="分享到豆瓣网" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('douban'));">
+				<img class="img-box" alt="分享到豆瓣网" src="/static/blog/coolblue/images/sns/32-douban.png" /></a>
+			</li>
+			<li><a title="分享到开心网" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('kaixin001'));">
+				<img class="img-box" alt="分享到开心网" src="/static/blog/coolblue/images/sns/32-kaixin001.png" /></a>
+			</li>
+            <li><a title="分享到QQ空间" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('qzone'));">
+				<img class="img-box" alt="分享到QQ空间" src="/static/blog/coolblue/images/sns/32-qzone.png" /></a>
+			</li>
+            <li><a title="分享到搜狐微博" href="#" target="_blank" rel="nofollow" onclick="$(this).attr('href',getSocialLink('sohu-weibo'));">
+				<img class="img-box" alt="分享到搜狐微博" src="/static/blog/coolblue/images/sns/32-sohuweibo.png" /></a>
+			</li>
+        </ul>
+		<div class="clear"></div>
+	</section>
+</section>
+
+{% if nodes|length > 0 %}
+	{% include "blog/dopetrope/comments.html" %}
+{% endif %}
+
+{% include "blog/dopetrope/commentform.html" %}
+
+{% endblock %}
+
+{% block footerjs %}
+<script type="text/javascript">
+  window.___gcfg = {lang: 'zh-CN'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+{% endblock %}

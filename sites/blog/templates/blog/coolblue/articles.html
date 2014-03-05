@@ -1,0 +1,41 @@
+{% for article in articles %}
+	<article class="post">
+	
+	    <div class="primary">
+	
+	        <h2>
+	        	<a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+				<g:plusone href="http://qinxuye.me{{ article.get_absolute_url }}"></g:plusone>
+			</h2>
+	
+	        <p class="post-info"><span>位于分类</span> <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></p>
+	
+	        {{ article.abstract|safe }}
+	
+	        <p><a class="more" href="{{ article.get_absolute_url }}">继续阅读整篇文章 &raquo;</a></p>
+	
+	    </div>
+	
+	    <aside>
+	
+		    <p class="dateinfo">{{ article.modified|date:"M" }}<span>{{ article.modified|date:"j" }}</span></p>
+	
+	   	    <div class="post-meta">
+	      	    <h4>文章信息</h4>
+	         	<ul>
+	               <li class="user"><a href="#" onclick="return false;">{{ article.author }}</a></li>
+	               <li class="time"><a href="#" onclick="return false;">{{ article.modified|date:"P" }}</a></li>
+	               <li class="comment"><a href="{{ article.get_absolute_url }}#comments">{{ article.comments.all|length }}个评论</a></li>
+	               <li class="permalink"><a href="{{ article.get_absolute_url }}">持久连接</a></li>
+	            </ul>
+			</div>
+	
+	    </aside>
+	
+	</article>
+	
+{% endfor %}
+
+{% if p.num_pages > 1 %}
+	{% include "blog/coolblue/paginator.html" with page_type=page_type|default:0 %}
+{% endif %}

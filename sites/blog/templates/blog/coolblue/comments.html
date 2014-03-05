@@ -1,0 +1,44 @@
+<!-- post-bottom-section -->
+<div class="post-bottom-section" id="comments">
+	
+	{% if is_contact == True %}
+	<h4>{{ nodes|length }}条留言</h4>
+	{% else %}
+    <h4>{{ nodes|length }}个评论</h4>
+	{% endif %}
+
+    <div class="primary">
+
+    	<ol class="commentlist">
+    		{% load mptt_tags %}
+			{% recursetree nodes %}
+		        <li id="comment-{{ node.id }}" class="{% if node.level == 0 %}{% cycle 'depth-1' 'thread-alt depth-1' %}{% else %}depth-2{% endif %}">
+		            <div class="comment-info">
+						<img alt="" src="{% if node.avatar %}{{ node.avatar }}{% else %}/static/blog/coolblue/images/gravatar.jpg{% endif %}" class="avatar" height="40" width="40" />
+						<cite>
+							<a href="{% if node.site %}{{ node.site }}{% else %}#comment-{{ node.id }}{% endif %}"{% if not node.site %} onclick="return false;"{% else %}target="_blank"{% endif %}>{{ node.username }}</a> 说： <br />
+							<span class="comment-data"><a href="#comment-{{ node.id }}" title="" onclick="return false;">{{ node.post_date|date:"Y年 bj日 P" }}</a></span>
+						</cite>
+					</div>
+					<div class="comment-text">
+						<p>{{ node.content|safe }}</p>
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-{{ node.id }}" name="回复{{ node.username }}：">回复</a>
+ 						</div>
+					</div>
+
+		            {% if not node.is_leaf_node %}
+		                <ul class="children">
+		                    {{ children }}
+		                </ul>
+		            {% endif %}
+		        </li>
+		    {% endrecursetree %}
+
+        <!-- /comment-list -->
+		</ol>
+
+    <!-- /primary -->
+    </div>
+
+ </div>

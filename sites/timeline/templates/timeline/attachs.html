@@ -1,0 +1,83 @@
+{% extends 'userena/base_userena.html' %}
+
+{% block title %}
+  {% if tl %}
+    编辑事件 {{tl}}
+  {% endif %}
+{% endblock %}
+
+{% block extra_header %}
+{{block.super}}
+<style type="text/css">
+</style>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block container_top %}
+<div id="container_top">
+  <div class="sw">
+    <a href="{% url timeline_edit tl.pk %}">编辑基础信息</a>
+    <span>|</span>
+    <a href="{% url timeline_events tl.pk %}">编辑事件</a>
+    <span>|</span>
+    <a href="{% url timeline_attach_upload tl.pk %}">上传图片</a>
+  </div>
+  <ul class="sbreadcrumb">
+    <li><a href="{% url timeline_idx %}">首页</a> <span class="divider">/</span></li>
+    <li><a href="{% url timeline_detail tl.pk %}">{{ tl.title }}</a> <span class="divider">/</span></li>
+    <li class="active">图片管理</li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+  <ul id="attach_list" class="thumbnails">
+    {% for a in attachs %}
+      <li class="span3">
+        <div class="thumbnail">
+          <img src="{{ a.file.url }}"/>
+          <div class="caption">
+            <div class="delete" aid="{{ a.id }}">
+              <a href="###" class="delete">删除</a>
+              <span style="display:none;color:gray">
+                你确定要删除？
+                <a href="###" class="confirm">确定</a>
+                |
+                <a href="###" class="cancel">取消</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url timeline_attach_upload tl.pk %}" class="btn btn-primary">上传图片</a>
+{% endblock %}
+
+{% block footer_ext %}
+  {{ block.super }}
+  <script type="text/javascript">
+    $('.thumbnail .delete > a').click(function(){
+      $(this).next().show();
+      $(this).hide();
+    });
+    $('.thumbnail .delete .confirm').click(function(){
+      var p = $(this).parent().parent();
+      var id = p.attr('aid');
+      $.post("{% url timeline_attach_delete_ tl.pk %}", {'id': id}, function(data){
+        if (data.valid) {
+          p.parent().parent().parent().fadeOut('slow');
+        } else {
+          alert('删除失败');
+        }
+      }, 'json');
+    });
+    $('.thumbnail .delete .cancel').click(function(){
+      var p = $(this).parent();
+      p.hide();
+      p.prev().show();
+    });
+  </script>
+{% endblock %}
