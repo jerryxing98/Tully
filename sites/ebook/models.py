@@ -61,6 +61,14 @@ class ProductManager(models.Manager):
 
 
 class Product(models.Model):
+    '''
+    the core Model of Ebook, the buyer and seller can get the 
+    list , thumbnail store the Product thumbnail image .
+    you can setting the thumbnail size in Settings File through 
+    EBOOK_THUMBNAIL_SIZE,EBOOK_THUMBNAIL_PATH,EBOOK_THUMBNAIL_CROP_TYPE
+    ForeignKey: User - Created_by
+    ForeignKey: Tags  - Tag 
+    '''
     title           = models.CharField(max_length=255, blank=False)
     status          = models.CharField(u"发布状态", max_length=16, default='draft', choices=STATUS_CHOICES)
     description     = models.CharField(max_length=255, blank=True, help_text="Because some things want it")
@@ -98,30 +106,40 @@ class Product(models.Model):
     focus_date = models.CharField(u'初始日期', max_length=30, null=True, blank=True)
     objects = ProductManager()
 
+    '''
+    update the Product models last update time.
+    :param commit,default set True
+    '''
     def update_updated_on(self, commit=True):
         self.updated_on = datetime.now()
         if commit:
             self.save()
 
-    def update_num_events(self, commit=True):
-        self.num_events = self.tlevent_set.count()
-        if commit:
-            self.save()
 
+    '''
+    update the Comment count.
+    :param commit,default set True
+    '''
     def update_num_replies(self, commit=True):
         self.num_replies = self.comment_set.count()
         if commit:
+    
             self.save()
 
+
+    '''
+    get the thumbnail image url
+    '''
     def get_thumbnail_url(self):
         if self.thumbnail:
             return self.thumbnail.url
         return getattr(ebook_settings, 'TL_COVER_URL', None)
 
+    '''
+    get model Product url
+    '''
     @models.permalink
     def get_absolute_url(self):
         return ('product_detail', (self.pk, ))
 
-    def can_edit(self, user):
-        return user.has_perm('collaborator', self) or \
-                self.created_by == user
+
