@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     #timeline all tags list
     #url(r'^tags/$', views.tags, name='bookmark_tags'),
     url(r'^pd/new/$', views.new, name='product_new'),
+    url(r'^tag/(?P<tag_name>[^/]+)/$', views.tag, name='product_tag'),
     url(r'^pd/(?P<pk>\d+)/delete/$', views.delete, name='product_delete'),
     #url(r'^bk/(?P<pk>\d+)/postcomment_/$', views.postcomment_, name='product_postcomment_'),
     url(r'^pd/(?P<pk>\d+)/$', views.detail, name='product_detail'),
