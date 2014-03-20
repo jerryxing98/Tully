@@ -182,9 +182,11 @@ INSTALLED_APPS = (
     'django.contrib.admindocs', 
     'django.contrib.sitemaps',
     # Grapplli
+    #'django-pagination',
     'grappelli.dashboard',
     'grappelli',
     'easy_thumbnails',
+    'markdown',
     #'debug_toolbar',
     # Filebrowser
     'filebrowser',

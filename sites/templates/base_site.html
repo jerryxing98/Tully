@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load umessages_tags %}
+
 {% block extra_header %}
 {% endblock %}
+
+
 {% block page_body %}
+
+   
   {% block topbar %}
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -13,7 +18,7 @@
             var dispatch = function() {
               q = document.getElementById("q");
               if (q.value != "") {
-                window.open('http://www.google.com/search?q=site:jstwind.com/t%20' + q.value, "_blank");
+                window.open('http://www.google.com/search?q=site:jerryminds.com/t%20' + q.value, "_blank");
                 return false;
               } else {
                 return false;
@@ -30,7 +35,23 @@
             <!-- <li><a href=" url "timeline_tags" ">标签云</a></li> -->
 		  </ul>
           <ul class="nav pull-right">
-            <li><a href="{% url timeline_new %}"><span>创建时间线</span></a></li>
+            <li>
+			{% comment %}
+			<a href="{% url timeline_new %}"><span>创建时间线</span></a>
+			{% endcomment %}
+			<div class="btn-group">
+				<button class="btn">创建</button>
+				<button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+                  <li><a href="{% url timeline_new %}">时间线</a></li>
+                  <li><a href="{% url bookmark_new %}">书签</a></li>
+                  <li><a href="{% url product_new %}">电子书</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">其他</a></li>
+                </ul>
+			</div>
+			</li>
             {% if user.is_authenticated %}
               <li><a href="{% url userena_profile_detail user.username %}#id_tls"><span>我的Profile</span></a></li>
               <li>
@@ -55,7 +76,19 @@
       </div>
     </div>
   {% endblock %}
-
+  {% block pnav %}
+	<div class="pnav ">
+		<ul >
+		    <li></li>
+			<li><a href="#">编辑精选</a></li>
+			<li><a href="/timeline/">时间线</a></li>
+			<li><a href="/ebook/">电子书</a></li>
+			<li><a href="/bookmark/">书签</a></li>
+			<li><a href="/hot/">热门</a></li>
+			<li><a href="/recommend/">推荐</a></li>
+		</ul>
+	 </div>
+  {% endblock %}
   {% block container %}
     <div class="container">
       {% if messages %}
