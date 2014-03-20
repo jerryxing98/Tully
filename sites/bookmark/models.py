@@ -47,7 +47,23 @@ js_help = """
 Javascript placed here will be inserted in the page in a <script></script> body. Lines will be stripped so make sure that 
 you end your lines of code correctly.
 """
+def upload_to_image(instance, filename):
+    #salt, hash = generate_sha1(instance.id)
+    extension = filename.split('.')[-1].lower()
+    hash = filename.split('.')[-2]
+    return '%(path)s%(hash)s.%(extension)s' % {'path': 'screen_500/',
+                                               'hash': hash,
+                                               'extension': extension}
 
+
+def upload_to_thumbnail(instance, filename):
+    #103,143
+    #salt, hash = generate_sha1(instance.id)
+    hash = filename.split('.')[-2]
+    extension='jpg_103'
+    return '%(path)s%(hash)s.%(extension)s' % {'path': 'thumbnail_103/',
+                                               'hash': hash,
+                                               'extension': extension}
 
 class Link(models.Model):
     url =  models.URLField(
@@ -56,7 +72,10 @@ class Link(models.Model):
         unique=True,
         help_text=url_help
     )
-    image = models.CharField(help_text=image_help, max_length=100, blank=False)
+    image = ThumbnailerImageField(help_text=image_help, 
+                                  max_length=100, 
+                                  blank=False,
+                                  upload_to = upload_to_image)
 
 
 
@@ -114,7 +133,7 @@ class Bookmark(models.Model):
     js              = models.TextField(help_text=js_help, blank=True)
     mtype           = models.IntegerField(choices=MTYPE_CHOICES,default=1)
     shared          = models.IntegerField(choices=SHARED_CHOICES,default=1)
-    thumbnail       = models.CharField(max_length=255,blank=True)
+    thumbnail       = ThumbnailerImageField(max_length=255,blank=True,upload_to=upload_to_thumbnail)
 
     num_views = models.IntegerField(u'浏览次数', default=0)
     num_replies = models.PositiveSmallIntegerField(u'回复数', default=0)
