@@ -2,9 +2,11 @@
 
 {% block title %} Product {% endblock %}
 
-{% block heading %} 
-<h1> Product</h1>
-<h2> List Records</h2>
+{% block content_title %}
+<div class="page-header">  
+	<h1> 电子书</h1>
+</div>
+<hr style="border:4" color="#987cb9" width="100%" SIZE="2">
 {% endblock %}
 
 
@@ -18,30 +20,36 @@
   </div>
 {% endblock %}
 
+
 {% block content %}
+
+
 <div class="content">
-  <div class="products">
     {% load pagination_tags %}
     {% autopaginate products %}
-    {% for o in products %}
-    <div class="row" style="padding-top:10">
-	<div class="span3 media-grid">
-		<a href="#">
-	    <img class="thumbnail" src="{{ o.get_thumbnail_url }}" alt="">
-	    </a>
-	</div>
-	<div class="span-two-thirds">
-		<h4>{{o.title}}</h4>
-		{{o.description}}
-	</div>
-	<div class="span2" style="align:right">
-		<p><a class="btn primary" href="{% url product_detail o.pk %}">查看</a></a> </p>
-		<p><a class="btn success" href="{% url product_edit o.pk %}">编辑</a> </p>
-		<p><a class="btn danger" href="#">删除</a></p>
-	</div>
-</div>
-
-
+    
+	{% for o in products %}
+	
+    <div class="media" style="height: 180px;">
+	 
+		    <a class="pull-left" href="#">
+	        <img class="media-object"   src="{{ o.get_thumbnail_url }}" alt="">
+	        </a>
+		  <div class="row">
+			<div class="span5">
+				<h4 class="media-heading">{{o.title}}</h4>
+				{{o.description}}
+			</div>
+			<div class="span1 pull-right">
+						<p><a class="btn primary" href="{% url product_detail o.pk %}">查看</a></a> </p>
+						<p><a class="btn success" href="{% url product_edit o.pk %}">编辑</a> </p>
+						<p><a class="btn danger" href="#">删除</a></p>
+			</div>
+		  </div>
+    </div>
+	<hr style="border:4" color="#987cb9" width="100%" SIZE="2">
+   {% endfor %}
+  
 	{% comment %}
     <div class="products">
       <div class="pic">
@@ -63,10 +71,9 @@
       </div>
     </div>
     {% endcomment %}
-    {% endfor %}
+  
   </div>
   {% paginate %}
-</div>
 {% endblock %}
 
 

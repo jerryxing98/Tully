@@ -26,18 +26,20 @@ SHARED_CHOICES = (
 
 def upload_to_thumbnail(instance, filename):
     """
+    103,143
     Uploads a thumbnail for a user to the ``EBOOK_THUMBNAIL_PATH`` and saving it
     under unique hash for the image. This is for privacy reasons so others
     can't just browse through the mugshot directory.
 
     """
-    extension = filename.split('.')[-1].lower()
+    #extension = filename.split('.')[-1].lower()
+    extension = 'jpg_103'  
     salt, hash = generate_sha1(instance.id)
     path = ebook_settings.EBOOK_THUMBNAIL_PATH % {'username': instance.created_by.username,
                                                     'id': instance.created_by.id,
                                                     'date': instance.created_by.date_joined,
                                                     'date_now': get_datetime_now().date()}
-    return 'thumbnail/%(path)s_%(hash)s.%(extension)s' % {'path': path,
+    return 'thumbnail/products/%(path)s_%(hash)s.%(extension)s' % {'path': path,
                                                'hash': hash[:10],
                                                'extension': extension}
 
@@ -80,15 +82,15 @@ class Product(models.Model):
 
 
 
-
+    '''
     THUMBNAIL_SETTINGS = {'size':(ebook_settings.EBOOK_THUMBNAIL_SIZE,
                                   ebook_settings.EBOOK_THUMBNAIL_SIZE),
                           'crop':ebook_settings.EBOOK_THUMBNAIL_CROP_TYPE}
-
+    '''
     thumbnail = ThumbnailerImageField(_('thumbnail'),
                                     blank=True,
                                     upload_to=upload_to_thumbnail,
-                                    resize_source=THUMBNAIL_SETTINGS,
+                                    #resize_source=THUMBNAIL_SETTINGS,
                                     help_text=_('A book image displayed in the list.'))
 
     tags = TaggableManager(blank=True)
