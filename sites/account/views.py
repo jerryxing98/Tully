@@ -20,7 +20,7 @@ from django.http import Http404, HttpResponseRedirect,QueryDict
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-
+from feeds import RSSFeed
 
 '''
 class UserProfileListView(ProfileListView):
@@ -122,8 +122,12 @@ def remove_follow(request):
         
     
             
-    
 
+def describe_email(request):
+    return RSSFeed()
+
+def describe_rss(request):
+    return RSSFeed()
 
     
     
