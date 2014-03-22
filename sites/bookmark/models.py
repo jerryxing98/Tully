@@ -9,12 +9,15 @@ from userena.utils import generate_sha1
 from attachments.models import Attachment
 from easy_thumbnails.fields import ThumbnailerImageField
 from taggit.managers import TaggableManager
-
+from django.template import Template, Context
+from  django.template.loader  import  get_template 
 
 STATUS_CHOICES = (('draft', u'草稿'), 
     ('pub', u'发布'),
     ('del', u'删除')
 )
+
+
 
 
 MTYPE_CHOICES = (
@@ -47,6 +50,10 @@ js_help = """
 Javascript placed here will be inserted in the page in a <script></script> body. Lines will be stripped so make sure that 
 you end your lines of code correctly.
 """
+
+_pagebreak = "<p><!-- pagebreak --></p>"
+get_abstract = lambda s: s.split(_pagebreak)[0]
+
 def upload_to_image(instance, filename):
     #salt, hash = generate_sha1(instance.id)
     extension = filename.split('.')[-1].lower()
@@ -73,7 +80,7 @@ class Link(models.Model):
         help_text=url_help
     )
     image = ThumbnailerImageField(help_text=image_help, 
-                                  max_length=100, 
+                                  max_length=255, 
                                   blank=False,
                                   upload_to = upload_to_image)
 
@@ -93,6 +100,13 @@ class Link(models.Model):
     class Meta:
         '''  '''
         verbose_name_plural = '链接信息'
+
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return getattr(settings, 'TL_COVER_URL', None)
+
 
 
 
@@ -150,6 +164,17 @@ class Bookmark(models.Model):
     focus_date = models.CharField(u'初始日期', max_length=30, null=True, blank=True)
     objects = BookmarkManager()
 
+    def __getattribute__(self, name):
+        if name == "abstract":
+            c = Context({'bm':self}) 
+            t = get_template('bookmark/feeds/bookmark_feed.html') 
+            html=t.render(c)
+            return get_abstract(html)
+        '''
+        if name == "visible_comments":
+            return self.comments.filter(visible=True)
+        '''
+        return super(Bookmark, self).__getattribute__(name)
 
 
     class Meta:
@@ -167,19 +192,16 @@ class Bookmark(models.Model):
         if commit:
             self.save()
 
-    def update_num_events(self, commit=True):
-        self.num_events = self.tlevent_set.count()
-        if commit:
-            self.save()
+
 
     def update_num_replies(self, commit=True):
-        self.num_replies = self.comment_set.count()
+        self.num_replies = self.bkcomment_set.count()
         if commit:
             self.save()
 
     def get_cover_url(self):
-        if self.cover:
-            return self.cover.url
+        if self.thumbnail:
+            return self.thumbnail.url
         return getattr(settings, 'TL_COVER_URL', None)
 
     @models.permalink
