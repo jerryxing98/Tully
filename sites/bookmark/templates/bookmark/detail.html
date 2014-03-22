@@ -41,45 +41,50 @@
 </style>
 {% endblock %}
 
+{% block content_title %}
+<div class="page-header">  
+<h1>
+详细
+</h1>
+
+</div>
+{% endblock %}
+
+
 {% block sidebar %}
 <div class="sidebar">
-  {% if tl.tags.all %}
+   <div class="well">
+    <h4>他的书签</h4>
+
+  {% if bm.tags.all %}
     <div class="sidelables" style="margin-bottom: 10px;">
-      {% for o in tl.tags.all %}
+      {% for o in bm.tags.all %}
         <a href="{% url bookmark_tag o.name %}"> 
           {{ o }} 
         </a> 
       {% endfor %}
     </div>
   {% endif %}
+  </div>
+
   <div class="well" id="sb_tl_creater">
     <div class="user avatar thumbnail">
-      <a href="{% url userena_profile_detail tl.created_by.username %}">
-        <img src="{{ tl.created_by.profile.get_mugshot_url }}"/>
+      <a href="{% url userena_profile_detail bm.created_by.username %}">
+        <img src="{{ bm.created_by.profile.get_mugshot_url }}"/>
       </a>
     </div>
     <div class="info">
       <ul>
-        <li><a href="{% url userena_profile_detail tl.created_by.username %}">{{ tl.created_by.profile }}</a></li>
-        <li>创建于： {{ tl.created_on|date:"Y-m-d H:i"}}</li>
-        <li>更新于： {{ tl.updated_on|date:"Y-m-d H:i"}}</li>
+        <li><a href="{% url userena_profile_detail bm.created_by.username %}">{{ tl.created_by.profile }}</a></li>
+        <li>创建于： {{ bm.created_on|date:"Y-m-d H:i"}}</li>
+        <li>更新于： {{ bm.updated_on|date:"Y-m-d H:i"}}</li>
       </ul>
     </div>
   </div>
+
   <div class="well">
-      <a class="btn" data-toggle="modal" href="#embedCodeModal">将时间线嵌入你的网站</a>
-  </div>
-  <div class="well">
-    <h4>协作者</h4>
-    <div class="sidelables">
-      {% for o in collaborators %}
-        <a href="{% url userena_profile_detail o.username %}"> 
-          {{ o }}
-        </a> 
-      {% endfor %}
-    </div>
     <div>
-      <a class="btn" href="{% url userena_umessages_compose_to tl.created_by.username %}">申请加入</a>
+      <a class="btn" href="{% url userena_umessages_compose_to bm.created_by.username %}">申请加入</a>
     </div>
   </div>
 
@@ -87,52 +92,36 @@
     <div class="well">
       <h4>管理</h4>
       <ul>
-        <li><a href="{% url bookmark_edit tl.pk %}">编辑发现信息</a></li>
-        {% comment %}<li><a href="{% url timeline_events tl.pk %}">编辑事件</a></li>{% endcomment %}
-        {% if user == tl.created_by %}
-        {% comment %}<li><a href="{% url timeline_edit_collaboration tl.pk %}">管理协作者</a></li>{% endcomment %}
-        <li><a href="{% url bookmark_delete tl.pk %}" 
-              onclick="return confirm('您确定需要删除该发现吗？删除后将无法恢复')">删除事件</a></li>
-        {% endif %}
+        <li><a href="{% url bookmark_edit bm.pk %}">编辑发现信息</a></li>
+        <li><a href="{% url bookmark_delete bm.pk %}" 
+              onclick="return confirm('您确定需要删除该发现吗？删除后将无法恢复')">删除发现</a></li>
       </ul>
     </div>
   {% endif %}
 </div>
 {% endblock %}
 
-{% block container_top %}
-<div id="container_top" style="padding-bottom: 20px;">
-  <div class="sw">
-    {% if auth_can_edit %}
-      <a href="{% url bookmark_edit tl.pk %}">编辑发现信息</a>
-      <span>|</span>
 
-      {% comment %}
-      <a href="{% url timeline_events tl.pk %}">编辑事件</a>
-      <span>|</span>
-    {% else %}
-      <a href="{% url timeline_events tl.pk %}">文字版</a>
-      <span>|</span>
-      {% endcomment %}
-    {% endif %}
-    {% comment %}
-    <a href="{% url timeline_full_screen tl.pk %}">精简模式</a>
-    {% endcomment %}
-  </div>
-  <ul class="sbreadcrumb">
-    <li><a href="{% url bookmark_idx %}">首页</a> <span class="divider">/</span></li>
-    <li class="active">{{ tl.title }}</li>
-  </ul>
-  <div>
-    <div id='timeline-embed'></div>
-  </div>
-</div>
-{% endblock %}
 
 {% block content %}
   <div class="content">
+      
+    <div class="title">
+      <h2>
+          <a href="#" target="_blank">{{ bm.title }}</a>
+      </h2>
+    </div>
+    <div class="option">
+      <i class="icon-share"></i>look     <i class="icon-share"></i>test
+    </div>
 
-  <div>
+    <div class="thumb">
+        <a href="{{ bm.link.url }}" target="_blank"><img class="img-border" src="{{ bm.link.get_image_url }}"></a>
+    </div>
+    <div>
+      <p>info</p>
+    </div>
+
     <div id="ckepop" style="float: right;">
       <span class="jiathis_txt">分享到：</span>
       <a class="jiathis_button_tsina"></a>
@@ -145,25 +134,28 @@
     </div>
     <script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
     <div>
-      {{ tl.num_events }} 事件  |  {{ tl.num_views }} 浏览 |  {{ tl.num_replies }} 回复
+      {{ bm.num_events }} 事件  |  {{ bm.num_views }} 浏览 |  {{ bm.num_replies }} 回复
     </div>
-  </div>
+  
 
     <hr/>
     <div>
-      {{ tl.intro|md }}
+      {{ bm.intro|md }}
     </div>
-    <h3>评论</h3>
+    
     <div class="comments" id="id_comments">
+      <h3>评论</h3>
       {% for c in comments %}
         {% include "bookmark/inc_comment.html" %}
       {% endfor %}
     </div>
     {% if user.is_authenticated %}
-      <h3>发表评论</h3>
       <div>
-        <form action="{% url bookmark_postcomment_ tl.pk %}" method="post" id="comment_from">
+        <form action="{% url bookmark_postcomment_ bm.pk %}" method="post" id="comment_from">
           {% csrf_token %}
+          <p>
+            <h3>发表评论</h3>
+          </p>
           <p>
             {{ form.content }}
           </p>
@@ -179,7 +171,7 @@
       </h3>
     {% endif %}
   </div>
-
+  </div>
 {% endblock %}
 
 {% block footer_ext %}
@@ -188,4 +180,21 @@
 <script type="text/javascript" src="{{ STATIC_URL }}ajax_validation/js/jquery-bootstrap-form.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}ajax_validation/js/jquery.djangoajaxform.js"></script>
 {% endcompress %}
+
+<script type='text/javascript'>
+
+</script>
+<script type="text/javascript">
+  $('#comment_from').djangoajaxform({
+      onValidateSucc: function(data, form){
+        if (data.valid) {
+          $('#id_comments').append(data.html);
+          $('#id_content').val('');
+        }
+      }
+  });
+
+  
+</script>
+
 {% endblock %}
