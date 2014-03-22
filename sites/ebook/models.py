@@ -77,10 +77,6 @@ class Product(models.Model):
     price           = models.DecimalField(max_digits=8,decimal_places=2)
     #js              = models.TextField(help_text=js_help, blank=True)
     shared          = models.IntegerField(choices=SHARED_CHOICES,default=1)
-    
-
-
-
 
     '''
     THUMBNAIL_SETTINGS = {'size':(ebook_settings.EBOOK_THUMBNAIL_SIZE,
@@ -145,3 +141,12 @@ class Product(models.Model):
         return ('product_detail', (self.pk, ))
 
 
+class PdComment(models.Model):
+    product = models.ForeignKey(Product)
+    content = models.TextField()
+
+    created_by = models.ForeignKey(User)
+    created_on = models.DateTimeField(u'创建日期', auto_now_add=True)
+
+    def __unicode__(self):
+        return "%s-%s" % (self.product.title, self.content[:20])
