@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block container_top %}
+<div class="page-header">  
 <h1>
   {% if pg == "hot" %} 热门 {% endif %}
   {% if pg == "last" %} 最新 {% endif %}
@@ -20,6 +21,7 @@
   {% if pg == "random" %} 发现 {% endif %}
   {% if pg == "tag" %} 标签 {{ tag.name }} {% endif %}
 </h1>
+</div>
 {% endblock %}
 
 {% block sidebar %}
@@ -39,26 +41,25 @@
     {% load pagination_tags %}
     {% autopaginate timelines %}
     {% for o in timelines %}
-    <div class="timeline">
-      <div class="pic">
-        <img src="{{ o.get_cover_url }}"/>
+    <div class="media" style="height: 180px;">
+   
+        <a class="pull-left" href="#">
+          <img class="media-object"   src="{{ o.get_cover_url }}" alt="">
+          </a>
+      <div class="row">
+      <div class="span5">
+        <h4 class="media-heading">{{o.title}}</h4>
+        {{o.description}}
       </div>
-      <div class="info">
-        <h3> <a href="{% url timeline_detail o.pk %}">{{o.title}}</a> </h3>
-        <div class="extinfo">
-          <span>事件: {{o.num_events}}</span>
-          <span>浏览: {{o.num_views}}</span>
-          <span>回复: {{o.num_replies}}</span>
-          <span>by: 
-            <a href="{% url userena_profile_detail o.created_by.username %}">
-              {{o.created_by}}
-            </a>
-          </span>
-          <span>创建: {{ o.created_on|date:"Y-m-d H:i"}}</span>
-        </div>
-        {{ o.intro|slice:"160"|linebreaksbr }}{% if o.intro|length > 340 %}...{% endif %} 
+      <div class="span1 pull-right">
+            <p><a class="btn primary" href="{% url timeline_detail o.pk %}">查看</a></a> </p>
+            <p><a class="btn success" href="{% url timeline_edit o.pk %}">编辑</a> </p>
+            <p><a class="btn danger" href="#">删除</a></p>
+      </div>
       </div>
     </div>
+  <hr style="border:4" color="#987cb9" width="100%" SIZE="2">
+
     {% endfor %}
   </div>
   {% paginate %}

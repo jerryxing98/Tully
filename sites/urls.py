@@ -8,10 +8,10 @@ from filebrowser.sites import site
 from django.conf.urls.static import static
 from userena.contrib.umessages import views as messages_views
 from account.forms import BsComposeForm
-
+from account.views  import describe_email,describe_rss
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-
+from account.feeds import RSSFeed
 
 admin.autodiscover()
 
@@ -48,11 +48,13 @@ urlpatterns = patterns('',
 
     #url(r'^attachments/', include('attachments.urls')),
     url(r'^about/$', TemplateView.as_view(template_name="about.html"), 
-      name="jerryminds_about"),
+      name="site_about"),
     url(r'^faq/$', TemplateView.as_view(template_name="faq.html"),
-      name="jerryminds_faq"),
-)
+      name="site_faq"),
+    url(r'describe_email/$',describe_email,name="site_describe_email"),
+    url(r'describe_rss/$',RSSFeed(),name="site_describe_rss"),
 
+)
 
 #sitemap
 '''
