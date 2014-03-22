@@ -7,6 +7,14 @@ body {
   background-color: #ffffff;
 }
 
+.btn {
+  line-height: 18px;
+
+}
+
+.navbar .btn {
+   line-height: 11px;
+}
 
 div.pnav {
 height: 42px;
@@ -123,7 +131,6 @@ textarea {
 }
 .navbar {
   position: static;
-  margin-bottom: 20px;
 }
 
 

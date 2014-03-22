@@ -126,13 +126,22 @@
             <img src="https://www.djangoproject.com/m/img/badges/djangosite80x15_grey.gif" border="0" alt="A Django site." title="A Django site." />
           </a>
         </p>
+
+        <ul>
         <p class="lks">
-          <a href=" url timeline_about ">关于</a>
+          <i class="icon-user lks"></i>作者信息:吴某人  <i class="icon-star lks"></i>QQ: 419964206      <i class="icon-envelope lks"></i>EMAIL:<a>jerry_xing8@126.com</a>
+          <i class="icon-home lks"></i>BLOG :<a>blog.jerryminds.info</a></s></p>
+        <p class="lks">
+          <a href="{% url site_about %}">关于</a>
           <span>|</span>
-          <a href=" url timeline_faq ">FAQ</a>
+          <a href="{% url site_faq %}">FAQ</a>
           <span>|</span>
           <a href="http://jerryminds.info" target="_blank">博客</a>
         </p>
+        <p>
+            <i class="icon-globe"></i></img>订阅: <a href="{% url site_describe_email %}">Email</a> |<a href="{% url site_describe_rss %}"> RSS </a>
+        </p>
+        </ul>
         <p>
           &copy; 2012 jstwind.com, all rights reserved 
         </p>
