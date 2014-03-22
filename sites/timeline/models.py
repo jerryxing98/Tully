@@ -25,7 +25,8 @@ class Timeline(models.Model):
     cover = ThumbnailerImageField(u'封面',
             blank=True,
             upload_to=upload_to_cover,
-            resize_source={'size': (140,140), 'crop': 'smart'},
+            #resize_source={'size': (140,140), 'crop': 'smart'},
+            resize_source={'size': (103,143)},
             help_text=u'封面图片')
     tags = TaggableManager(blank=True)
     intro = models.TextField(u'简介', max_length=30,
