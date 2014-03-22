@@ -114,4 +114,18 @@ def edit(request, pk):
     return HttpResponse(t.render(c))
 
 
+def postcomment_(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    form, validate = validate_form(request, form_class=PdCommentForm)
+    if not request.user.is_authenticated():
+        return render_json_response({'valid': False})
+    if validate['valid']:
+        c = form.save(commit=False)
+        c.product = product
+        c.created_by = request.user
+        c.save()
+        product.update_num_replies()
+        validate['html'] = render_to_string('ebook/inc_comment.html', { 'c': c })
+    return render_json_response(validate)
+
 
