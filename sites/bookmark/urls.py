@@ -21,7 +21,6 @@ urlpatterns = patterns('',
     url(r'^bk/(?P<pk>\d+)/delete/$', views.delete, name='bookmark_delete'),
     url(r'^bk/(?P<pk>\d+)/postcomment_/$', views.postcomment_, name='bookmark_postcomment_'),
     url(r'^bk/(?P<pk>\d+)/$', views.detail, name='bookmark_detail'),
-    #
     url(r'^bk/(?P<pk>\d+)/edit/$', views.edit, name='bookmark_edit'),
 )
 

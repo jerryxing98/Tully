@@ -4,7 +4,7 @@ from django.template import Library
 from django.utils.safestring import mark_safe
 
 from bookmark.models import Bookmark
-#from timeline.helper import _html, tl_markdown
+from timeline.helper import _html, tl_markdown
 
 register = Library()
 

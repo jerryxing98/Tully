@@ -44,13 +44,13 @@ def recommend(request, template_name="bookmark/bookmarks.html"):
     ctx['bookmarks'] = Bookmark.objects.get_recommend_bookmarks()
     return render(request, template_name, ctx)
 
-def random(request, template_name="bookmarks/bookmarks.html"):
+def random(request, template_name="bookmark/bookmarks.html"):
     ctx = {}
     ctx['pg'] = 'random'
     ctx['bookmarks'] = Bookmark.objects.get_random_bookmarks()
     return render(request, template_name, ctx)
 
-def tag(request, tag_name, template_name="bookmarks/bookmarks.html"):
+def tag(request, tag_name, template_name="bookmark/bookmarks.html"):
     ctx = {}
     ctx['pg'] = 'tag'
     ctx['tag'] = get_object_or_404(Tag, name=tag_name)
@@ -59,7 +59,7 @@ def tag(request, tag_name, template_name="bookmarks/bookmarks.html"):
     return render(request, template_name, ctx)
 
 
-def detail(request, pk, template_name="bookmarks/detail.html"):
+def detail(request, pk, template_name="bookmark/detail.html"):
     ctx = {}
     bookmark = get_object_or_404(Bookmark, pk=pk)
     bookmark.num_views += 1
@@ -84,7 +84,7 @@ def delete(request, pk):
 
 def postcomment_(request, pk):
     bookmark = get_object_or_404(Bookmark, pk=pk)
-    form, validate = validate_form(request, form_class=CommentForm)
+    form, validate = validate_form(request, form_class=BKCommentForm)
     if not request.user.is_authenticated():
         return render_json_response({'valid': False})
     if validate['valid']:
@@ -103,7 +103,7 @@ def new(request):
     template_name = 'bookmark/form.html'
     form = BookmarkForm()
     if request.method == "POST":
-        form = TimelineForm(request.POST)
+        form = BookmarkForm(request.POST)
         if form.is_valid():
             bookmark = form.save(created_by=request.user)
             return redirect('bookmark_last', bookmark.pk)
