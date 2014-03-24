@@ -46,26 +46,48 @@
   {% load pagination_tags %}
     {% autopaginate bookmarks %}
     
-  {% for o in bookmarks %}
-  
-    <div class="media" style="height: 180px;">
-   
-        <a class="pull-left" href="#">
-          <img class="media-object"   src="{{ o.get_cover_url }}" alt="">
-          </a>
-      <div class="row">
-      <div class="span5">
-        <h4 class="media-heading">{{o.title}}</h4>
-        {{o.description}}
-      </div>
-      <div class="span1 pull-right">
-            <p><a class="btn primary" href="{% url bookmark_detail o.pk %}">查看</a></a> </p>
-            <p><a class="btn success" href="{% url bookmark_edit o.pk %}">编辑</a> </p>
-            <p><a class="btn danger" href="#">删除</a></p>
-      </div>
-      </div>
-    </div>
+	{% for o in bookmarks %}
+	   <div class="media" style="height: 180px;">
+	 
+		  <a class="pull-left" href="#">
+	        <img class="media-object"   src="{{ o.get_cover_url }}" alt="">
+	      </a>
+		  <div class="row">
+			 <div class="span5">
+				<h4 class="media-heading">{{o.title}}</h4>
+				<p></p>
+				<p>
+				{{o.description}}
+				</p>
+				 <dl class="dl-horizontal span5 pull-right">
+				     <dt class="user-option pull-right">
+						<div>
+							<a onclick="Keep.like({{ o.pk }}, this)" href="javascript:;" title="收藏"><i class="icon-thumbs-up"></i>收藏 {{ o.num_views }}</a>
+							<a onclick="Keep.share({{ o.title }},'{% url bookmark_detail o.pk %}', '{{ o.get_thumbnail_url }}', this)" href="javascript:;"><i class="icons icon-share"></i>分享</a>
+							<a onclick="Keep.comment({{ o.pk }}, this)"><i class="icons icon-comment"></i>评论 </a>
+							<p>
+							<a class="username" href="#" target="_blank">{{ o.user.username }}</a>
+						    <span class="time"> - 10/28 11:11收藏了</span>
+							</p>
+						 </div>
+				     </dt>
+				     <dd  class="pull-right">
+					    <a class="user30" href="" target="_blank">
+					      <img src="/static/634577493731971067.jpg_30" title="爱库小秘书">
+                          <em class="vip"></em>
+				        </a>
+				    </dd>
+		        </dl>
+			</div>
+			<div class="span1 pull-right">
+						<p><a class="btn primary" href="{% url bookmark_detail o.pk %}">查看</a></a> </p>
+						<p><a class="btn success" href="{% url bookmark_edit o.pk %}">编辑</a> </p>
+						<p><a class="btn danger" href="#">删除</a></p>
+			</div>
+		  </div>
+		  </div>
   <hr style="border:4" color="#987cb9" width="100%" SIZE="2">
+  </dl>
    {% endfor %}
 
   

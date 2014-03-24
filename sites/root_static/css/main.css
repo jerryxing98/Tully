@@ -7,6 +7,28 @@ body {
   background-color: #ffffff;
 }
 
+dl.dl-horizontal dd.avatar {
+float: right;
+padding: 3px 0 0;
+}
+
+dl.dl-horizontal dt.user-option {
+font-weight: normal;
+line-height: 12px;
+text-align: right;
+width: 335px;
+font-size: 8px;
+color:rgb(119, 119, 119);
+}
+
+
+
+.dl-horizontal dd {
+margin-left: 10px;
+}
+
+
+
 .btn {
   line-height: 18px;
 
