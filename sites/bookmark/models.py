@@ -151,7 +151,7 @@ class Bookmark(models.Model):
 
     num_views = models.IntegerField(u'浏览次数', default=0)
     num_replies = models.PositiveSmallIntegerField(u'回复数', default=0)
-
+    num_favorites = models.IntegerField(u'收藏数',default=0)
     link = models.ForeignKey(Link)
     rec = models.BooleanField(u'推荐', default=False)
     rec_on = models.DateTimeField(blank=True, null=True)

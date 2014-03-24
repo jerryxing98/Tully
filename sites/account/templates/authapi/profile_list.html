@@ -1,0 +1,47 @@
+
+{% load i18n %}
+{% load profiletags %}
+{% block content_title %}<h2 class="content-title">{% trans 'Profiles' %}</h2>{% endblock %}
+
+{% block content %}
+<ul id="account_list">
+    {% for profile in profile_list %}
+	{% if user.username != profile.user.username %}
+		<li>
+			<a href="{% url userena_profile_detail profile.user.username %}"><img src="{{ profile.get_mugshot_url }}" /></a>
+			<a href="{% url userena_profile_detail profile.user.username %}">{{ profile.user.username }}</a>
+			{% comment %}是否粉丝 {{ profile|is_fans:user.username }}，是否关注{{ profile|is_follows:user.username }}
+			{% endcomment %}
+			{% if profile|is_fans:user.username and profile|is_follows:user.username %}
+				 互相关注(<a href={% url friend_delete_follows %}?user={{ user.username }}&ex_user={{ profile.user.username }} >取消关注</a>)
+			{% elif profile|is_fans:user.username %}
+				 我的粉丝(<a href='{% url friend_follows %}?user={{ user.username }}&ex_user={{ profile.user.username }}'>加关注</a>)
+			{% elif profile|is_follows:user.username %}
+				 我的关注(<a href={% url friend_delete_follows %}?user={{ user.username }}&ex_user={{ profile.user.username }} >取消关注</a>)
+			{% else %}
+                 没有关系(<a href='{% url friend_follows %}?user={{ user.username }}&ex_user={{ profile.user.username }}'>加关注</a>)
+		   {% endif %}
+		</li>
+	{% endif %}
+    {% endfor %}
+
+</ul>
+
+{% if is_paginated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="{% url userena_profile_list_paginated page_obj.previous_page_number %}">{% trans 'previous' %}</a>
+        {% endif %}
+
+        <span class="current">
+            {% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="{% url userena_profile_list_paginated  page_obj.next_page_number %}">{% trans 'next' %}</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% endblock %}

@@ -98,7 +98,7 @@ class Product(models.Model):
     num_views = models.IntegerField(u'浏览次数', default=0)
     num_replies = models.PositiveSmallIntegerField(u'回复数', default=0)
 
-
+    num_favorites = models.IntegerField(u'收藏数',default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     focus_date = models.CharField(u'初始日期', max_length=30, null=True, blank=True)

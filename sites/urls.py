@@ -1,5 +1,8 @@
-#!/usr/bin/env python
 #coding=utf-8
+from account.feeds import RSSFeed
+from account.views import describe_email
+from account.views import describe_rss
+from django.contrib import admin
 from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -8,14 +11,7 @@ from filebrowser.sites import site
 from django.conf.urls.static import static
 from userena.contrib.umessages import views as messages_views
 from account.forms import BsComposeForm
-from account.views  import describe_email,describe_rss
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-from account.feeds import RSSFeed
-
 admin.autodiscover()
-
-
 
 
 urlpatterns = patterns('',
@@ -53,16 +49,8 @@ urlpatterns = patterns('',
       name="site_faq"),
     url(r'describe_email/$',describe_email,name="site_describe_email"),
     url(r'describe_rss/$',RSSFeed(),name="site_describe_rss"),
-
 )
 
-#sitemap
-'''
-urlpatterns += patterns('django.contrib.sitemaps.views',
-    (r'^sitemap\.xml$', 'index', {'sitemaps': sitemaps}),
-    (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap', {'sitemaps': sitemaps}),
-)
-'''
 
 # Grappelli url mapping
 urlpatterns += patterns('',
@@ -71,19 +59,15 @@ urlpatterns += patterns('',
 )
 
 # Accounts
+
 urlpatterns += patterns('',
     (r'^accounts/', include('social.urls')),
-    (r'^account/',include('account.urls'))
-)
-    
-# Blog
-urlpatterns += patterns('',
-    (r'^blog/', include('blog.urls'))
+    (r'^account/',include('account.urls')),
 )
 
-# Bookmark
+
 urlpatterns += patterns('',
-    (r'^bookmark/',include('bookmark.urls'))
+    (r'^favorite/',include('favorite.urls'))
 )
 
 #====================================
@@ -91,23 +75,37 @@ urlpatterns += patterns('',
 #====================================
 '''
 urlpatterns += patterns('',
-		url(r'^friend/',include('friend.urls')),
-		)
+        url(r'^friend/',include('friend.urls')),
+        )
 '''
 #
+# Blog
+urlpatterns += patterns('',
+    (r'^blog/', include('blog.urls')),
+)
 
+# Bookmark
+urlpatterns += patterns('',
+    (r'^bookmark/',include('bookmark.urls')),
+)
 #timeline
 
 urlpatterns += patterns('',
-    (r'^timeline/',include('timeline.urls'))
+    (r'^timeline/',include('timeline.urls')),
 )
 
 urlpatterns += patterns ('',
  (r'^ebook/', include('ebook.urls')),
 )
 
-
 # Static files url if DEBUG
+#sitemap
+'''
+urlpatterns += patterns('django.contrib.sitemaps.views',
+    (r'^sitemap\.xml$', 'index', {'sitemaps': sitemaps}),
+    (r'^sitemap-(?P<section>.+)\.xml$', 'sitemap', {'sitemaps': sitemaps}),
+)
+'''
 
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()

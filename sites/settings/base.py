@@ -213,6 +213,7 @@ INSTALLED_APPS = (
     'ebook',
     'taggit',
     'taggit_templatetags',
+    'favorite',
     'attachments',
     'blog',
     'social',

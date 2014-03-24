@@ -1,0 +1,20 @@
+
+
+  <h1>{% trans "Signin" %}</h1>
+    <hr/>
+    <form action="" method="post" class="form-horizontal">
+      <fieldset>
+        {% csrf_token %}
+        {{ form.as_div }}
+        {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+        <div class="form-actions">
+          <p>
+            <input type="submit" value="{% trans 'Signin' %}" class="btn btn-primary">
+			&gt; 还没有帐号？<a href="{% url userena_signup %}">立即注册</a>
+          </p>
+          <p class="forgot-password">
+            <a href="{% url userena_password_reset %}" title="{% trans "Forgot your password?" %}">{% trans "Forgot your password?" %}</a>
+          </p>
+        </div>
+      </fieldset>
+    </form>

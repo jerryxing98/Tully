@@ -6,7 +6,7 @@ from ebook.models import Product
 '''
 class ProductAdmin(admin.ModelAdmin):
 
-    list_display        = ('title', 'thumbnail', 'created_by', 'status', 'num_views', 'num_replies', )
+    list_display        = ('thumbnail', 'created_by', 'status', 'num_views', 'num_replies', )
     search_fields       = ('title', 'created_by__username', )
     #raw_id_fields       = ('attachments', 'created_by')
 

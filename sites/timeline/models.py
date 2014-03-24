@@ -39,6 +39,7 @@ class Timeline(models.Model):
     num_events = models.IntegerField(u'事件数', default=0)
     num_views = models.IntegerField(u'浏览次数', default=0)
     num_replies = models.PositiveSmallIntegerField(u'回复数', default=0)
+    num_favorites = models.IntegerField(u'收藏数',default=0)
 
     rec = models.BooleanField(u'推荐', default=False)
     rec_on = models.DateTimeField(blank=True, null=True)
@@ -55,6 +56,8 @@ class Timeline(models.Model):
             ('admin', u'管理员'),#暂不使用，时间线的创建者就是管理员
             ('collaborator', u'协作者'),
         )
+    
+        
 
     def update_updated_on(self, commit=True):
         self.updated_on = datetime.now()

@@ -9,6 +9,8 @@ from account.forms import BsPasswordChangeForm
 from account.forms import BsChangeEmailForm 
 from django.views.generic.simple import direct_to_template
 from account.views import friends,follow,remove_follow
+from account.views import authapi_signin
+
 
 
 
@@ -38,6 +40,10 @@ urlpatterns = patterns('',
     #url(r'',)
     url(r'^friend/follows$',follow,name = 'friend_follows'),
     url(r'^friend/follows/delete$',remove_follow,name = 'friend_delete_follows'),
+    #url(r'^authapi/signup/$',authapi_signup,{'signup_form':BsSignupForm},name='authapi_signup'),
+    url(r'^authapi/signin/$',authapi_signin,{'auth_form': BsAuthenticationForm},name='authapi_signin'),
+
     (r'^', include('userena.urls')),
+
 )
 
