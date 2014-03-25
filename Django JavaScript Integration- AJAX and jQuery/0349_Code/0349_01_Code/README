@@ -1,0 +1,120 @@
+1.js, 2.js, 3.js, 4.js, 5.js, 6.js, 7.js, 8.js
+
+    Sample lines documenting how methods and properties of the XMLHttpRequest
+    object are accessed.
+
+9.html
+
+    The beginning of one of the web's first HTML documents.
+
+10.sh
+
+    Example command line invocation to create a new project in Django.
+
+11.html
+
+    Slightly more than a "Hello, world!" in Django templating.
+
+    NOTE: In Django templating, it is common to give templates a .html
+    extension instead of one made up for Django templating. In the attached
+    files, a .html extension may be proper HTML or it may be Django templating,
+    either complete or a fragment.
+
+12.py
+    
+    A Python fragment for inclusion in a Django project's urls.py file.
+
+13.py
+
+    A complete Python script and Django view to use in rendering the sample
+    template.
+
+14.py
+
+    A Python fragment to be added to a Django project's settings.py file.
+
+15.py
+
+    Pre-existing Python code immediately before where the contents of 14.py are
+    to be inserted.
+
+16.sh
+    
+    The Python command to run a Django application under the development server
+    from that application's home directory, but only be accessible to the
+    computer it's running from.
+
+17.sh
+
+    The Python command to run a Django application under the development server
+    from that application's home directory, and be accessible to any computer
+    with network access to the server.
+
+18.html
+    
+    An example of a more detailed Django template providing more hooks than the
+    "Hello, world!" template.
+
+19.html
+    
+    What 18.html should render as (excluding lines consisting only of
+    whitespace).
+
+20.html
+
+    An example of includes as an example of the kind of approach to handling
+    boilerplate HTML that Django's templating engine offers an improvement on.
+
+21.html
+    
+    An example of a block in the base template that will be used to demonstrate
+    overriding blocks.
+
+22.html
+    
+    What 21.html looks like rendered.
+
+23.html
+
+    An example of how to override the block to specify another nationality of
+    English.
+
+24.html
+
+    What the block in 23.html looks like when rendered.
+
+25.html
+
+    An example of how to override the block and specify Russian rather than
+    English.
+
+26.html
+
+    What the block in 25.html looks like when rendered.
+
+27.html
+
+    An example of a Django template that extends the base template while
+    specifying Russian rather than English.
+
+28.html
+
+    An example of a base template hook that does not specify a default
+    language.
+
+29.html
+
+    An example of a language-agnostic HTML tag.
+
+30.html
+
+    An example of Django templating that uses in-template conditional logic and
+    loops.
+
+31.py, 32.py, 33.py
+
+    A fragment of Python to be included in a project's settings.py file.
+
+34.py
+
+    A fragment of Python to be included in a project's urls.py file.

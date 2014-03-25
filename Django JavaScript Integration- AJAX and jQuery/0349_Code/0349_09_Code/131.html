@@ -1,0 +1,12 @@
+    PHOTO_DIRECTORY.search_when_loaded = function()
+        {
+        if (PHOTO_DIRECTORY.database_loaded)
+            {
+            PHOTO_DIRECTORY.search();
+            }
+        else
+            {
+            setTimeout('PHOTO_DIRECTORY.search_when_loaded()',
+              PHOTO_DIRECTORY.DELAY_BETWEEN_RETRIES);
+            }
+        }

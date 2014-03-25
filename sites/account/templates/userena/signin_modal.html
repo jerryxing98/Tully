@@ -1,0 +1,45 @@
+{% load i18n %}
+
+<div id="signin_modal" class="modal hide fade" role="dialog">  
+            <div class="modal-header">  
+                <h3>{% trans "Signin" %}</h3>  
+                
+            </div>  
+			<div class="modal-body">
+
+			<hr/>
+
+		<form action="" method="post" class="form-horizontal">
+		{% csrf_token %}
+		 <fieldset>
+			<div class="alert fade in" data-dismiss="close" >
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>{% trans 'Tip!' %}</strong> {% trans 'Please Check ，UserName,Password error!.' %}
+			</div>
+
+
+			<div style="display:none">
+				<input type="hidden" name="csrfmiddlewaretoken" value="E8hZZr0lONMwRbf7AUat4zdrjtF1urJo"/>
+			</div>
+			{{ auth_form.as_div }}
+			{% comment %}
+			{% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+			{% endcomment %}
+			<div class="form-actions">
+			<p>
+				{% comment %}
+				<input type="submit" value="{% trans 'Signin' %}" class="btn btn-primary">
+				{% endcomment %}
+				<div class="modal-footer">
+				<button  class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Close' %}</button>
+				<button id="signin_modal_link" href="{% url authapi_signin %}" class="btn btn-primary" data-loading-text="{% trans 'Loging...' %}">{% trans 'Signin' %}</button>
+				</div>
+			</p>
+			<p class="forgot-password">
+				<a href="{% url userena_password_reset %}" title="{% trans "Forgot your password?" %}">{% trans "Forgot your password?" %}</a>
+			</p>
+			</div>
+		</fieldset>
+		</form>
+	</div>
+  </div>

@@ -1,0 +1,1 @@
+    (r'^$', 'sample.views.home'),

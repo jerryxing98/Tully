@@ -1,0 +1,19 @@
+<p>Department:
+    <strong>
+        <select name="department" id="department" class="autocomplete"
+          onchange="update_autocomplete('Entity_department_{{ entity.id}}', document.getElementById('department').value);">
+            <option
+                {% if not entity.department.id %}
+                    selected="selected"
+                {% endif %}
+                value="department.-1">None</option>
+            {% for department in departments %}
+                <option 
+                    {% if department.id == entity.department.id %}
+                        selected="selected"
+                    {% endif %}
+                    value="department.{{ department.id }}">{{ department.name }}</option>
+            {% endfor %}
+        </select>
+    </strong>
+</p>

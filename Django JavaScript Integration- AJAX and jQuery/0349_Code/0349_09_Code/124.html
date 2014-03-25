@@ -1,0 +1,43 @@
+    PHOTO_DIRECTORY.count_tokens = function(raw, match)
+        {
+        var result = 0;
+        var tokens = PHOTO_DIRECTORY.get_tokens(raw);
+        for(var index = 0; index < tokens.length; ++index)
+            {
+            if (tokens[index] == match)
+                {
+                ++result;
+                }
+            }
+        return result;
+        }
+
+        PHOTO_DIRECTORY.get_tokens = function(text)
+        {
+        var lowercase = text.toLowerCase();
+        var current_token = "";
+        var in_token = false;
+        var result = [];
+        for(var index = 0; index < lowercase.length; ++index)
+            {
+            if (!lowercase[index].match(/[^-\w]/))
+                {
+                in_token = true;
+                current_token += lowercase[index];
+                }
+            else
+                {
+                if (current_token)
+                    {
+                    result[result.length] = current_token;
+                    current_token = "";
+                    }
+                in_token = false;
+                }
+            }
+        if (current_token)
+            {
+            result[result.length] = current_token;
+            }
+        return result;
+        }

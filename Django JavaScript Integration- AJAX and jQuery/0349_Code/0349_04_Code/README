@@ -1,0 +1,86 @@
+01.py
+
+    The first segment of a file defining the central Django Model in the
+    application.
+
+02.py
+
+    The second segment of this file, providing an extension field meant to work
+    in organizations whose phone extensions are of unknown length.
+
+03.py
+
+    An alternate extension that enforces an assumption of either exactly or at
+    most a particular limit to the number of digits, such as a limit of 5.
+
+04.py
+
+    The third segment of the file defining the central model in the
+    application.
+
+05.py
+
+    The fourth segment of this file, which begins to define the central
+    Model proper.
+
+06.py
+
+    The fifth segment of this file, continuing to define the central Model.
+
+07.py
+
+    The sixth segment of this file, continuing to define the central Model.
+
+08.py
+
+    The seventh segment of this file, continuing to define the central Model.
+
+09.py
+
+    The eighth segment of this file, continuing to define the central Model.
+
+10.py
+
+    The ninth segment of this file, concluding the central Model and
+    registering it for tagging.
+
+11.py
+
+    The tenth segment of this file, demonstrating a many-to-one relationship
+    implementation.
+
+12.py
+
+    Another example many-to-one relationship. This concludes examples for the 
+    first file.
+
+13.py
+
+    The beginning of a source file defining a view which provides as JSON
+    selected data, from the model defined in the file beginning with 1.py.
+
+14.py
+
+    Continuation of the source file beginning in 13.py.
+
+15.py
+
+    Continuation of the source file beginning in 13.py.
+
+16.py
+
+    Conclusion of the source file beginning in 13.py.
+
+17.py
+
+    A code fragment demonstrating how to get all saved Entity instances whose
+    name contains 'ed', case insensitive.
+
+18.py
+
+    A code fragment demonstrating chained operations on a QuerySet.
+
+19.py
+
+    Pseudocode demonstrating how to iterate through a QuerySet the reccommended
+    way.

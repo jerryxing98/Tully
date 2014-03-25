@@ -1,0 +1,14 @@
+<div class="image">
+    <form id="image_upload" name="image_upload"
+      action="/ajax/saveimage/{{ id }}" method="POST"
+      enctype="multipart/form-data">
+        {% if entity.image_mimetype %}
+            <img class="profile" src="/profile/images/{{ id }}" />
+        {% else %}
+            <div id="image_slot"></div>
+            Upload image:<br />
+        {% endif %}
+        <button class="button" id="upload"
+          onclick="return ajaxFileUpload({{ id }});">Upload</button>
+    </form>
+</div>

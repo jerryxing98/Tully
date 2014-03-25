@@ -1,0 +1,32 @@
+    PHOTO_DIRECTORY.Emails = [];
+    PHOTO_DIRECTORY.Entities = [];
+    PHOTO_DIRECTORY.Entities_by_id = [];
+    PHOTO_DIRECTORY.Phones = [];
+    PHOTO_DIRECTORY.Stati = [];
+    PHOTO_DIRECTORY.Tags = [];
+    PHOTO_DIRECTORY.Tags_by_id = [];
+    PHOTO_DIRECTORY.URLs = [];
+
+    PHOTO_DIRECTORY.current_profile = {{ id|default:"null" }} ;
+    PHOTO_DIRECTORY.database_loaded = false;
+    PHOTO_DIRECTORY.last_attempted_function = null;
+    PHOTO_DIRECTORY.logged_in = false;
+    PHOTO_DIRECTORY.no_network = false;
+    PHOTO_DIRECTORY.tables_loaded = 0;
+    PHOTO_DIRECTORY.tables_available = 6;
+
+    PHOTO_DIRECTORY.DELAY_BETWEEN_RETRIES =
+      {{ settings.DELAY_BETWEEN_RETRIES }};
+    PHOTO_DIRECTORY.INITIAL_STATI = {{ settings.INITIAL_STATI }};
+    PHOTO_DIRECTORY.INITIAL_RESULTS = {{ settings.INITIAL_RESULTS }};
+    PHOTO_DIRECTORY.SHOULD_DOWNLOAD_DIRECTORY =
+      {{ settings.SHOULD_DOWNLOAD_DIRECTORY }};
+    PHOTO_DIRECTORY.SHOULD_TURN_OFF_HIJAXING =
+      {{ settings.SHOULD_TURN_OFF_HIJAXING }};
+
+    PHOTO_DIRECTORY.DEPARTMENT_WEIGHT = {{ settings.DEPARTMENT_WEIGHT }};
+    PHOTO_DIRECTORY.DESCRIPTION_WEIGHT = {{ settings.DESCRIPTION_WEIGHT }};
+    PHOTO_DIRECTORY.LOCATION_WEIGHT = {{ settings.LOCATION_WEIGHT }};
+    PHOTO_DIRECTORY.NAME_WEIGHT = {{ settings.NAME_WEIGHT }};
+    PHOTO_DIRECTORY.STATUS_WEIGHT = {{ settings.STATUS_WEIGHT }};
+    PHOTO_DIRECTORY.TAG_WEIGHT = {{ settings.TAG_WEIGHT }};

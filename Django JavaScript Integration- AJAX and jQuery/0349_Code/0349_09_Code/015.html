@@ -1,0 +1,6 @@
+<p>Phone: <strong>
+    {% for phone in phones %}
+        <span id="Phone_{{ phone.id }}" class="edit"
+          title="Click to edit.">{{ phone.number }}</span>
+        <span class="delete" id="Phone_{{ phone.id }}">&#10008;</span> &nbsp;
+    {% endfor %}

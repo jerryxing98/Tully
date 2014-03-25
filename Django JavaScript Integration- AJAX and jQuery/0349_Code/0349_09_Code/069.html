@@ -1,0 +1,28 @@
+PHOTO_DIRECTORY.check_authentication = function(parsed_json)
+        {
+        if (parsed_json == '{"not_authenticated": true}')
+            {
+            PHOTO_DIRECTORY.logged_in = false;
+            return false;
+            }
+        try
+            {
+            if (parsed_json.not_authenticated)
+                {
+                PHOTO_DIRECTORY.logged_in = false;
+                return false;
+                }
+            else
+                {
+                PHOTO_DIRECTORY.logged_in = true;
+                return true;
+                }
+            PHOTO_DIRECTORY.logged_in = true;
+            return true;
+            }
+        catch(error)
+            {
+            PHOTO_DIRECTORY.logged_in = false;
+            return false;
+            }
+        }

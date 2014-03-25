@@ -1,0 +1,14 @@
+.edit_rightclick:after
+    {
+    color: #404040;
+    content: "☛✍"; /* The symbols, not ASCII encodings, of &#9755; and then &#9997; */
+    text-decoration: none;
+    font-size: larger;
+    }
+
+img.profile
+    {
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    }

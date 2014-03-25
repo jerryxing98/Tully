@@ -1,0 +1,69 @@
+% block dtd %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">{% endblock dtd %}
+{% block html_tag %}<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">{% endblock html_tag %}
+    {% block head %}<head>
+        <title>{% block head_title %}{{ page.title }}{% endblock head_title %}</title>
+        {% block head_favicon %}<link rel="icon" href="/static/favicon.ico" type="x-icon" />
+        <link rel="shortcut icon" href="/static/favicon.ico" type="x-icon" />{% endblock head_favicon %}
+        {% block head_meta %}
+            {% block head_meta_author%}{% endblock head_meta_author %}
+            {% block head_meta_charset %}<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />{% endblock head_meta_charset %}
+            {% block head_meta_contentlanguage %}<meta http-equiv="Content-Language" value="en-US" />{% endblock head_meta_contentlanguage %}
+            {% block head_meta_description %}{% endblock head_meta_description %}
+            {% block head_meta_keywords %}{% endblock head_meta_keywords %}
+            {% block head_meta_othertags %}{% endblock head_meta_othertags %}
+            {% block head_meta_refresh %}{% endblock head_meta_refresh %}
+            {% block head_meta_robots %}{% endblock head_meta_robots %}
+        {% endblock head_meta %}
+        {% block head_rss %}{% endblock head_rss %}
+        {% block head_css %}
+            {% block head_css_site %}<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<link rel="stylesheet" type="text/css"
+href="/static/css/smoothness/jquery-ui-1.8.2.custom.css" />{% endblock head_css_site %}
+            {% block head_css_section %}{% endblock head_css_section %}
+            {% block head_css_page %}{% endblock head_css_page %}
+        {% endblock head_css %}
+        {% block head_section %}{% endblock head_section %}
+        {% block head_page %}{% endblock head_page %}
+    </head>{% endblock head %}
+    {% block body %}<body>
+        {% block body_preamble_site %}{% endblock body_preamble_site %}
+        {% block body_preamble_section %}{% endblock body_preamble_section %}
+        {% block body_preamble_page %}{% endblock body_preamble_page %}
+        <div id="sidebar">
+        {% block body_sidebar %}{% endblock body_sidebar %}
+        </div>
+        <div id="content">
+        {% block body_content %}
+            <div id="header">
+            {% block body_header %}
+                {% block body_header_banner %}{% endblock body_header_banner %}
+                {% block body_header_title %}<h1>{{ page.title }}</h1>{% endblock body_header_title %}
+                {% block body_header_breadcrumb %}{{ page.breadcrumb }}{% endblock body_header_breadcrumb %}
+            {% endblock body_header %}
+            </div>
+            {% block body_site_announcements %}{% endblock body_site_announcements %}
+            {% block body_notifications %}<div id="notifications"></div>{% endblock body_notifications %}
+            {% block body_main %}{% endblock body_main %}
+        {% endblock body_content %}
+        </div>
+        <div id="footer">
+        {% block body_footer %}
+            {% block body_footer_breadcrumb %}{{ page.breadcrumb }}{% endblock body_footer_breadcrumb %}
+            {% block body_footer_legal %}{% endblock body_footer_legal %}
+        {% endblock body_footer %}
+        </div>
+    </body>{% endblock body %}
+    {% block footer %}
+        {% block footer_javascript %}
+            {% block footer_javascript_site %}
+<script language="JavaScript" type="text/javascript" src="/static/js/jquery.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/jquery-ui.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/jquery.jeditable.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/ajaxfileupload.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/jquery.effects.fade.js"></script>
+{% endblock footer_javascript_site %}
+            {% block footer_javascript_section %}{% endblock footer_javascript_section %}
+            {% block footer_javascript_page %}{% endblock footer_javascript_page %}
+        {% endblock footer_javascript %}
+    {% endblock footer %}
+</html>

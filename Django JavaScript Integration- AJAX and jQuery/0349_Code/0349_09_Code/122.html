@@ -1,0 +1,145 @@
+    PHOTO_DIRECTORY.build_profile = function(id)
+        {
+        var result = "<h2>People, etc.</h2>\n";
+        if (PHOTO_DIRECTORY.Entities)
+            {
+            var entity = PHOTO_DIRECTORY.Entities_by_id[id];
+            if (entity)
+                {
+                result += "<div class='deletion'>\n";
+                result += "<span class='delete' id='Entity_" + id +
+                  "'>Delete " + entity.fields.name + "</span>\n";
+                result += "</div>";
+                result += "<h3 id='Entity_name_" + id +
+                  "' title='Click to edit.' class='edit'>";
+                result += entity.fields.name;
+                result += "</h3>\n";
+                result += "<div class='image'>";
+                result += "<form id='image_upload' name='image_upload' " + 
+                  "action='/ajax/saveimage/" + id +
+                  "' method='POST' enctype='multipart/form-data'>\n";
+                if (entity.fields.image_mimetype)
+                    {
+                    result += "<img class='profile' src='/profile/images/" +
+                      id + " />\n";
+                    }
+                else
+                    {
+                    result += "<div id='image_slot'></div>\n";
+                    result += "Upload image:<br />\n";
+                    }
+                result += "<input type='file' name='image' id='image' />" +
+                  "<br />\n";
+                result += "<button class='button' id='upload' " +
+                  "onclick='return ajaxFileUpload(" + id +
+                  ");'>Upload</button>\n";
+                result += "</form>";
+                result += "</div>";
+                result += "<p>Title: <strong id='entity_title_" + id +
+                  "' title='Click to edit.' class='edit'>";
+                result += entity.fields.title;
+                result += "</strong></p>\n";
+                result += "<p>Description: <strong id='Entity_description_" +
+                  id + "' title='Click to edit.' class='edit_textarea'>";
+                result += entity.fields.description;
+                result += "</strong><p>\n";
+                result += "<p>Phone: <strong>";
+                for (var index = 0; index < PHOTO_DIRECTORY.Phones.length;
+                  ++index)
+                    {
+                    if (PHOTO_DIRECTORY.Phones[index].fields.entity == id)
+                        {
+                        result += "<span id='Phone_" +
+                          PHOTO_DIRECTORY.Phones[index].pk +
+                          "' class='edit' title='Click to edit.'>" +
+                          PHOTO_DIRECTORY.Phones[index].fields["number"] +
+                          "</span> &nbsp;\n<span class='delete' id='Phone_" +
+                          PHOTO_DIRECTORY.Phones[index].pk +
+                          "'>&#10008;</span>" + " &nbsp;\n";
+                        }
+                    }
+                result += "<span class='edit' title='Click to add.' " +
+                  "id='Phone_new_" + id + "'></span>";
+                result += "</strong></p>\n";
+                result += "<p>Email: <strong>";
+                for (var index = 0; index < PHOTO_DIRECTORY.Emails.length;
+                  ++index)
+                    {
+                    if (PHOTO_DIRECTORY.Emails[index].fields.entity == id)
+                        {
+                        result += "<a id='Email_" +
+                          PHOTO_DIRECTORY.Emails[index].pk +
+                          "' class='edit_rightclick' " +
+                          " title='RIGHT click to edit.' href='mailto:" +
+                          PHOTO_DIRECTORY.Emails[index].fields.email + "'>" +
+                          PHOTO_DIRECTORY.Emails[index].fields.email + "</a> " +
+                          "<span class='delete' id='Email_" +
+                          PHOTO_DIRECTORY.Emails[index].pk +
+                          "'>&#10008;</span>" + " &nbsp;\n";
+                                                }
+                    }
+                result += "<span class='edit' title='Click to edit.' " +
+                  "id='Email_new_" + id + "'></span>";
+                result += "</strong></p>\n";
+                result += "<p>Webpages: <strong>";
+                for (var index = 0; index < PHOTO_DIRECTORY.URLs.length;
+                  ++index)
+                    {
+                    if (PHOTO_DIRECTORY.URLs[index].fields.entity == id)
+                        {
+                        result += "<a id='URL_url_" +
+                          PHOTO_DIRECTORY.URLs[index].pk +
+                          "' class='edit_rightclick' " +
+                          " title='RIGHT click to edit.' href='" +
+                          PHOTO_DIRECTORY.URLs[index].fields["url"] + "'>" +
+                          PHOTO_DIRECTORY.URLs[index].fields["url"] + "</a> " + 
+                          "<span class='delete' id='URL_" +
+                          PHOTO_DIRECTORY.URLs[index].pk +
+                          "'>&#10008;</span>" + " &nbsp;\n";
+                        }
+                    }
+                result += "<span class='edit' title='Click to add.' " +
+                  "id='URL_new_" + id + "'></span>";
+                result += "</strong></p>\n";
+                result += "<p>GPS: <strong";
+                var gps = "";
+                var gps_url = "";
+                if (entity.fields.gps)
+                    {
+                    gps = entity.fields.gps;
+                    }
+                else if (entity.fields["location"])
+                    {
+                    if (PHOTO_DIRECTORY.Entities_by_id[
+                      entity.fields["location"]].gps)
+                        {
+                        gps = PHOTO_DIRECTORY.Entities_by_id[
+                          entity.fields["location"]].gps;
+                        }
+                    }
+                if (gps)
+                    {
+                    gps_url =
+                      "http://maps.google.com/maps?f=q&source=s_q&hl=en&q=" +
+                      gps.replace(" ", "+") + "&iwloc=A&hl=en";
+                    result += "><a class='edit_rightclick' " +
+                      "title='Click to edit.' " + "id='Entity_gps_" +
+                      entity.pk + "' href='" + gps_url + "'>" + gps + "</a>";
+                    }
+                else
+                    {
+                    result += " class='edit' title='Click to edit.'";
+                    result += " id='Entity_gps_" + entity.pk + "'>";
+                    }
+                result += "</strong></p>";
+                result += "<p>Postal address:<br /><strong " +
+                  "id='Entity_postal_address_" + id +
+                  "' title='Click to edit.' class='edit_textarea'>";
+                result += entity.fields.postal_address;
+                result += "</strong></p>\n";
+                result += "<p>Other contact information: <strong ";
+                result += "class='edit_textarea' title='Click to edit.' " +
+                  "id='Entity_other_contact_" + id + "'>" +
+                  entity.fields.other_contact + "</strong></p>\n";
+                result += "<p>Tags: <strong>";
+                entity.fields.tags.sort();

@@ -1,0 +1,131 @@
+PHOTO_DIRECTORY.load_database = function()
+        {
+        if (PHOTO_DIRECTORY.no_network ||
+          !PHOTO_DIRECTORY.SHOULD_DOWNLOAD_DIRECTORY)
+            {
+            return;
+            }
+        $.ajax(
+            {
+            success: function(data, textStatus, XMLHttpRequest)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    if (PHOTO_DIRECTORY.Emails.length == 0)
+                        {
+                        PHOTO_DIRECTORY.tables_loaded += 1;
+                        }
+                    PHOTO_DIRECTORY.Emails = data;
+                    if (PHOTO_DIRECTORY.tables_loaded >=
+                      PHOTO_DIRECTORY.tables_available)
+                        {
+                        PHOTO_DIRECTORY.database_loaded = true;
+                        }
+                    }
+                },
+            url: "/ajax/download/Email",
+            });
+        $.ajax(
+            {
+            success: function(data, textStatus, XMLHttpRequest)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    if (PHOTO_DIRECTORY.Entities.length == 0)
+                        {
+                        PHOTO_DIRECTORY.tables_loaded += 1;
+                        }
+                    PHOTO_DIRECTORY.Entities = data;
+                    PHOTO_DIRECTORY.Locations = data;
+                    for(var index = 0; index < PHOTO_DIRECTORY.Entities.length;
+                      ++index)
+                        {
+                        PHOTO_DIRECTORY.Entities_by_id[
+                          PHOTO_DIRECTORY.Entities[index].pk] =
+                          PHOTO_DIRECTORY.Entities[index];
+                        }
+                    if (PHOTO_DIRECTORY.tables_loaded >=
+                      PHOTO_DIRECTORY.tables_available)
+                        {
+                        PHOTO_DIRECTORY.database_loaded = true;
+                        }
+                    }
+                },
+            url: "/ajax/download/Entity",
+            });
+        $.ajax(
+            {
+            success: function(data, textStatus, XMLHttpRequest)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.tables_loaded += 1;
+                    PHOTO_DIRECTORY.Phones = data;
+                    if (PHOTO_DIRECTORY.tables_loaded >=
+                      PHOTO_DIRECTORY.tables_available)
+                        {
+                        PHOTO_DIRECTORY.database_loaded = true;
+                        }
+                    }
+                },
+            url: "/ajax/download/Phone",
+            });
+        $.ajax(
+            {
+                        success: function(data, textStatus, XMLHttpRequest)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.tables_loaded += 1;
+                    PHOTO_DIRECTORY.Stati = data;
+                    if (PHOTO_DIRECTORY.tables_loaded >=
+                      PHOTO_DIRECTORY.tables_available)
+                        {
+                        PHOTO_DIRECTORY.database_loaded = true;
+                        }
+                    }
+                },
+            url: "/ajax/download/Status",
+            });
+        $.ajax(
+            {
+            success: function(data, textStatus, XMLHttpRequest)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.tables_loaded += 1;
+                    PHOTO_DIRECTORY.Tags = data;
+                    for(var index = 0; index < PHOTO_DIRECTORY.Tags.length;
+                      ++index)
+                        {
+                        PHOTO_DIRECTORY.Tags_by_id[
+                          PHOTO_DIRECTORY.Tags[index].pk] =
+                          PHOTO_DIRECTORY.Tags[index];
+                        }
+                    if (PHOTO_DIRECTORY.tables_loaded >=
+                      PHOTO_DIRECTORY.tables_available)
+                        {
+                        PHOTO_DIRECTORY.database_loaded = true;
+                        }
+                    }
+                },
+            url: "/ajax/download/Tag",
+            });
+        $.ajax(
+            {
+            success: function(data, textStatus, XMLHttpRequest)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.tables_loaded += 1;
+                    PHOTO_DIRECTORY.URLs = data;
+                    if (PHOTO_DIRECTORY.tables_loaded >=
+                      PHOTO_DIRECTORY.tables_available)
+                        {
+                        PHOTO_DIRECTORY.database_loaded = true;
+                        }
+                    }
+                },
+            url: "/ajax/download/URL",
+            });
+        }

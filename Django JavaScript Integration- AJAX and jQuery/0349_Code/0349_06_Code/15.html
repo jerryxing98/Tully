@@ -1,0 +1,34 @@
+{% block footer_javascript_page %}
+<script language="JavaScript" type="text/javascript">
+<!--
+function register_editables()
+    {
+    $(".edit").editable("/ajax/save",
+        {
+        cancel: "Cancel",
+        submit: "OK",
+        tooltip: "Click to edit.",
+        });
+    $(".edit_rightclick").editable("/ajax/save",
+        {
+        cancel: "Cancel",
+        submit: "OK",
+        tooltip: "Right click to edit.",
+        event: "contextmenu",
+        });
+    $(".edit_textarea").editable("/ajax/save",
+        {
+        cancel: "Cancel",
+        submit: "OK",
+        tooltip: "Click to edit.",
+        type: "textarea",
+        });
+    }
+
+$(function()
+    {
+    register_editables();
+    });
+// -->
+</script>
+{% endblock footer_javascript_page %}

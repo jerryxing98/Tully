@@ -1,0 +1,18 @@
+    {% for result in second_portion %}
+
+        <div class="search_result"
+          onmouseover="PHOTO_DIRECTORY.load_profile({{ result.id }});">
+        <p><a href="/?query={{ query }}&id={{ result.id }}"
+        onclick="PHOTO_DIRECTORY.load_profile({{ result.id }}); return false;"
+        >{{ result.name }}</a><br />
+        {% if result.image %}
+            <img class="search_results" src="/profile/images/{{ result.id }}" />
+        {% endif %}
+        {% if result.title %}
+            {{ result.title }}{% if result.department.name %},<br />{% endif %}
+        {% endif %}
+        {{ result.department.name }}
+        </p>
+        </div>
+
+    {% endfor %}

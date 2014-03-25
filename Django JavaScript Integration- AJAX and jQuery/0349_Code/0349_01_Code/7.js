@@ -1,0 +1,2 @@
+XMLHttpRequest.responseText
+XMLHttpRequest.responseXML

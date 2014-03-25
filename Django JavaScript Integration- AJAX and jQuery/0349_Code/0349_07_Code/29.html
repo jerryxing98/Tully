@@ -1,0 +1,20 @@
+<p>
+    Reports to:
+    <strong>
+        <select name="reports_to" id="reports_to" class="autocomplete"
+          onchange="update_autocomplete('Entity_reports_to_{{ entity.id}}', document.getElementById('reports_to').value);">
+        <option
+        {% if not entity.reports_to.id %}
+            selected="selected"
+        {% endif %}
+        value="reports_to_-1">None</option>
+        {% for reports_to in reports_to_candidates %}
+            <option 
+            {% if reports_to.id == entity.reports_to.id %}
+                selected="selected"
+            {% endif %}
+            value="reports_to_{{ reports_to.id }}">{{ reports_to.name }}</option>
+        {% endfor %}
+        </select>
+    </strong>
+</p>

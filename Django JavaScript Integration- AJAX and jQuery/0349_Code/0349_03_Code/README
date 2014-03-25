@@ -1,0 +1,50 @@
+1.php
+
+    PHP code fragment demonstrating the naive way of writing an SQL injection
+    vulnerability.
+
+2.txt
+
+    Code demonstrating an SQL injection attack on the code in 1.php.
+
+3.sql
+
+    Rendered SQL after injection.
+
+4.php
+
+    A modified version of 1.php that masks the immediately addressed form of
+    vulnerability.
+
+5.txt
+
+    Part of a sample malformed HTTP request that Django should recognize as
+    malformed.
+
+6.py
+
+    A field for a credit card number that disregards non-numeric characters
+    such as are traditionally inserted for more readable credit card numbers.
+    This is for illustration purposes only, and the point is made in the text
+    that you're probably not solving the problem right if you're handling
+    credit card numbers with your own code unless you're i.e. developing an
+    ecommerce framework.
+
+7.py
+
+    An analogous field for storing a phone number that disregads non-word
+    characters such as are commonly used for formatting.
+
+8.py
+
+    An illustration for how to adapt VARCHAR-based Django fields to use a TEXT
+    base.
+
+9.py
+
+    An example of a phone number field that can be tested for equality so that
+    "(800) 555-1212" and "800.555.1212" will evaluate as equal.
+
+10.py
+
+    An example of a validated field, in this case a GPS coordinate field.

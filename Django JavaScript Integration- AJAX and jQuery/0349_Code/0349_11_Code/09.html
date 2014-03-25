@@ -1,0 +1,9 @@
+    PHOTO_DIRECTORY.mouseover_profile = function(profile)
+        {
+        if (profile != PHOTO_DIRECTORY.last_mouseover_profile)
+            {
+            PHOTO_DIRECTORY.load_profile(profile);
+            PHOTO_DIRECTORY.last_mouseover_profile = profile;
+            PHOTO_DIRECTORY.register_editables();
+            }
+        }

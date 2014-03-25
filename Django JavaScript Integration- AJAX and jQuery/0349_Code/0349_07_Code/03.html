@@ -1,0 +1,7 @@
+        {% for department in departments %}
+            <option 
+            {% if department.id == entity.department.id %}
+                selected="selected"
+            {% endif %}
+            value="department.{{ department.id }}">{{ department.name }}</option>
+        {% endfor %}

@@ -1,0 +1,111 @@
+    PHOTO_DIRECTORY.search = function()
+        {
+        if (PHOTO_DIRECTORY.database_loaded)
+            {
+            var query = document.search_form.query.value;
+            var candidates = [];
+            for(var index = 0; index < PHOTO_DIRECTORY.Entities.length;
+              ++index)
+                {
+                candidates[candidates.length] =
+                  [PHOTO_DIRECTORY.Entities[index], 0];
+                }
+            var tokens = PHOTO_DIRECTORY.get_tokens(query);
+            for(var index = 0; index < tokens.length; ++index)
+                {
+                var new_candidates = [];
+                for (var j = 0; j < candidates.length; ++j)
+                    {
+                    if (PHOTO_DIRECTORY.score(candidates[j][0],
+                      tokens[index]) > 0)
+                        {
+                        candidates[j][1] +=
+                          PHOTO_DIRECTORY.score(candidates[j][0],
+                          tokens[index]);
+                        new_candidates[new_candidates.length] = candidates[j];
+                        }
+                    }
+                candidates = new_candidates;
+                }
+            var score_sorter = function(a, b)
+                {
+                if (a[1] > b[1])
+                    {
+                    return 1;
+                    }
+                if (a[1] == b[1])
+                    {
+                    return 0;
+                    }
+                if (a[1] < b[1])
+                    {
+                    return -1;
+                    }
+                }
+            candidates.sort(score_sorter);
+            var result = "<h2>Search results</h2>";
+            if (candidates.length == 0)
+                {
+                result +=
+                  "<p><em>There were no results for this search.</em></p>";
+                }
+            for(var index = 0; index < candidates.length; ++index)
+                {
+                if (index == PHOTO_DIRECTORY.INITIAL_RESULTS)
+                    {
+                    result += "<a class='show_additional_results' " +
+                      "href='JavaScript:show_additional(\"results\")';>" +
+                      "<span class='emphasized'>+</span> Show all</a>" +
+                      "<div id='additional_results'>";
+                    }
+                result += "<div class='search_result'>";
+                result += "<a href='/?query=" +
+                  document.search_form.query.value +
+                  "&id=" + candidates[index][0].pk +
+                  "' onclick='PHOTO_DIRECTORY.load_profile(" +
+                  candidates[index][0].pk + "); return false;'>" +
+                  candidates[index][0].fields.name + "</a><br />";
+                if (candidates[index][0].fields.image_mimetype)
+                    {
+                    result +=
+                      "<img class='search_results' src='/profile/images/" + 
+                      candidates[index][0].pk + "' />\n";
+                    }
+                if (candidates[index][0].fields.title)
+                    {
+                    result += candidates[index][0].fields.title;
+                    if (candidates[index][0].department &&
+                      PHOTO_DIRECTORY.Entities_by_id[candidates[index][0].
+                      department].name)
+                        {
+                        result += ",<br />";
+                        }
+                    }
+                if (candidates[index][0].department &&
+                  PHOTO_DIRECTORY.Entities_by_id[candidates[index][0].
+                  department].name)
+                    {
+                    result += PHOTO_DIRECTORY.Entities_by_id[candidates
+                      [index][0].department].name;
+                    }
+                result += "</div>";
+                }
+            if (entity_stati.length > PHOTO_DIRECTORY.INITIAL_STATI)
+                {
+                result += "</div>";
+                }
+            if (result == "")
+                {
+                result =
+                  "<p><em>There were no matches to your search.</em></p>";
+                }
+            $("#search_results").html(result);
+            PHOTO_DIRECTORY.register_update();
+            }
+        else
+            {
+            $("#search_results").load("/ajax/search?query=" +
+              escape(document.search_form.query.value),
+              PHOTO_DIRECTORY.register_update);
+            }
+        }

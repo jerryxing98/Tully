@@ -1,0 +1,9 @@
+{% if results %}
+    <ul>
+    {% for result in results %}
+        <li>{% result.title %}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>There were no results.</p>
+{% endif %}

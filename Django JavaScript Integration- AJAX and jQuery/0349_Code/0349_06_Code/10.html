@@ -1,0 +1,15 @@
+    Email:
+    <strong>
+        {% for email in emails %}
+            <a id="EntityEmail_email_{{ email.id }}" class="edit_rightclick" href="mailto:{{ email.email }}">
+                {{ email.email }}
+            </a>
+            {% if not forloop.last %}
+                , 
+            {% endif %}
+        {% endfor %}
+        <span class="edit" id="EntityEmail_new_{{ entity.id }}">
+            Click to add email.
+        </span>
+    </strong>
+    <br />

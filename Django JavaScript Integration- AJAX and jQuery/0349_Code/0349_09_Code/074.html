@@ -1,0 +1,18 @@
+ PHOTO_DIRECTORY.limit_width = function(css_class, limit)
+        {
+        $(css_class).each(function(index, element)
+            {
+            if ($(element).width() == 0)
+                {
+                setTimeout("PHOTO_DIRECTORY.limit_width('" + css_class +
+                  "', " + limit + ");", PHOTO_DIRECTORY.DELAY_BETWEEN_RETRIES);
+                }
+            if ($(element).width() > limit)
+                {
+                var height = Math.ceil($(element).height() * limit /
+                  $(element).width());
+                $(element).width(limit);
+                $(element).height(height);
+                }
+            });
+        }

@@ -1,0 +1,23 @@
+div.outer 
+    {    
+    display: table-row;
+    }    
+        
+div.outer_outer
+    {        
+    display: table;
+    width: 100%;
+    }
+    
+div.search_result
+    {
+    display: table; 
+    margin-bottom: 20px;
+    padding-right: 50px;
+    width: 100%;
+    }
+
+div.search_result:hover
+    {
+    background-color: #ffffc0;
+    }

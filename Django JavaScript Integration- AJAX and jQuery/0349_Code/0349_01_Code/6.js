@@ -1,0 +1,2 @@
+XMLHttpRequest.onreadystatechange
+XMLHttpRequest.readyState

@@ -1,0 +1,15 @@
+    PHOTO_DIRECTORY.update_autocomplete_handler = function(event, ui)
+        {
+        var split_value = ui.item.value.split(".");
+        var field = split_value[0];
+        var id = split_value[1];
+        $.ajax({
+            data:
+                {
+                id: "Entity_" + id + "_" + PHOTO_DIRECTORY.current_profile,
+                value: field,
+                },
+            url: "/ajax/save", 
+            });
+        PHOTO_DIRECTORY.reload_profile();
+        }

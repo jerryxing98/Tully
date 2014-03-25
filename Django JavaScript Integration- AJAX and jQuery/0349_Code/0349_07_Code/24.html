@@ -1,0 +1,7 @@
+<script language="JavaScript" type="text/javascript">
+function send_notification(message)
+    {
+    $("#notifications").html("<p>" + message + "</p>");
+    setTimeout("$('#notifications').show('slow').delay(" + (5000 +
+      message.length * 2) + ").hide('slow');", 0);
+    }

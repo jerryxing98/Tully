@@ -1,0 +1,9 @@
+#local_time
+    {
+    font-weight: bold;
+    }
+
+#local_time strong
+    {
+    font-size: 2em;
+    }

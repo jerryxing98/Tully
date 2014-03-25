@@ -1,0 +1,21 @@
+    $(function()
+        {
+        $.ajaxSetup(
+            {
+            datatype: "json",
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+                {
+                if (XMLHttpRequest.responseText)
+                    {
+                    {% if settings.DEBUG %}
+                        PHOTO_DIRECTORY.send_notification(
+                          XMLHttpRequest.responseText);
+                    {% else %}
+                        PHOTO_DIRECTORY.send_notification(
+                          "There was an error handling your request.");
+                    {% endif %}
+                    }
+                },
+            type: "POST",
+            });
+        });

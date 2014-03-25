@@ -1,0 +1,20 @@
+<p>
+    Location:
+    <strong>
+        <select name="location" id="location" class="autocomplete"
+          onchange="update_autocomplete('Entity_location_{{ entity.id}}', document.getElementById('location').value);">
+        <option
+        {% if not entity.location.id %}
+            selected="selected"
+        {% endif %}
+        value="location.-1">None</option>
+        {% for location in locations %}
+            <option 
+            {% if location.id == entity.location.id %}
+                selected="selected"
+            {% endif %}
+            value="location.{{ location.id }}">{{ location.identifier }}</option>
+        {% endfor %}
+        </select>
+    </strong>
+</p>

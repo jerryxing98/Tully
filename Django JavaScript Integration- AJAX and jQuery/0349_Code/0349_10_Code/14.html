@@ -1,0 +1,16 @@
+    PHOTO_DIRECTORY.undo_notification = function(text)
+        {
+        if ($("div.undo_notifications").html().match(/\S/))
+            {
+            $("div.undo_notifications").fadeOut("slow").html(text +
+              " &nbsp; <a href='JavaScript:PHOTO_DIRECTORY.dismiss_undo()" +
+              "' class='dismiss_undo'>&#10008;</a>"
+              ).fadeIn("slow");
+            }
+        else
+            {
+            $("div.undo_notifications").html(text +
+              " &nbsp; <a href='JavaScript:PHOTO_DIRECTORY.dismiss_undo()" +
+              "' class='dismiss_undo'>&#10008;</a>").show("slow");
+            }
+        }

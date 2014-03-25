@@ -1,0 +1,1 @@
+SHOULD_TURN_OFF_HIJAXING = 1 # 1 or 0, BUT NOT True or False

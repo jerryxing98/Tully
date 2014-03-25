@@ -1,0 +1,11 @@
+        {% if result.image %}
+            <img class="search_results" src="/profile/images/{{ result.id }}" />
+        {% endif %}
+        {% if result.title %}
+            {{ result.title }}{% if result.department.name %},<br />{% endif %}
+        {% endif %}
+        {{ result.department.name }}
+        </p>
+        </div>
+
+    {% endfor %}

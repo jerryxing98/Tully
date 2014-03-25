@@ -1,0 +1,11 @@
+<div id="body_preamble_page">
+    <strong>
+        {% if settings.SHOULD_DOWNLOAD_DIRECTORY %}
+        <span id="bad_network_connection"><a href="/"
+          onclick="bad_network_connection(); return false;">Bad network
+          connection?</a> &bull;</span>
+        {% endif %}
+        <a href="/" id="add_new"
+          onclick="PHOTO_DIRECTORY.add_new(); return false;">Add new</a>
+    </strong>
+</div>

@@ -1,0 +1,59 @@
+    PHOTO_DIRECTORY.score = function(entity, keywords)
+        {
+        try
+            {
+            entity.fields.name;
+            }
+        catch(error)
+            {
+            return 0;
+            }
+        var result = 0;
+        if (entity.fields.name)
+            {
+            result += PHOTO_DIRECTORY.count_tokens(entity.fields.name,
+              keywords) * PHOTO_DIRECTORY.NAME_WEIGHT;
+            }
+        if (entity.fields.description)
+            {
+            result += PHOTO_DIRECTORY.count_tokens(entity.fields.description,
+              keywords) * PHOTO_DIRECTORY.DESCRIPTION_WEIGHT;
+            }
+        for(var index = 0; index < entity.fields.tags.length; ++index)
+            {
+            if (PHOTO_DIRECTORY.Tags_by_id[entity.fields.tags[index]] ==
+              keywords)
+                {
+                result += PHOTO_DIRECTORY.TAG_WEIGHT;
+                }
+            }
+        if (entity.fields.department)
+            {
+            result += PHOTO_DIRECTORY.count_tokens(
+              PHOTO_DIRECTORY.Entities_by_id[
+              entity.fields.department].fields.name, keywords) *
+              PHOTO_DIRECTORY.DEPARTMENT_WEIGHT;
+            }
+        if (entity.fields.title)
+            {
+            result += PHOTO_DIRECTORY.count_tokens( entity.fields.title,
+              keywords) * PHOTO_DIRECTORY.TITLE_WEIGHT;
+            }
+        if (entity.fields["location"])
+            {
+            result += PHOTO_DIRECTORY.count_tokens(
+              PHOTO_DIRECTORY.Entities_by_id[
+              entity.fields["location"]].fields.name, keywords) *
+              PHOTO_DIRECTORY.LOCATION_WEIGHT;
+            }
+        for (var index = 0; index < PHOTO_DIRECTORY.Stati.length; ++index)
+            {
+            if (PHOTO_DIRECTORY.Stati[index].fields.entity == entity.pk)
+                {
+                result += PHOTO_DIRECTORY.count_tokens(
+                  PHOTO_DIRECTORY.Stati[index].  fields.text, keywords) *
+                  PHOTO_DIRECTORY.STATUS_WEIGHT;
+                }
+            }
+        return result;
+        }

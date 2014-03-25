@@ -2,6 +2,7 @@ from django import template
 from django.template.loader import render_to_string
 from django.contrib.contenttypes.models import ContentType
 from favorite.models import Favorite
+from account.forms import BsAuthenticationForm
 
 
 register = template.Library()
@@ -12,7 +13,9 @@ def favorite_button(context, target):
 
     # do nothing when user isn't authenticated
     if not user.is_authenticated():
-        return ''
+        return render_to_string('favorite/button.html',
+                            {'target_model': target_model, 'target_object_id': target_object_id,
+                             'fav_count': fav_count, 'undo': undo,'is_auth':Fasle})
 
     target_model = '.'.join((target._meta.app_label, target._meta.object_name))
     target_content_type = ContentType.objects.get_for_model(target)
@@ -26,4 +29,15 @@ def favorite_button(context, target):
 
     return render_to_string('favorite/button.html',
                             {'target_model': target_model, 'target_object_id': target_object_id,
-                             'fav_count': fav_count, 'undo': undo})
+                             'fav_count': fav_count, 'undo': undo,'is_auth':True})
+
+
+@register.simple_tag(takes_context=True)
+def  login_modal(context):
+    user = context['request'].user
+    '''
+    if user.is_authenticated:
+        return ''
+    '''
+    return render_to_string('userena/signin_modal.html',{'auth_form': BsAuthenticationForm})
+    

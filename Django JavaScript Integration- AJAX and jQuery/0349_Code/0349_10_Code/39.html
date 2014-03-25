@@ -1,0 +1,19 @@
+    PHOTO_DIRECTORY.check_login = function()
+        {
+        var result = $.ajax({
+            success: function(data, textStatus, XMLHttpRequest)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.logged_in = true;
+                    $("#login_or_logout").html("&bull; <a href='JavaScript:PHOTO_DIRECTORY.logout_link();'>Log out</a>");
+                    }
+                else
+                    {
+                    PHOTO_DIRECTORY.logged_in = false;
+                    $("#login_or_logout").html("&bull; <a href='JavaScript:PHOTO_DIRECTORY.login_link();'>Log in</a>");
+                    }
+                },
+            url: "/ajax/check_login",
+            });
+        }

@@ -1,0 +1,190 @@
+                for(var index = 0; index < entity.fields.tags.length; ++index)
+                    {
+                    result += "<span class='tag'>" +
+                      PHOTO_DIRECTORY.Tags_by_id[
+                      entity.fields.tags[index]].fields.text +
+                      "</span> " + "<span class='delete' id='Tag_" +
+                      entity.pk + "_" + entity.fields.tags[index] +
+                                            "'>&#10008;</span> &nbsp;\n";
+                    }
+                result += "<span class='edit' id='Entity_tag_new_" + id +
+                  "'></span>";
+                result += "</strong></p>\n";
+                result += "<p>Department: <strong>";
+                if (entity.fields.department)
+                    {
+                    result += "<a href='/?query=" + escape({{ query }}) +
+                      "&id=" + entity.fields.department + "' " +
+                      "onclick='PHOTO_DIRECTORY.load_profile(" +
+                      entity.fields.department + "); return false;'>";
+                    result +=
+                      PHOTO_DIRECTORY.Entities_by_id[entity.fields.department].
+                      fields.name;
+                    result += "</a>";
+                    }
+                result += " &nbsp; <select name='department' id='department'" +
+                  "class='autocomplete' onchange='PHOTO_DIRECTORY.update_autocomplete(" +
+                  '"Entity_department_' + id +
+                  '", "department");' + "'>\n";
+                result += "<option ";
+                if (!entity.fields.department)
+                    {
+                    result += " selected='selected'";
+                    }
+                result += "value='department.-1'>Select</option>\n";
+                for(var index = 0; index < PHOTO_DIRECTORY.Entities.length;
+                  ++index)
+                    {
+                    result += "<option ";
+                    if (PHOTO_DIRECTORY.Entities[index].pk ==
+                      entity.fields.department)
+                        {
+                        result += " selected='selected'";
+                        }
+                    result += " value='department." +
+                      PHOTO_DIRECTORY.Entities[index].pk + "'>";
+                    result += PHOTO_DIRECTORY.Entities[index].fields.name;
+                    result += "</option>\n";
+                    }
+                result += "</select></strong></p>\n";
+                result += "<p>Location: <strong>";
+                if (entity.fields["location"])
+                    {
+                    result += "<a href='/?query=" + escape({{ query }}) +
+                      "&id=" + entity.fields["location"] + "' " +
+                      "onclick='PHOTO_DIRECTORY.load_profile(" +
+                      entity.fields["location"] + "); return false;'>";
+                    result += PHOTO_DIRECTORY.Entities_by_id[
+                      entity.fields["location"]].fields.name;
+                    result += "</a>";
+                    }
+                result += " &nbsp; <select name='location' id='location' " +
+                  "class='autocomplete' " + 
+                  "onchange='PHOTO_DIRECTORY.update_autocomplete(\"Entity_location_" + id +
+                  "\", \"location\");'>\n";
+                result += "<option";
+                if (!entity.fields["location"])
+                    {
+                    result += " selected='selected'";
+                    }
+                result += " value='location.-1'>Select</option>\n";
+                for(var index = 0; index < PHOTO_DIRECTORY.Entities.length;
+                  ++index)
+                    {
+                    result += "<option";
+                    if (PHOTO_DIRECTORY.Entities[index].pk ==
+                      entity.fields["location"])
+                        {
+                        result += " selected='selected'";
+                        }
+                    result += " value='location." +
+                      PHOTO_DIRECTORY.Entities[index].pk + "'>";
+                                        result += PHOTO_DIRECTORY.Entities[index].fields.name;
+                    result += "</option>\n";
+                    }
+                result += "</select></strong></p>\n";
+                result += "<p>Reports to: <strong>";
+                if (entity.fields.reports_to)
+                    {
+                    result += "<a href='/?query=" + escape({{ query }}) +
+                      "&id=" + entity.fields.reports_to + "' " +
+                      "onclick='PHOTO_DIRECTORY.load_profile(" +
+                      entity.fields.reports_to + "); return false;'>";
+                    result += PHOTO_DIRECTORY.Entities_by_id[
+                      entity.fields.reports_to].fields.name;
+                    result += "</a>";
+                    }
+                result += " &nbsp; <select name='reports_to' id='reports_to'" +
+                  " class='autocomplete'" +
+                  " onchange='PHOTO_DIRECTORY.update_autocomplete(\"Entity_reports_to_" + id +
+                  "\", \"reports_to\");'>\n";
+                result += "<option";
+                if (!entity.fields.reports_to)
+                    {
+                    result += " selected='selected'";
+                    }
+                result += " value='reports_to.-1'>Select</option>\n";
+                for(var index = 0; index < PHOTO_DIRECTORY.Entities.length;
+                  ++index)
+                    {
+                    result += "<option"
+                    if (PHOTO_DIRECTORY.Entities[index].pk ==
+                      entity.fields.reports_to)
+                        {
+                        result += " selected='selected'";
+                        }
+                    result += " value='reports_to." +
+                      PHOTO_DIRECTORY.Entities[index].pk + "'>";
+                    result += PHOTO_DIRECTORY.Entities[index].fields.name;
+                    result += "</option>\n";
+                    }
+                result += "</select></strong></p>\n";
+                result += "<p>Start date: <strong>";
+                if (entity.fields.start_date)
+                    {
+                    result += entity.fields.start_date;
+                    }
+                result += "</strong></p>\n";
+                result += "<p>Status:</p>";
+                result += "<div class='edit_textarea' ";
+                result += "id='Status_new_" + id + "'></div>";
+                var entity_stati = [];
+                for(var index = 0; index < PHOTO_DIRECTORY.Stati.length;
+                  ++index)
+                    {
+                    if (PHOTO_DIRECTORY.Stati[index].fields.entity == id)
+                        {
+                        entity_stati[entity_stati.length] =
+                          PHOTO_DIRECTORY.Stati[index];
+                        }
+                    }
+                var sort_comparison = function(first_status, second_status)
+                    {
+                    if (first_status.fields.datetime >
+                      second_status.fields.datetime)
+                        {
+                        return -1;
+                        }
+                    if (first_status.fields.datetime ==
+                      second_status.fields.datetime)
+                        {
+                        return 0;
+                        }
+                    if (first_status.fields.datetime <
+                      second_status.fields.datetime)
+                        {
+                                                return 1;
+                        }
+                    }
+                entity_stati.sort(sort_comparison);
+                for(var index = 0; index < entity_stati.length; ++index)
+                    {
+                    if (index == PHOTO_DIRECTORY.INITIAL_STATI)
+                        {
+                        result += "<p><a class='show_additional_stati' ";
+                        result +=
+                          "href='JavaScript:show_additional(\"stati\")';>";
+                        result += "<span class='emphasized'>+</span> ";
+                        result += "Show all</a></p>";
+                        result += "<div id='additional_stati'>";
+                        }
+                    result += "<p>" + entity_stati[index].fields.text +
+                      "<br /><span class='timestamp'>" +
+                      entity_stati[index].fields.datetime + "</span></p>";
+                    }
+                if (entity_stati.length > PHOTO_DIRECTORY.INITIAL_STATI)
+                    {
+                    result += "</div>";
+                    }
+                return result;
+                }
+            else
+                {
+                throw "That profile has not been found.";
+                }
+            }
+        else
+            {
+            throw "The database has not been loaded.";
+            }
+        }

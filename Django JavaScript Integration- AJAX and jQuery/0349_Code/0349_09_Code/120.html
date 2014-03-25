@@ -1,0 +1,22 @@
+    PHOTO_DIRECTORY.add_new = function()
+        {
+        $.ajax({
+            success: function(data, textStatus, XMLHttpRequest)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.Entities[PHOTO_DIRECTORY.Entities.length] = 
+                      data[0];
+                    PHOTO_DIRECTORY.Entities_by_id[data[0].pk] = data[0];
+                    PHOTO_DIRECTORY.load_profile(data[0].pk);
+                    }
+                else
+                    {
+                    PHOTO_DIRECTORY.last_attempted_function =
+                      PHOTO_DIRECTORY.add_new;
+                    PHOTO_DIRECTORY.offer_login();
+                    }
+                },
+            url: "/ajax/new/Entity",
+            });
+        }

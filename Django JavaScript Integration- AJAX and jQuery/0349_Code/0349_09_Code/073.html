@@ -1,0 +1,14 @@
+    PHOTO_DIRECTORY.load_profile = function(id)
+        {
+        PHOTO_DIRECTORY.current_profile = id;
+        if (PHOTO_DIRECTORY.current_profile)
+            {
+            $("#profile").load("/ajax/profile/" +
+              PHOTO_DIRECTORY.current_profile,
+              PHOTO_DIRECTORY.register_update);
+            }
+        else
+            {
+            $("#profile").html("");
+            }
+        }
