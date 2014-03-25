@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load umessages_tags %}
-
+{% load favorite_tags %}
 {% block extra_header %}
 {% endblock %}
 
@@ -68,7 +68,10 @@
               </li>
               <li><a href="{% url userena_signout %}"><span>退出</span></a></li>
             {% else %}
-              <li><a href="{% url userena_signin %}"><span>{% trans 'Signin' %}</span></a></li>
+			  {% comment %}
+              <li><a class="signin_link" href="{% url userena_signin %}"><span>{% trans 'Signin' %}</span></a></li>
+			  {% endcomment %}
+			  <li><a id="signin_link" href="javascript:void()"><span>{% trans 'Signin' %}</span></a></li>
               <li><a href="{% url userena_signup %}"><span>{% trans 'Signup' %}</span></a></li>
             {% endif %}
           </ul>
@@ -101,7 +104,13 @@
           </ul>
         </div>
       {% endif %}
-      
+      <div id='top_alert' class="alert alert-info hide">
+          <button type="button" class="close" data-dismiss="close">&times;</button>
+		  {% comment %}
+		  <h4>{% trans 'Success!'</h4>
+		  {% trans 'You have log successly!' %}
+		  {% endcomment %}
+        </div>
       {% block container_top %}
       {% endblock %}
 
@@ -147,11 +156,13 @@
         </p>
       </div>
     </footer>
+	{% login_modal %}
   {% endblock %}
 {% endblock %}        
 
 {% block footer_ext %}
   {{ block.super }}
+  
   {% if unread_message_count %}
     <script type="text/javascript">
       var nav_msg = $('#nav_msg');

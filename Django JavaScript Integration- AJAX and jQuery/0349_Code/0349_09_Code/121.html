@@ -1,0 +1,24 @@
+    PHOTO_DIRECTORY.bad_network_connection = function()
+        {
+        PHOTO_DIRECTORY.SHOULD_TURN_OFF_HIJAXING = 0;
+        $("#search_form").submit(function(event)
+            {
+            PHOTO_DIRECTORY.search();
+            return false;
+            });
+        $("#bad_network_connection").hide("slow");
+        if (PHOTO_DIRECTORY.tables_loaded < PHOTO_DIRECTORY.tables_available)
+            {
+            PHOTO_DIRECTORY.load_database();
+            PHOTO_DIRECTORY.no_network = true;
+            PHOTO_DIRECTORY.send_notification(
+              "Once everything's loaded, you should be able to use the " +
+                "directory whether or not you have network access.");
+            }
+        else
+            {
+            PHOTO_DIRECTORY.no_network = true;
+            send_notification("You should be able to browse the database " +
+              "whether or not you have good network access.");
+            }
+        }

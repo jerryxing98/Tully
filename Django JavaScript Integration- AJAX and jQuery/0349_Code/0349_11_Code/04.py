@@ -1,0 +1,4 @@
+            else
+                {
+                $("#profile").html("");
+                }

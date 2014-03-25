@@ -1,0 +1,584 @@
+001.html
+
+    A snippet beginning the search_internal.html template.
+
+    Note: In this bundle, a .html extension always indicates a Django template,
+    and never just represents an unadorned, verbatim webpage.
+
+002.html
+
+    A snippet continuing the search_internal.html template.
+
+003.html
+
+    A snippet continuing the search_internal.html template.
+
+004.html
+
+    A snippet continuing the search_internal.html template.
+
+005.html
+
+    A snippet continuing the search_internal.html template.
+
+006.html
+
+    A snippet continuing the search_internal.html template.
+
+007.html
+
+    A snippet continuing the search_internal.html template.
+
+008.html
+
+    A snippet continuing the search_internal.html template.
+
+009.html
+
+    The snippet concluding the search_internal.html template.
+
+010.html
+
+    A snippet opening the profile_internal.html template.
+
+011.html
+
+    A snippet continuing the profile_internal.html template.
+
+012.html
+
+    A snippet continuing the profile_internal.html template.
+
+013.html
+
+    A snippet continuing the profile_internal.html template.
+
+014.html
+
+    A snippet continuing the profile_internal.html template.
+
+015.html
+
+    A snippet continuing the profile_internal.html template.
+
+016.html
+
+    A snippet continuing the profile_internal.html template.
+
+017.html
+
+    A snippet continuing the profile_internal.html template.
+
+018.html
+
+    A snippet continuing the profile_internal.html template.
+
+019.html
+
+    A snippet continuing the profile_internal.html template.
+
+020.html
+
+    A snippet continuing the profile_internal.html template.
+
+021.html
+
+    A snippet continuing the profile_internal.html template.
+
+022.html
+
+    A snippet continuing the profile_internal.html template.
+
+023.html
+
+    A snippet continuing the profile_internal.html template.
+
+024.html
+
+    A snippet continuing the profile_internal.html template.
+
+025.html
+
+    A snippet continuing the profile_internal.html template.
+
+026.html
+
+    A snippet continuing the profile_internal.html template.
+
+027.html
+
+    A snippet continuing the profile_internal.html template.
+
+028.html
+
+    The snippet concluding the profile_internal.html template.
+
+029.py
+
+    A view, in views.py, to check if a user is logged in.
+
+030.py
+
+    The snippet beginning a view, in views.py, to delete fields and entities
+    via Ajax.
+
+031.py
+    
+    A snippet continuing a view, in views.py, to delete fields and entities via
+    Ajax.
+
+032.py
+
+    A snippet continuing a view, in views.py, to delete fields and entities via
+    Ajax.
+    
+033.py
+
+    A snippet continuing a view, in views.py, to delete fields and entities via
+    Ajax.
+
+034.py
+
+    The snippet concluding a view, in views.py, to delete fields and entities
+    via Ajax.
+
+035.py
+
+    The snippet beginning a view, in views.py, to display a profile via AHAH.
+
+036.py
+
+    A snippet continuing a view, in views.py, to display a profile via AHAH.
+
+037.py
+
+    The snippet concluding a view, in views.py, to display a profile via AHAH.
+
+038.py
+
+    The snippet opening a helper function in functions.py.
+
+039.py
+
+    The snippet concluding a helper function in functions.py.
+
+040.py
+
+    Another helper function residing in functions.py.
+
+041.py
+
+    Settings which are placed at the top of settings.py.
+
+042.py
+    
+    The updated Model, in models.py, for an Entity.
+
+043.py
+
+    The snippet opening the view serving up AHAH search results.
+
+044.py
+
+    A snippet continuing the view serving up AHAH search results.
+
+045.py
+
+    A snippet continuing the view serving up AHAH search results.
+
+046.py
+
+    A snippet continuing the view serving up AHAH search results.
+
+047.py
+
+    A snippet continuing the view serving up AHAH search results.
+
+048.py
+
+    The snippet concluding the view serving up AHAH search results.
+
+049.html
+
+    A snippet demonstrating how to enclose jQuery code so as to use the $ alias
+    locally while leaving it otherwise available to other libraries without
+    interference.
+
+050.html
+
+    A demonstration of Whitesmith indentation.
+
+051.html
+
+    The snippet the base.html that the template for the AHAH and
+    client-side database solution both inherit from.
+
+052.html
+
+    The snippet opening the search.html template for the AHAH solution.
+
+053.html
+    
+    A snippet continuing the search.html template for the AHAH solution.
+
+054.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+055.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+056.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+057.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+058.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+059.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+060.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+061.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+062.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+063.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+064.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+065.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+066.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+067.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+068.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+069.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+070.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+071.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+072.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+073.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+074.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+075.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+076.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+077.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+078.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+079.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+    
+080.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+081.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+082.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+083.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+084.html
+
+    A snippet continuing the search.html template for the AHAH solution.
+
+085.html
+
+    The snippet concluding the search.html template for the AHAH solution.
+
+086.css
+
+    The snippet beginning the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+087.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+088.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+089.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+090.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+091.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+092.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+093.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+094.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+095.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+096.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+097.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+098.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+099.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+100.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+101.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+
+102.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+103.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+104.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+105.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+    
+106.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+107.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+108.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+109.css
+
+    A snippet that continues the present stylesheet for either the AHAH or
+    client-side database solutions.
+
+110.py
+
+    An updated urlpatterns in urls.py.
+
+111.py
+
+    A view in views.py allowing models to be downloaded via Ajax.
+
+112.py
+
+    A view in views.py to serve up profile pictures.
+
+113.py
+
+    The beginning of an updated save() view in views.py.
+
+114.py
+
+    The remainder of an updated save() view in views.py.
+
+115.py
+    
+    A view in views.py to save uploaded images.
+
+116.py
+
+    A view to render the homepage, i.e. the main page for the directory.
+
+117.py
+
+    An updated line in settings.py.
+
+118.html
+
+    The first update to the search.html template to accommodate a client-side
+    database solution. (Most of what was in the original solution will be
+    retained in the expansion.)
+
+119.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+120.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+121.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+122.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+123.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+124.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+125.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+126.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+127.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+128.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+129.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+130.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+131.html
+
+    The next update to the search.html template to accommodate a client-side
+    database solution.
+
+132.html
+
+    The final update to the search.html template to accommodate a client-side
+    database solution.
+
+133.py
+
+    An update to settings.py to turn on a hybrid solution.
+

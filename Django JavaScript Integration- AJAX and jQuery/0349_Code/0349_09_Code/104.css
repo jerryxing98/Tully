@@ -1,0 +1,11 @@
+span.delete
+    {
+    color: #aa0000;
+    font-size: larger;
+    font-weight: bold;
+    }
+
+span.emphasized
+    {
+    font-size: larger;
+    }

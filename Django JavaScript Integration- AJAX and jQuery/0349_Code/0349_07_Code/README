@@ -1,0 +1,131 @@
+01.html
+
+    An updated templates/base.html Django template block to include a theme from
+    jQuery UI's Themeroller.
+
+02.html
+
+    The first part of a fragment from the templates/profile.html to create a
+    select for an Entity's department.
+
+03.html
+
+    The second part of a fragment that loops to populate the bulk of a select.
+
+04.html
+
+    The third part of a fragment that closes the select.
+
+05.html
+
+    A fragment from the templates/profile.html to do the same thing for an
+    Entity's location field.
+
+06.html
+
+    A fragment from the templates/profile.html to do the same thing for an
+    Entity's reports_to field.
+
+07.py
+
+    An updated view that provides templates/profile.html additional variables
+    for populating the autocomplete fields.
+
+08.css
+
+    An addition to the site's static/css/style.css file.
+
+09.html
+
+    An iframe added to templates/profile.html to the main body block to serve
+    as target for form submissions whose output will be discarded.
+
+10.html
+
+    A fragment from an updated segment of code in templates/profile.html to
+    display the department in a first workaround.
+
+11.html
+
+    A second fragment that includes more workaround code.
+
+12.html
+
+    A third fragment that closes the segment.
+
+13.html
+
+    More of the updated template.
+
+14.html
+
+    Still more of the template.
+
+15.js
+
+    JavaScript embedded in the template.
+
+16.js
+
+    More JavaScript embedded in the template.
+
+17.js
+
+    More JavaScript embedded in the template.
+
+18.js
+
+    More embedded JavaScript code, with a problem area that is not working
+    commented out.
+
+19.py
+
+    An updated fragment of the view (in views.py) that handles the server side
+    of saving data updated by in-place edits and (now) autocompletes.
+
+20.py
+
+    Continuation of the previous.
+
+21.py
+
+    The remainder of the "special cases" portion of the view.
+
+22.py
+
+    The remainder of the view, which handles the general case for saving
+    in-place edits.
+
+23.html
+
+    An update to the base templates to have a notifications div, which is being
+    moved upstream from the search page.
+
+24.html
+
+    A script delivering a modification of the earlier send_notification()
+    JavaScript function, which will now keep a displayed Django error page
+    visible for significantly longer than a brief one-sentence message.
+
+25.css
+
+    A modified portion of the style sheet reflecting an expansion in the role
+    that notifications have come to play.
+
+26.html
+
+    The remainder of the script block begun in 24.html and interrupted by
+    25.css.
+
+27.html
+
+    The last refinement of the department autocomplete block that has been
+    worked on.
+
+28.html
+
+    The last refinement of the location block.
+
+29.html
+
+    The last refinement of the reports_to block.

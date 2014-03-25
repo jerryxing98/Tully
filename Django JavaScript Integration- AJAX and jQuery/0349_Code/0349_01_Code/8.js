@@ -1,0 +1,2 @@
+XMLHttpRequest.status
+XMLHttpRequest.statusText

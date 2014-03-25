@@ -1,0 +1,120 @@
+01.html
+
+    A Django templating block that includes jQuery and (now) jQuery UI and
+    the Jeditable jQuery plugin.
+
+02.html
+
+    The first of several code snippets making up the profile.html Django
+    template.
+
+03.html
+
+    Another block pulling the title and then opening the main templating block.
+
+04.html
+
+    The first page body block, showing several features that will keep coming
+    up: how to display the honorifics, default value "Click to edit", and mark
+    them with the CSS class that will be editable via the Jeditable plugin.
+
+05.html
+
+    The remainder of the header, with the name and post nominals.
+
+06.html
+
+    A code snippet to display a profile picture.
+
+07.html
+
+    A code snippet displaying a slight nuance: an editable area that will be
+    displayed with a <textarea> rather than a text <input>, for a somewhat
+    larger chunk of data.
+
+08.html
+
+    A display of how to make an editable URL that works normally when clicked
+    but can be edited on right click. Note that the top field, department, is
+    not editable, but is a placeholder for the next chapter.
+
+09.html
+
+    An aside, code from 08.html as delivered minified, and consequently
+    unreadable.
+
+10.html
+
+    Code similar to 08.html that allows an open-ended number of email addresses
+    to be added.
+
+11.html
+
+    Another placeholder for next-chapter autocomplete.
+
+12.py
+
+    An updated Location model intended to work better with the profile page.
+
+13.html
+
+    Resuming the Django template, an editable phone number.
+
+14.html
+
+    The remaining fields in the main body block.
+
+15.html
+
+    The page-specific JavaScript block, concluding the profile template.
+
+16.py
+
+    A bare-bones logging utility function.
+
+17.py
+
+    A setting for the settings.py file.
+
+18.py
+
+    urlpatterns entries.
+
+19.py
+
+    The current views.py import statements, which have grown during the
+    chapter.
+
+20.py
+
+    The main profile (whole) page view.
+
+21.py
+
+    The beginning of the view to save Ajax updates--the server-side code
+    intended to service what are Jeditable updates on the client-side.
+
+22.py
+
+    A continuation of the same view; the next portion handles a special case.
+
+23.py
+
+    More of the special case.
+
+24.py
+
+    The remainder of the special case.
+
+25.py
+
+    The beginning of the generic code intended to handle most cases.
+
+26.py
+
+    More of the general case.
+
+27.py
+
+    The conclusion of the general case and the Django view we have seen in
+    pieces.

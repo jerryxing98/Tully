@@ -1,0 +1,17 @@
+Location:
+    <strong>
+        <select name="location" id="location" class="autocomplete">
+        <option
+        {% if not entity.location.id %}
+            selected="selected"
+        {% endif %}
+        value="location.-1">&mdash; Select &mdash;</option>
+        {% for location in locations %}
+            <option 
+            {% if locationi.id == entity.locationi.id %}
+                selected="selected"
+            {% endif %}
+            value="location.{{ location.id }}">{{ location.identifier }}</option>
+        {% endfor %}
+        </select>
+    <br />

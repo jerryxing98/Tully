@@ -24,6 +24,10 @@ from feeds import RSSFeed
 from userena.forms import SignupForm,SignupFormOnlyEmail,AuthenticationForm,ChangeEmailForm,EditProfileForm
 from utils import render_json_response
 from django.template import loader, Context
+from django.views.decorators.csrf import csrf_protect
+
+
+import time
 '''
 class UserProfileListView(ProfileListView):
     def get_context_data(self, **kwargs):
@@ -61,7 +65,7 @@ def _friends(request,username,
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
-def  authapi_signin(request, auth_form=AuthenticationForm,
+def authapi_signin(request, auth_form=AuthenticationForm,
            template_name='authapi/signin_form.html',
            extra_context=None):
     form = auth_form()
@@ -74,37 +78,14 @@ def  authapi_signin(request, auth_form=AuthenticationForm,
                                                      form.cleaned_data['remember_me'])
             user = authenticate(identification=identification,
                                 password=password)
-            if user.is_active:
+            if user and user.is_active:
                 login(request, user)
-                if remember_me:
-                    request.session.set_expiry(userena_settings.USERENA_REMEMBER_ME_DAYS[1] * 86400)
-                else: request.session.set_expiry(0)
-
-                if userena_settings.USERENA_USE_MESSAGES:
-                    messages.success(request, _('You have been signed in.'),
-                                     fail_silently=True)
-
-                #send a signal that a user has signed in
-                userena_signals.account_signin.send(sender=None, user=user)
-                # Whereto now?
-                '''
-                redirect_to = redirect_signin_function(
-                    request.REQUEST.get(redirect_field_name), user)
-                return HttpResponseRedirect(redirect_to)
-                '''
-                return render_json_response({'valid':True,'user':user}) 
+                result = True
             else:
-                '''
-                return redirect(reverse('userena_disabled',
-                                        kwargs={'username': user.username}))
-                '''
-                
-                
-                data = {'valid': False}
-                template = loader.get_template('authapi/signin_form.html')
-                data['html'] = template.render(Context({'form':form}))
-                return render_json_response(data)
-    return render_json_response({'valid':False,'html':loader.get_template('authapi/signin_form.html').render(Context({'form':form}))})
+                result = False
+    response = HttpResponse(json.dumps(result), mimetype = u'application/json')
+    time.sleep(1000)
+    return response
 
 @login_required
 def friends(request,username,ftype):

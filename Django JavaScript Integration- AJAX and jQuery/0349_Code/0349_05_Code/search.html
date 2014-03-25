@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block head_title %}Photo Directory: Search{% endblock head_title %}
+{% block body_main %}
+<div id="notifications"></div>
+<form name="search_form" id="search_form" action="/">
+<input type="text" name="query" id="query" /><br />
+<input type="submit" name="submit" id="submit" value="Search" />
+</form>
+<div id="results"></div>
+<div id="login_form" title="Log in">
+    <form>
+        <fieldset>
+            <label for="login">Login</label>
+            <input type="text" name="login" id="login" class="text ui-widget-content ui-corner-all" /><br />
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all" /><br />
+        </fieldset>
+    </form>
+</div>
+{% endblock body_main %}
+{% block footer_javascript_page %}
+<script language="JavaScript" type="text/javascript"
+src="/static/js/jquery.effects.fade.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+function check_authentication(parsed_json)
+    {
+    if (parsed_json.not_authenticated)
+        {
+        return false;
+        }
+    else
+        {
+        return true;
+        }
+    }
+function offer_login()
+    {
+    $("#login_form").dialog("open");
+    }
+function send_notification(message)
+    {
+    $("#notifications").html("<p>" + message + "</p>");
+    setTimeout("$('#notifications').show('slow').delay(5000).hide('slow');", 0);
+    }
+function submit_search()
+    {
+    $.ajax(
+        {
+        data:
+            {
+            query: document.search_form.query.value
+            },
+        datatype: 'json',
+        success: function(data, textStatus, XMLHttpRequest)
+            {
+            if (data)
+                {
+                if (check_authentication(data))
+                    {
+                    $("#results").html("");
+                    var results = data[0];
+                    var length = data[1];
+                    for (var index = 0; index < results.length; ++index)
+                        {
+                        var result = results[index];
+                        $("#results").append("<p><a href='/entities/" +
+                          result["id"] + "'>" + result["name"] +
+                          "</a><br />" + result["description"] + "</p>");
+                        }
+                    }
+                else
+                    {
+                    offer_login();
+                    }
+                }
+            },
+        type: 'POST',
+        url: '/ajax/search',
+        });
+    }
+$(function()
+    {
+    $("#submit").click(function(event)
+        {
+        submit_search();
+        return false;
+        });
+        $("#query").width($(window).width() - 240);
+    $("#login_form").dialog({
+        autoOpen: false,
+        height: 150,
+        width: 350,
+        modal: true,
+        buttons:
+            {
+            'Log in': function()
+                {
+                $.ajax({
+                    data:
+                        {
+                        "login": document.getElementById("login").value,
+                        "password": document.getElementById("password").value,
+                        },
+                    datatype: 'text',
+                    success: function(data, textStatus, XMLHttpRequest)
+                        {
+                        if (data)
+                            {
+                            send_notification("You have successfully logged in.");
+                            $(this).dialog('close');
+                            submit_search();
+                            }
+                        else
+                            {
+                            send_notification("Your login was not successful.");
+                            }
+                        },
+                    type: 'POST',
+                    url: '/ajax/login',
+                    });
+                },
+            'Forgot password': function()
+                {
+                send_notification("This feature has not been implemented.");
+                },
+            'Create account': function()
+                {
+                send_notification("This feature has not been implemented.");
+                },
+            },
+        });
+    $.ajaxSetup(
+        {
+        error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+            send_notification(textStatus + "</p><p>" +
+              errorThrown);
+},
+        });
+    });
+// -->
+</script>
+{% endblock footer_javascript_page %}

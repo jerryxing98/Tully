@@ -8,9 +8,8 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-
+from django.views.decorators.csrf import csrf_protect
 from guardian.shortcuts import assign, remove_perm, get_users_with_perms
-
 from taggit.models import Tag
 
 from ajax_validation.views import validate_form
@@ -23,8 +22,12 @@ from attachments.models import Attachment
 from .models import Bookmark
 from .forms import BookmarkForm, BKCommentForm
 
+
+
+
 def index(request):
   return recommend(request)
+
 
 def hot(request, template_name="bookmark/bookmarks.html"):
     ctx = {}
@@ -32,11 +35,13 @@ def hot(request, template_name="bookmark/bookmarks.html"):
     ctx['bookmarks'] = Bookmark.objects.get_hot_bookmarks()
     return render(request, template_name, ctx)
 
+
 def last(request, template_name="bookmark/bookmarks.html"):
     ctx = {}
     ctx['pg'] = 'last'
     ctx['bookmarks'] = Bookmark.objects.get_last_bookmarks()
     return render(request, template_name, ctx)
+
 
 def recommend(request, template_name="bookmark/bookmarks.html"):
     ctx = {}
@@ -44,11 +49,14 @@ def recommend(request, template_name="bookmark/bookmarks.html"):
     ctx['bookmarks'] = Bookmark.objects.get_recommend_bookmarks()
     return render(request, template_name, ctx)
 
+
 def random(request, template_name="bookmark/bookmarks.html"):
     ctx = {}
     ctx['pg'] = 'random'
     ctx['bookmarks'] = Bookmark.objects.get_random_bookmarks()
     return render(request, template_name, ctx)
+
+
 
 def tag(request, tag_name, template_name="bookmark/bookmarks.html"):
     ctx = {}

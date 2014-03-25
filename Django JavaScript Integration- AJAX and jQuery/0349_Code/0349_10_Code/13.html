@@ -1,0 +1,44 @@
+$(function()
+        {
+        $.ajaxSetup(
+            {
+            beforeSend: function(XMLHttpRequest)
+                {
+                PHOTO_DIRECTORY.login_offered = false;
+                },
+            complete: function(XMLHttpRequest, textStatus)
+                {
+                var data = XMLHttpRequest.responseText;
+                var regular_expression = new RegExp("<!-" +
+                  "-# (\\d+) #-" + "->");
+                if (data.match(regular_expression))
+                    {
+                    var match = regular_expression.exec(data);
+                    PHOTO_DIRECTORY.undo_notification(
+                      "Your changes have been saved. " +
+                      "<a href='JavaScript:PHOTO_DIRECTORY.undo(" +
+                      match[1] + ")'>Undo</a>");
+                    }
+                else if (!PHOTO_DIRECTORY.check_authentication(data) &&
+                  !PHOTO_DIRECTORY.login_offered)
+                    {
+                    offer_login();
+                    }
+                },
+            datatype: "json",
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+                {
+                if (XMLHttpRequest.responseText)
+                    {
+                    {% if settings.DEBUG %}
+                        PHOTO_DIRECTORY.send_notification(
+                          XMLHttpRequest.responseText);
+                    {% else %}
+                        PHOTO_DIRECTORY.send_notification(
+                          "There was an error handling your request.");
+                    {% endif %}
+                    }
+                },
+            type: "POST",
+            });
+        });

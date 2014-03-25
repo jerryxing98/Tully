@@ -1,0 +1,139 @@
+01.py
+
+    ModelForm definitions that define ModelForms inheriting from Entity and
+    Location respectively.
+
+02.py
+
+    Line to be added to imports at top of the same file.
+
+03.py
+
+    Views for the ModelForms for Entity and Location.
+
+04.py
+
+    URLs to be added to the urlpatterns in urls.py.
+
+05.html
+
+    A template completing "Hello, world!" in ModelForm.
+
+06.py
+
+    An update partially replacing the urlpatterns in urls.py.
+
+07.py
+
+    An updated import.
+
+08.py
+
+    A view illustrating redirects.
+
+09.py
+
+    Update ModelForm views that can look up and edit an existing instance
+    (instead of only creating new ones).
+
+10.html
+
+    An updated block that gives a slightly clearer title.
+
+11.html
+
+    The first portion of a demonstration of how to give a stylesheet makeover
+    to ModelForm.
+
+    Note that in this and some following code snippets, I am working on CSS in
+    a Django template and am therefore using a .html instead of .css extension.
+
+12.html
+
+    An updated template block delivering CSS.
+
+13.html
+
+    A further update improving things in Firefox.
+
+14.html
+
+    Adding margins.
+
+15.html
+
+    Styling one specific textarea to be much larger.
+
+16.html
+
+    Shifting visual emphasis from labels to the data itself.
+
+17.html
+
+    A tweak to a more readable font size.
+
+18.html
+
+    A further tweak making borders visually lighter.
+
+19.html
+
+    Extending the makeover to text inputs.
+
+20.html
+
+    jQuery call to give a desired class to all text inputs.
+
+21.html
+
+    CSS defining styles (one of them a stub) for zebra-striped rows.
+
+22.html
+
+    Using jQuery to correctly "cross-over" so that even and odd are applied to
+    even and odd-numbered rows, one-based, rather than the opposite.
+
+23.html
+
+    Additional CSS to tweak the zebra striping.
+
+24.html
+
+    Additional CSS for finishing tweaks.
+
+25.py
+
+    Code demonstrating the "opt-out" approach to selective field display.
+
+26.py
+
+    Code demonstrating the "opt-in" approach to selective field display.
+
+27.py
+
+    Code using the "opt-in" syntax to reorder how fields appear on the form.
+
+28.py
+
+    An update to the profile page; the first part of demonstrating how to add
+    "Add New" functionality to the existing interface.
+
+29.py
+
+    Code to be added to the urlpatterns in urls.py.
+
+30.html
+
+    An update to the base.html template.
+
+31.html
+
+    The new intermediate main.html template.
+
+32.html
+
+    The new first line of search.html and profile.html.
+
+33.css
+
+    CSS in static/css/style.css to style "Add New" div.

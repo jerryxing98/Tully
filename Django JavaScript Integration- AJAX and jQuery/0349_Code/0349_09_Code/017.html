@@ -1,0 +1,17 @@
+<p>Email: <strong>
+    {% for email in emails %}
+    <a id="Email_{{ email.id }}" class="edit_rightclick"
+      title="RIGHT click to edit." href="mailto:{{ email.email }}"
+      >{{ email.email }}</a>
+    <span class="delete" id="Email_{{ email.id }}">&#10008;</span> &nbsp;
+    {% endfor %}
+    <span class="edit" title="Click to edit." id="Email_new_{{ id }}"></span>
+</strong></p>
+<p>Webpages: <strong>
+    {% for url in urls %}
+        <a id="URL_url_{{ url.id }}" class="edit_rightclick"
+          title="RIGHT click to edit." href="{{ url.url }}">{{ url.url }}</a>
+        <span class="delete" id="URL_{{ url.id }}">&#10008;</span> &nbsp;
+    {% endfor %}
+    <span class="edit" title="Click to add." id="URL_new_{{ id }}"></span>
+</strong></p>

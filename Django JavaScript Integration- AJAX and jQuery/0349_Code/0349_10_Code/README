@@ -1,0 +1,157 @@
+01.py
+
+    Python defining constants for different kinds of edits.
+
+02.py
+
+    The model for keeping track of edit history.
+
+03.py
+
+    A basic model used to create an auto-incrementing primary key.
+
+04.py
+
+    The function to register an edit.
+
+05.py
+
+    The updated ajax_delete() function.
+
+06.py
+
+    The updated new_Entity() function.
+
+07.py
+
+    The beginning of the updated save() function.
+
+08.py
+
+    Continuing the updated save() function.
+
+09.py
+
+    The conclusion of the updated save() function.
+
+10.py
+
+    The beginning of the updated saveimage() function.
+
+11.py
+
+    Continuing the updated saveimage() function.
+
+12.py
+
+    Concluding the updated saveimage() function.
+
+13.html
+
+    The updated $.ajaxSetup() call. Everywhere for this bundle, a .html
+    extension indicates a Django template and not a static HTML file.
+
+14.html
+
+    An undo_notification() JavaScript function is defined.
+
+15.html
+
+    A div is inserted.
+
+16.css
+
+    Styling for this.
+
+17.html
+
+    A template to view a changelog.
+
+18.py
+
+    A corresponding view.
+
+19.py
+
+    The corresponding urlpatterns entry.
+
+20.py
+
+    A view that does more work to make a human-friendly result.
+
+21.html
+
+    The updated template.
+
+22.css
+
+    A subtle change to the CSS, replacing "tr.remainder" with "remainder".
+
+23.py
+
+    An updated view that hones in on more relevant data.
+
+24.html
+    
+    A further updated view.
+
+25.py
+
+    A formatting function that gives a human-friendly datetime format.
+
+26.py
+
+    An updated entity that defines a permission in its Meta class.
+
+27.py
+
+    An updated import that obtains the @permission_required decorator.
+
+28.py
+
+    A code snippet demonstrating the @permission_required decorator.
+
+29.py
+
+    The source for an @ajax_permission_required decorator.
+
+30.py
+
+    An example, using a made-up permission, of how the
+    @ajax_permission_required decorator would be used.
+
+31.html
+
+    Updated divs for use in logging in and creating accounts.
+
+32.html
+
+    A redefinition of PHOTO_DIRECTORY.offer_login()
+
+33.html
+
+    JavaScript to deal with the forms.
+
+34.py
+
+    A view to create a user.
+
+35.py
+
+    The urlpatterns entry for this view.
+
+36.py
+
+    An import statement added to urls.py.
+
+37.py
+
+    The urlpatterns entries for Django's password reset.
+
+38.html
+
+    An update to the template.
+
+39.html
+
+    An updated check_login function.

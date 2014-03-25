@@ -1,0 +1,6 @@
+            <select name="department" id="department" class="autocomplete"
+              onchange="document.department_form.submit();">
+                <option
+                    {% if not entity.department.id %}
+                        selected="selected"
+                    {% endif %}

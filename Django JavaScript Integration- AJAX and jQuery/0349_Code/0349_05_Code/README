@@ -1,0 +1,19 @@
+Code samples included are all from a Django project. They are:
+
+admin.py:
+
+    Administrative functions that should be run exactly once.
+
+functions.py:
+
+    A file for defining functions for this website, presently including one
+    decorator.
+
+views.py
+
+    A file containing Django views.
+
+search.html
+
+    The present WIP for the search page. The JavaScript should probably be
+    refactored once it's working, and moved off to its own file.

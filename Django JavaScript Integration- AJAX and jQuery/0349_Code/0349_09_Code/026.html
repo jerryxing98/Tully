@@ -1,0 +1,41 @@
+<p>Location: <strong>
+    <a href="/?query={{ query }}&id={{ entity.location.id }}"
+            onclick="load_profile({{ entity.location.id }}); return false;"
+      >{{ entity.location.name }}</a> &nbsp;
+    <select name="location" id="location" class="autocomplete"
+      onchange=
+      "PHOTO_DIRECTORY.update_autocomplete('Entity_location_{{ id }}', 'location');">
+        <option 
+          {% if not entity.location %}
+             selected="selected"
+          {% endif %}
+          value="location.-1">None</option>
+        {% for location in entities %}
+        <option
+          {% if location.id == entity.location %}
+              selected="selected"
+          {% endif %}
+          value="location.{{ location.id }}">{{ location.name }}</option>
+        {% endfor %}
+</select></strong></p>
+
+<p>Reports to: <strong>
+    <a href="/?query={{ query }}&id={{ entity.reports_to.id }}"
+      onclick="load_profile({{ entity.reports_to.id }}); return false;"
+      >{{ entity.reports_to.name }}</a> &nbsp;
+    <select name="reports_to" id="reports_to" class="autocomplete"
+      onchange=
+      "PHOTO_DIRECTORY.update_autocomplete('Entity_reports_to_{{ id }}', 'reports_to');">
+        <option 
+          {% if not entity.reports_to %}
+             selected="selected"
+          {% endif %}
+          value="reports_to.-1">None</option>
+        {% for reports_to in entities %}
+        <option
+          {% if reports_to.id == entity.reports_to %}
+              selected="selected"
+          {% endif %}
+          value="reports_to.{{ reports_to.id }}">{{ reports_to.name }}</option>
+        {% endfor %}
+</select></strong></p>

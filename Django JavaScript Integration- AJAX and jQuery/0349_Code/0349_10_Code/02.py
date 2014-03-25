@@ -1,0 +1,20 @@
+class EditTrail(models.Model):
+    change_set = models.IntegerField()
+    change_type = models.CharField(max_length = 1, choices = EDIT_CHOICES)
+    content_object = generic.GenericForeignKey(u'content_type', u'object_id')
+    content_type = models.ForeignKey(ContentType)
+    field_name = models.TextField(null = True, blank = True)
+    foreign_key_added = generic.GenericForeignKey()
+    foreign_key_deleted = generic.GenericForeignKey()
+    in_effect = models.BooleanField()
+    instance = generic.GenericForeignKey()
+    ip = models.IPAddressField()
+    object_id = models.PositiveIntegerField()
+    session = models.TextField(null = True, blank = True)
+    text_after = models.TextField(null = True, blank = True)
+    text_before = models.TextField(null = True, blank = True)
+    timestamp = models.DateTimeField(default = datetime.datetime.now, blank =
+      True)
+    username = models.TextField(null = True, blank = True)
+    def format_timestamp(self):
+        return directory.functions.format_timestamp(self.timestamp)

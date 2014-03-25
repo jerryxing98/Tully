@@ -1,0 +1,16 @@
+    PHOTO_DIRECTORY.register_update = function()
+        {
+        PHOTO_DIRECTORY.limit_width("img.profile", 150);
+        PHOTO_DIRECTORY.limit_width("img.search_results", 80);
+        PHOTO_DIRECTORY.register_editables();
+        PHOTO_DIRECTORY.register_autocomplete();
+        if (PHOTO_DIRECTORY.SHOULD_TURN_OFF_HIJAXING)
+            {
+            $("a").removeAttr("onclick");
+            $("#add_new").click(function()
+                {
+                PHOTO_DIRECTORY.add_new();
+                return false;
+                });
+            }
+        }

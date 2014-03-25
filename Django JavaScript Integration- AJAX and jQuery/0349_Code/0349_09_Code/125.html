@@ -1,0 +1,19 @@
+    PHOTO_DIRECTORY.load_current_profile = function()
+        {
+        if (PHOTO_DIRECTORY.tables_loaded >= PHOTO_DIRECTORY.tables_available)
+            {
+            PHOTO_DIRECTORY.load_profile(PHOTO_DIRECTORY.current_profile);
+            }
+        else
+            {
+            if (PHOTO_DIRECTORY.current_profile)
+                {
+                $("#profile").load("/ajax/profile/" + PHOTO_DIRECTORY.current_profile,
+                  PHOTO_DIRECTORY.register_update);
+                }
+            else
+                {
+                $("#profile").load("");
+                }
+            }
+        }

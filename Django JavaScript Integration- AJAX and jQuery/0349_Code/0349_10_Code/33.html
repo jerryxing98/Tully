@@ -1,0 +1,83 @@
+        $("#create_account").dialog({
+            autoOpen: false,
+            height: 350,
+            width: 350,
+            modal: true,
+            buttons:
+                {
+                "Create": function()
+                    {
+                    $.ajax({
+                        data:
+                            {
+                            "new_email": document.getElementById("new_email").value,
+                            "new_password": document.getElementById("new_password").value,
+                            "new_username": document.getElementById("new_username").value,
+                            },
+                        url: "/ajax/create_user",
+                        });
+                    $("#create_account").dialog("close");
+                    }
+                },
+            });
+        $("#login_form").dialog({
+            autoOpen: false,
+            height: 480,
+            width: 350,
+            modal: true,
+            buttons:
+                {
+                'Log in': function()
+                    {
+                    $.ajax({
+                        data:
+                            {
+                            "login": document.getElementById("login").value,
+                            "password":
+                              document.getElementById("password").value,
+                            },
+                        datatype: 'text',
+                        success: function(data, textStatus, XMLHttpRequest)
+                            {
+                            if (data)
+                                {
+                                PHOTO_DIRECTORY.send_notification(
+                                  "You have successfully logged in and " +
+                                  "can now make changes.");
+                                PHOTO_DIRECTORY.load_database();
+
+                                $("#login_form").dialog("close");
+                                PHOTO_DIRECTORY.register_update();
+                                if (PHOTO_DIRECTORY.last_attempted_function)
+                                    {
+                                    PHOTO_DIRECTORY.last_attempted_function();
+                                    }
+                                }
+                            else
+                                {
+                                PHOTO_DIRECTORY.send_notification(
+                                  "Your login was not successful.");
+                                }
+                            },
+                        url: "/ajax/login",
+                        close: function(){},
+                        });
+                    },
+                'Forgot password': function()
+                    {
+                    document.location = "/password_reset/";
+                    },
+                {% if settings.SHOULD_ALLOW_USERS_TO_CREATE_ACCOUNTS %}
+                'Create account': function()
+                    {
+                    $("#login_form").dialog("close");
+                    $("#create_account").dialog("open");
+                    },
+                {% endif %}
+                'Cancel and go back': function()
+                    {
+                    $("#login_form").dialog("close");
+                    PHOTO_DIRECTORY.reload_profile();
+                    }
+                },
+            });

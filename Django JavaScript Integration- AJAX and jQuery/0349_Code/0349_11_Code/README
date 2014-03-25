@@ -1,0 +1,128 @@
+01.py
+
+    A Python file giving a carefully chosen default value.
+
+02.py
+
+    A bugfixed code segment.
+
+03.py
+
+    A related bugfixed code segment.
+
+04.py
+
+    An unrelated bugfixed code segment.
+
+05.py
+
+    An enhancement to 04.py.
+
+06.py
+
+    Updated code demonstrating a particular type of filter.
+
+07.py
+
+    Updated code demonstrating another kind of bugfix.
+
+08.html
+
+    A fragment from a Django template. For this chapter, a .html extension
+    always denotes a fragment of a Django template, and never a plain old HTML
+    page.
+
+09.html
+
+    An update to a page to remedy unwanted network hits.
+
+10.html
+
+    A template fragment handling mouseover and click.
+
+11.js
+
+    An example of a tweak to a jQuery extension.
+
+12.js
+
+    Another tweak to the same jQuery extension.
+
+13.html
+
+    An updated complete handler that handles permission denied messages.
+
+14.css
+
+    Styling to hide certain elements.
+
+15.css
+
+    More styling to hide certain elements.
+
+16.html
+
+    The marked-up forms for a different way to handle passwords.
+
+17.html
+
+    One helper function.
+
+18.html
+
+    Another helper function.
+
+19.html
+
+    Another helper function.
+
+20.py
+
+    A Django choice with time zone information.
+
+21.py
+
+    An updated Entity model supporting time zone operations.
+
+22.html
+
+    A Django template to allow a user to fill in time zone information for an
+    Entity.
+
+23.html
+
+    More of the template, including a hook to display the result.
+
+24.css
+
+    CSS to hide a span used to store information for the clock.
+
+25.html
+
+    An updated register_update() that calls for the local time clock to be
+    displayed on an Entity.
+
+26.html
+
+    The beginning of a function that updates the local time clock.
+
+27.html
+
+    More of the same.
+
+28.html
+
+    The end of the function.
+
+29.html
+
+    JavaScript to build timezone-related profile information like the Django
+    template did.
+
+30.html
+
+    JavaScript to handle one thing that was missing from 29.html.
+
+31.css
+    
+    Styling for the local time clock.

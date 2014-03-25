@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Measure Clock Skew{% endblock title %}
+{% block body_header_title %}Measure Clock Skew{% endblock body_header_title %}
+{% block head_css_page %}<style type="text/css">
+<!--
+.error
+    {
+    color: red;
+    }
+.success
+    {
+    font-weight: bold;
+    }
+// -->
+</style>
+{% endblock head_css_page %}
+{% block footer_javascript_page %}<script language="JavaScript" type="text/javascript" src="/static/js/json2.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/clock_skew.js"></script>{% endblock footer_javascript_page %}
+{% block body_content %}<ul id="results"></ul>
+<button id="button">Measure Clock Skew</button>{% endblock body_content %}

@@ -1,0 +1,18 @@
+<p>Time zone:
+    <select name="time_zone" id="time_zone"
+      onchange="PHOTO_DIRECTORY.update_autocomplete('Entity_time_zone_{{ id }}', 'time_zone');">
+        {% for time_zone in time_zones %}
+            <option value="{{ time_zone.0 }}"
+                {% if time_zone.0 == entity.time_zone %}
+                    selected
+                {% endif %}
+            >{{ time_zone.1 }}</option>
+        {% endfor %}
+    </select><br />
+Observes daylight saving time: <input type="checkbox"
+name="observes_daylight_saving_time" id="observes_daylight_saving_time"
+onchange="PHOTO_DIRECTORY.update_autocomplete('Entity_observes_daylight_saving_time_{{ id }}', 'observes_daylight_saving_time');"
+{% if entity.observes_daylight_saving_time %}
+  checked="checked"
+{% endif %}
+    /></p>

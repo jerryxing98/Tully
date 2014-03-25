@@ -1,0 +1,50 @@
+<div id="login_form" title="Log in">
+    <form>
+        <fieldset>
+            <label for="login">Login</label><br />
+            <input type="text" name="login" id="login" class="text ui-widget-content ui-corner-all" /><br />
+            <label for="password">Password</label><br />
+            <input
+              onkeyup="PHOTO_DIRECTORY.field_sync('password_visible', 'password_hidden');"
+              onkeydown="PHOTO_DIRECTORY.field_sync('password_visible', 'password_hidden');"
+            autocomplete="off" type="text" name="password_visible" id="password_visible" class="text ui-widget-content ui-corner-all" />
+            <input
+              onkeyup="PHOTO_DIRECTORY.field_sync('password_hidden', 'password_visible');"
+              onkeydown="PHOTO_DIRECTORY.field_sync('password_hidden', 'password_visible');"
+              type="password" name="password_hidden" id="password_hidden"
+              class="text ui-widget-content ui-corner-all" /><br />
+            <a id="hide_password" name="hide_password"
+              href="JavaScript:PHOTO_DIRECTORY.hide_element('password');">Hide
+              password</a>
+            <a id="show_password" name="show_password"
+              href="JavaScript:PHOTO_DIRECTORY.show_element('password');">Show
+              password</a>
+        </fieldset>
+    </form>
+</div>
+<div id="create_account" title="Create account">
+    <form>
+        <fieldset>
+            <label for="new_username">Account name</label><br />
+            <input type="text" name="new_username" id="new_username" class="text ui-widget-content ui-corner-all" /><br />
+            <label for="new_email">Email</label><br />
+            <input type="text" name="new_email" id="new_email" class="text ui-widget-content ui-corner-all" /><br />
+            <label for="new_password">Password</label><br />
+            <input
+              onkeyup="PHOTO_DIRECTORY.field_sync('new_password_visible', 'new_password_hidden');"
+              onkeydown="PHOTO_DIRECTORY.field_sync('new_password_visible', 'new_password_hidden');"
+            autocomplete="off" type="text" name="new_password_visible" id="new_password_visible" class="text ui-widget-content ui-corner-all" />
+            <input
+              onkeyup="PHOTO_DIRECTORY.field_sync('new_password_hidden', 'new_password_visible');"
+              onkeydown="PHOTO_DIRECTORY.field_sync('new_password_hidden', 'new_password_visible');"
+              type="password" name="new_password_hidden" id="new_password_hidden"
+              class="text ui-widget-content ui-corner-all" /><br />
+            <a id="hide_new_password" name="hide_new_password"
+              href="JavaScript:PHOTO_DIRECTORY.hide_element('new_password');">Hide
+              password</a>
+            <a id="show_new_password" name="show_new_password"
+              href="JavaScript:PHOTO_DIRECTORY.show_element('new_password');">Show
+              password</a>
+        </fieldset>
+    </form>
+</div>

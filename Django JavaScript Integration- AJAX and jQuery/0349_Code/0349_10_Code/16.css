@@ -1,0 +1,24 @@
+a.dismiss_undo
+    {
+    color: #800000;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    }
+
+div.undo_notifications
+    {
+    background-color: #ccffcc;
+    border: 2px solid #008000;
+    display: none;
+    margin-bottom: 50px;
+    margin-left: 25%;
+    margin-top: 50px;
+    padding: 20px;
+    width: 50%;
+    }
+
+div.undo_notifications a
+    {
+    font-weight: bold;
+    }

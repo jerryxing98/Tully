@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block head_title %}Changelog{% endblock head_title %}
+{% block body_header_title %}<h1>Changelog</h1>{% endblock body_header_title %}
+{% block body_main %}
+    {% for message in messages %}
+        {% if forloop.counter == settings.INITIAL_RESULTS %}<div                class="remainder">{% endif %}
+            <p>{{ message.message|safe }}<br />
+            <span class="timestamp">{{ message.timestamp }}</span> &rarr;
+            <a href="JavaScript:undo({{ message.change_set }});">Undo</a></p>
+    {% endfor %}
+</div>
+    {% if messages|length > settings.INITIAL_RESULTS %}
+        <p class="expand_link"><strong><a href="JavaScript:expand();"><span
+        class="emphasized">+</span> Show all</a></strong></p>
+    {% endif %}
+{% endblock body_main %}
+{% block footer_javascript_page %}
+    <script language="JavaScript" type="text/javascript">
+        <!--
+
+            function expand()
+                {
+                $(".expand_link").hide();
+                $(".remainder").show();
+                }
+
+            send_notification = function(message)
+                {
+                $("#notifications").html("<p>" + message + "</p>");
+                setTimeout("$('#notifications').show('slow').delay(" +
+                (5000 + message.length * 2) + ").hide('slow');", 0);
+                }
+
+
+            function undo(change_set)
+                {
+                $.ajax({
+                    data:
+                        {
+                        change_set: change_set,
+                        },
+                    error: function(XMLHttpRequest)
+                        {
+                        send_notification(XMLHttpRequest.responseText);
+                        },
+                    success: function()
+                        {
+                        send_notification("This change has been undone.");
+                        },
+                    url: "/ajax/undo",
+                    });
+                }
+
+        // -->
+    </script>
+{% endblock footer_javascript_page %}

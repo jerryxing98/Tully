@@ -1,0 +1,29 @@
+        var adjusted_date = new Date(new Date().getTime() + offset);
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday",
+          "Thursday", "Friday", "Saturday"];
+        var months = ["January", "February", "March", "April",
+          "May", "June", "July", "August", "September", "November",
+          "December"];
+        var ampm = "AM";
+        var hours = adjusted_date.getHours()
+        if (hours > 11)
+            {
+            hours -= 12;
+            ampm = "PM"
+            }
+        if (hours == 0)
+            {
+            hours = 12;
+            }
+        var formatted_date = "<strong>" + hours + ":";
+        if (adjusted_date.getMinutes() < 10)
+            {
+            formatted_date += "0";
+            }
+        formatted_date += adjusted_date.getMinutes() + " " + ampm;
+        formatted_date += "</strong>, ";
+        formatted_date += days[adjusted_date.getDay()] + " ";
+        formatted_date += months[adjusted_date.getMonth()] + " ";
+        formatted_date += adjusted_date.getDate() + ", ";
+        formatted_date += adjusted_date.getFullYear();
+        $("#local_time").html(formatted_date + ".");

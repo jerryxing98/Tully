@@ -1,0 +1,32 @@
+<p>
+    Homepage:
+    {% if entity.homepage %}
+        <a href="{{ entity.homepage }}">
+    {% endif %}
+    <strong class="edit_rightclick" id="entity_homepage_{{ entity.id }}">
+        {% if entity.homepage %}
+            {{ entity.homepage }}
+        {% else %}
+            Right click to change.
+        {% endif %}
+    </strong>
+    {% if entity.homepage %}
+        </a>
+    {% endif %}
+</p>
+<p>
+    Email:
+    <strong>
+        {% for email in emails %}
+            <a id="EntityEmail_email_{{ email.id }}" class="edit_rightclick" href="mailto:{{ email.email }}">
+                {{ email.email }}
+            </a>
+            {% if not forloop.last %}
+                ,
+            {% endif %}
+        {% endfor %}
+        <span class="edit" id="EntityEmail_new_{{ entity.id }}">
+            Click to add email.
+        </span>
+    </strong>
+</p>

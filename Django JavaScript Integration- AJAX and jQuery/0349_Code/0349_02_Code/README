@@ -1,0 +1,112 @@
+Code samples included:
+
+1.js
+    
+    "Hello, world!" in Ajax using library-free JavaScript.
+
+2.js
+
+    "Hello, world!" in Ajax using jQuery.
+
+3.js
+
+    Examples of jQuery selectors.
+
+4.js
+
+    An example of a wrapped set.
+
+5.js
+
+    An example of chained operations on a wrapped set.
+
+6.js
+
+    A sample invocation of $.ajax().
+
+7.js
+
+    Code demonstrating a jQuery context.
+
+8.js
+
+    An example of using a closure to create an object with effectively a
+    private field.
+
+9.js
+
+    Code snippet for prototypes.
+
+10.txt
+
+    Sample data encoded in a string for $.ajax(), query-stype.
+
+11.js
+    
+    The same sample data as a JavaScript dictionary that can be passed to
+    $.ajax().
+
+12.js
+
+    Important example $.ajaxSetup() invocation.
+
+13.js
+
+    Incomplete fragment demonstrating $.ajax()'s error argument.
+
+14.js
+
+    Incomplete fragment demonstrating $.ajax()'s success argument.
+
+15.js
+
+    Second sample invocation of $.ajaxSetup().
+
+16.js
+
+    Sample invocations of $.get() and $.post().
+
+17.js
+
+    Sample invocations of .load().
+
+18.js
+
+    Sample animation of a carefully chosen wrapped set.
+
+19.js
+    
+    A more elaborate example demonstrating chaining of operations.
+
+20.js
+
+    An illustration of why calling .load() on a wrapped set with several items
+    may not make the most sense.
+
+21.html
+
+    Illustration HTML document used to show what kinds of elements
+    $(".first-child") does and does not include in the selection.
+
+22.html
+
+    An example of a template that extends "base.html", included in the
+    previous code zipfile as 0349_01_code/18.html. This is one part of an Ajax
+    application.
+
+23.js
+    
+    This is the JavaScript for the Ajax application that begins with 22.html.
+
+24.py
+
+    A model that serves up the rendered view in one function, and JSON data for
+    the application in another function.
+
+25.py
+
+    The line in urls.py after which the contents of 26.py should be appended.
+
+26.py
+
+    Two more lines of text to add to urls.py after the contents of 25.py.

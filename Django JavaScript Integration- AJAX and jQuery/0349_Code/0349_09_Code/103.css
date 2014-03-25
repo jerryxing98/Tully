@@ -1,0 +1,35 @@
+#profile h2
+    {
+    margin-top: 0;
+    }
+
+.search_result
+    {
+    padding: 10px;
+    padding-right: 0px;
+    }
+
+.search_result:hover
+    {
+    background-color: #ccccff;
+    }
+
+#search_results
+    {
+    background-color: #ddddff;
+    display: table-cell;
+    height: 100%;
+    padding: 50px;
+    width: 32%;
+    }
+
+#search_results h2
+    {
+    margin-top: 0;
+    }
+
+span.placeholder
+    {
+    font-style: italic;
+    font-weight: normal;
+    }

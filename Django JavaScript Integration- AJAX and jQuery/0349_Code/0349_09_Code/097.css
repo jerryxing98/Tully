@@ -1,0 +1,6 @@
+.edit:after, .edit_textarea:after
+    {
+    color: #808080;
+    content: "✍"; /* The symbol, not ASCII encoding, of &#9997; */
+    font-size: larger;
+    }

@@ -1,0 +1,59 @@
+    $(function()
+        {
+        $("#search_form").submit(function(event)
+            {
+            PHOTO_DIRECTORY.search();
+            return false;
+            });
+        $("#query").width($(window).width() - 240);
+        $("#login_form").dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons:
+                {
+                'Log in': function()
+                    {
+                    $.ajax({
+                        data:
+                            {
+                            "login": document.getElementById("login").value,
+                            "password":
+                              document.getElementById("password").value,
+                            },
+                        datatype: 'text',
+                        success: function(data, textStatus, XMLHttpRequest)
+                            {
+                            if (data)
+                                {
+                                PHOTO_DIRECTORY.send_notification(
+                                  "You have successfully logged in and " +
+                                  "can now make changes.");
+                                PHOTO_DIRECTORY.load_database();
+                                
+                                $(".ui-dialog").hide();
+                                $(".ui-widget-overlay").hide();
+                                PHOTO_DIRECTORY.register_update();
+                                if (PHOTO_DIRECTORY.last_attempted_function)
+                                    {
+                                    PHOTO_DIRECTORY.last_attempted_function();
+                                    }
+                                }
+                            else
+                                {
+                                PHOTO_DIRECTORY.send_notification(
+                                  "Your login was not successful.");
+                                }
+                            },
+                        url: "/ajax/login",
+                        close: function(){},
+                        });
+                    },
+                },
+            });
+        $("#body_preamble_page").show();
+        PHOTO_DIRECTORY.check_login();
+        PHOTO_DIRECTORY.load_database();
+        PHOTO_DIRECTORY.register_update();
+        });

@@ -1,0 +1,8 @@
+<p>Department:
+    <strong>
+        <select name="department" id="department" class="autocomplete">
+        <option
+        {% if not entity.department.id %}
+            selected="selected"
+        {% endif %}
+        value="department.-1">&mdash; Select &mdash;</option>

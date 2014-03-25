@@ -1,0 +1,64 @@
+<form action="/ajax/save" method="POST" name="location_form"
+  id="location_form" target="bitbucket">
+    <p>
+        <input type="hidden" name="id" value="Entity_location_{{ entity.id }}" />
+        Location:
+        <strong>
+            <select name="location" id="location" class="autocomplete"
+              onchange="document.location_form.submit();">
+            <option
+            {% if not entity.location.id %}
+                selected="selected"
+            {% endif %}
+            value="location.-1">None</option>
+            {% for location in locations %}
+                <option 
+                {% if locationi.id == entity.locationi.id %}
+                    selected="selected"
+                {% endif %}
+                value="location.{{ location.id }}">{{ location.identifier }}</option>
+            {% endfor %}
+            </select>
+        </strong>
+    </p>
+</form>
+<p>
+    Phone:
+    <strong class="edit" id="entity_phone_{{ entity.id }}">
+        {% if entity.phone %}
+            {{ entity.phone }}
+        {% else %}
+            Click to change.
+        {% endif %}
+    </strong>
+</p>
+<form action="/ajax/save" method="POST" name="reports_to_form"
+  id="reports_to_form" target="bitbucket">
+    <p>
+        <input type="hidden" name="id" value="Entity_reports_to_{{ entity.id }}" />
+        Reports to:
+        <strong>
+             <select name="reports_to" id="reports_to" class="autocomplete"
+onchange="document.reports_to_form.submit();">
+            <option
+            {% if not entity.reports_to.id %}
+                selected="selected"
+            {% endif %}
+            value="reports_to_-1">None</option>
+            {% for reports_to in reports_to_candidates %}
+                <option 
+                {% if reports_to.id == entity.reports_to.id %}
+                    selected="selected"
+                {% endif %}
+                value="reports_to_{{ reports_to.id }}">{{ reports_to.name }}</option>
+            {% endfor %}
+            </select>
+        </strong>
+    </p>
+</form>
+<p>
+    Start date:
+    <strong>
+        {{ entity.start_date }}
+    </strong>
+</p>

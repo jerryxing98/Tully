@@ -1,0 +1,12 @@
+$(function()
+    {
+    $.ajaxSetup(
+        {
+        error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+            send_notification(XMLHttpRequest.responseText);
+            },
+        type: "POST",
+        });
+    });
+</script>

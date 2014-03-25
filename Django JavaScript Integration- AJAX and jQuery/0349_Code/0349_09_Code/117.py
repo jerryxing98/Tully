@@ -1,0 +1,1 @@
+SHOULD_DOWNLOAD_DIRECTORY = 1 # 1 or 0, BUT NOT True or False

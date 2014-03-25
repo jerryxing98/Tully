@@ -1,0 +1,8 @@
+<p>GPS: <strong>
+    {% if gps %}
+        <a class="edit_rightclick" id="Entity_gps_{{ id }}"
+          href="{{ gps_url }}">{{ gps }}</a>
+    {% else %}
+        <span class="edit" id="Entity_gps_{{ id }}"></span>
+    {% endif %}
+</strong></p>

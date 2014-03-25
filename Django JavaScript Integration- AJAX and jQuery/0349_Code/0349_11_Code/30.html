@@ -1,0 +1,13 @@
+PHOTO_DIRECTORY.load_profile = function(id)
+        {
+        PHOTO_DIRECTORY.current_profile = id;
+        if (PHOTO_DIRECTORY.SHOULD_TURN_ON_HIJAXING)
+            {
+            try
+                {
+                $("#profile").html(PHOTO_DIRECTORY.build_profile(id));
+                if (PHOTO_DIRECTORY.entities[id].fields.time_zone != null)
+                    {
+                    $("#time_zone").val(PHOTO_DIRECTORY.entities[id].fields.time_zone);
+                    }
+                PHOTO_DIRECTORY.register_update();

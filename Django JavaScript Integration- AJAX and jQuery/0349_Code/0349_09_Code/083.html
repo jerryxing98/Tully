@@ -1,0 +1,13 @@
+    PHOTO_DIRECTORY.update_autocomplete = function(id, html_id)
+        {
+        var value = $("#" + html_id).val();
+        $.ajax({
+            data:
+                {
+                id: id,
+                value: value,
+                },
+            url: "/ajax/save", 
+            });
+        PHOTO_DIRECTORY.reload_profile();
+        }

@@ -1,0 +1,8 @@
+<p>Tags: <strong>
+    {% for tag in tags %}
+        <span class="tag">{{ tag.text }}</span>
+        <span class="delete" id="tag_{{ id }}_{{ tag.id }}">&#10008;</span>
+        &nbsp;
+    {% endfor %}
+    <span class="edit" id="Entity_tag_new_{{ id }}"></span>
+</strong></p>

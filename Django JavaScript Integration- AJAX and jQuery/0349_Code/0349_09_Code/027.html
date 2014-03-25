@@ -1,0 +1,17 @@
+<p>Status:</p>
+<div class="edit_textarea" id="Status_new_{{ id }}"></div>
+{% for status in first_stati %}
+<p>{{ status.text }}<br />
+<span class="timestamp">{{ status.datetime }}</span></p>
+{% endfor %}
+{% if second_stati %}
+    <p><a class="show_additional_stati"
+    href="JavaScript:show_additional('stati');"
+    ><span class="emphasized">+</span> Show all</a></p>
+    <div class="additional_stati">
+        {% for status in second_stati %}
+            <p>{{ status.text }}<br />
+            <span class="timestamp">{{ status.datetime }}</span></p>
+        {% endfor %}
+    </div>
+{% endif %}

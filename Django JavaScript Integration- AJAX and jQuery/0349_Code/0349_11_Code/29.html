@@ -1,0 +1,34 @@
+                result += "<p>Other contact information: <strong ";
+                result += "class='edit_textarea' title='Click to edit.' " +
+                  "id='Entity_other_contact_" + id + "'>" +
+                  entity.fields.other_contact + "</strong></p>\n";
+                result += "<p>Time zone: ";
+                result += "<select name='time_zone' id='time_zone'";
+                result += "onchange='PHOTO_DIRECTORY.update_autocomplete(\"Entity_time_zone_{{ id }}\", \"time_zone\");'>";
+                {% for time_zone in time_zones %}
+                    result += "<option value='{{ time_zone.0 }}'>";
+                    result += "{{ time_zone.1 }}</option>\n";
+                {% endfor %}
+                result += "</select><br />\n";
+                result += "Observes daylight saving time: ";
+                result += "<input type='checkbox' ";
+                result += "name='observes_daylight_saving_time' ";
+                result += "id='observes_daylight_saving_time' ";
+                result += "onchange='PHOTO_DIRECTORY.update_autocomplete(";
+                result += '"Entity_observes_daylight_saving_time_';
+                result += id;
+                result += '", "observes_daylight_saving_time");';
+                result += "'";
+                if (entity.fields.observes_daylight_saving_time)
+                    {
+                    result += " checked='checked'";
+                    }
+                result += " /></p>";
+                if (entity.fields.time_zone)
+                    {
+                    result += "<p>Local time:";
+                    result += "<span id='local_time_zone'>";
+                    result += entity.fields.time_zone;
+                    result += "</span><span id='local_time'></span></p>";
+                    }
+                result += "<p>Department: <strong>";

@@ -1,0 +1,15 @@
+    <span id="Entity_name_{{ entity.id }}" class="edit">
+        {% if entity.name %}
+            {{ entity.name }}
+        {% else %}
+            Click to edit.
+        {% endif %}
+    </span>
+    <span id="Entity_post_nominals_{{ entity.id }}" class="edit">
+        {% if entity.post_nominals %}
+            {{ entity.post_nominals }}
+        {% else %}
+            Click to edit.
+        {% endif %}
+    </span>
+</h1>

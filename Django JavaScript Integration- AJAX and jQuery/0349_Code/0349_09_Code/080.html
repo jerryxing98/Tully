@@ -1,0 +1,6 @@
+    PHOTO_DIRECTORY.search = function()
+        {
+        $("#search_results").load("/ajax/search?query=" +
+          escape(document.search_form.query.value),
+          PHOTO_DIRECTORY.register_update);
+        }

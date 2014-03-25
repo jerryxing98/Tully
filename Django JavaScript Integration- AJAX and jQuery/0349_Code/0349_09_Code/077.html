@@ -1,0 +1,91 @@
+    PHOTO_DIRECTORY.register_editables = function()
+        {
+        $(".delete").each(function(index, item)
+            {
+            var id = item.id;
+            $(item).click(function()
+                {
+                $.ajax(
+                    {
+                    data:
+                        {
+                        id: id,
+                        },
+                    datatype: "html",
+                    success: function(data)
+                        {
+                        if (PHOTO_DIRECTORY.check_authentication(data))
+                            {
+                            PHOTO_DIRECTORY.reload_profile();
+                            }
+                        else
+                            {
+                            PHOTO_DIRECTORY.last_function_called =
+                              PHOTO_DIRECTORY.reload_profile;
+                            PHOTO_DIRECTORY.offer_login();
+                            }
+                        },
+                    url: "/ajax/delete",
+                    });
+                });
+            });
+        $(".edit").editable("/ajax/save",
+            {
+            callback: function(data)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.reload_profile();
+                    }
+                else
+                    {
+                    PHOTO_DIRECTORY.last_function_called =
+                      PHOTO_DIRECTORY.reload_profile;
+                    PHOTO_DIRECTORY.offer_login();
+                    }
+                },
+            cancel: "Cancel",
+            submit: "OK",
+            });
+        $(".edit_rightclick").editable("/ajax/save",
+            {
+            cancel: "Cancel",
+            callback: function(data)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.reload_profile();
+                    }
+                else
+                    {
+                    PHOTO_DIRECTORY.last_function_called =
+                      PHOTO_DIRECTORY.reload_profile;
+                    PHOTO_DIRECTORY.offer_login();
+                    }
+                },
+            event: "contextmenu",
+            submit: "OK",
+            tooltip: "Right click to edit.",
+            });
+        $(".edit_textarea").editable("/ajax/save",
+            {
+            cancel: "Cancel",
+            callback: function(data)
+                {
+                if (PHOTO_DIRECTORY.check_authentication(data))
+                    {
+                    PHOTO_DIRECTORY.reload_profile();
+                    }
+                else
+                    {
+                    PHOTO_DIRECTORY.last_function_called =
+                      PHOTO_DIRECTORY.reload_profile;
+                    PHOTO_DIRECTORY.offer_login();
+                    }
+                },
+            rows: 5,
+            submit: "OK",
+            tooltip: "Click to edit.",
+            type: "textarea",
+            });
+        }

@@ -1,0 +1,9 @@
+div.edit_textarea:after
+    {
+    font-weight: normal;
+    }
+
+div.image
+    {
+    float: left;
+    } 
