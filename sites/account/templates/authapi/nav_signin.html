@@ -1,0 +1,23 @@
+{% load i18n %}
+{% if user.is_authenticated %}
+              <li><a href="{% url userena_profile_detail user.username %}#id_tls"><span>我的Profile</span></a></li>
+              <li>
+                <a href="{% url userena_profile_detail user.username %}">
+                  <span> {{ user.username }}的帐号 </span>
+                </a>
+              </li>
+              <li><a href="{# url userena_umessages_list #}">
+                  {# get_unread_message_count_for user as unread_message_count #}
+                  <span id="nav_msg" class="{# if unread_message_count #}have-new-msg{# endif #}">
+                    消息({#{{unread_message_count}}#})
+                  </span>
+                </a>
+              </li>
+              <li><a onclick="keep_logout();" href="javascript:void()"><span>退出</span></a></li>
+            {% else %}
+			  {% comment %}
+              <li><a class="signin_link" href="{% url userena_signin %}"><span>{% trans 'Signin' %}</span></a></li>
+			  {% endcomment %}
+			  <li><a onclick="keep_login_get();" href="javascript:void()"><span>{% trans 'Signin' %}</span></a></li>
+              <li><a href="{% url userena_signup %}"><span>{% trans 'Signup' %}</span></a></li>
+{% endif %}
