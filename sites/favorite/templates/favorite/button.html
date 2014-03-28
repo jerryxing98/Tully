@@ -2,5 +2,6 @@
   <button class="btn favorite" href="{% url favorite.views.add_or_remove %}" model="{{ target_model }}" is_auth="{{ is_auth }}" id="target_{{ target_object_id }}">
     <i class="icon-star{% if not undo %}-empty{% endif %}"></i>
   </button>
-  <span class="fav-count">{{ fav_count }}</span>
+  <span class="fav-count"></span>
 </div>
+

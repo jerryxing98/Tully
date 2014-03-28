@@ -1,0 +1,1 @@
+<a id="fav_{{ o.pk }}" onclick="keep_favorite('{{ target_model }}','{{ target_object_id }}')"  model="{{ target_model }}" is_auth="{{ is_auth }}" id="target_{{ target_object_id }}" title="收藏"><i class="icon-star{% if not undo %}-empty{% endif %}"></i>收藏 {{ o.num_favorites }}</a>
