@@ -1,0 +1,12 @@
+{% extends 'userena/base_userena.html' %}
+
+{% block content %}
+<script>
+function my_js_callback(data){
+    alert(data.message);
+};
+
+</script>
+<button onclick="Dajaxice.bookmark.ajax_recommend(my_js_callback);">test</button>
+
+{% endblock %}

@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 
 from bookmark import views
 
+from dajaxice.core import dajaxice_autodiscover, dajaxice_config
+
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='bookmark_idx'),
@@ -22,6 +24,9 @@ urlpatterns = patterns('',
     url(r'^bk/(?P<pk>\d+)/postcomment_/$', views.postcomment_, name='bookmark_postcomment_'),
     url(r'^bk/(?P<pk>\d+)/$', views.detail, name='bookmark_detail'),
     url(r'^bk/(?P<pk>\d+)/edit/$', views.edit, name='bookmark_edit'),
+    url(r'^test/',TemplateView.as_view(template_name='bookmark/test.html'),name='bookmark_test'),
+    url(r'^tags/$', views.tags, name='bookmark_tags'),
+    url(r'^tag/(?P<tag_name>[^/]+)/$', views.tag, name='bookmark_tag'),
 )
 
 

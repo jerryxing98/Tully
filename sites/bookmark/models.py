@@ -120,7 +120,7 @@ class BookmarkManager(models.Manager):
     def get_random_bookmarks(self):
         return self.get_all_bookmarks().order_by('-rec_on')
     def get_recommend_bookmarks(self):
-        return self.get_all_bookmarks().order_by('?')
+        return self.get_all_bookmarks().order_by('-num_favorites')
     def get_tag_bookmarks(self):
         return self.get_all_bookmarks().filter(tags__name__in=[tag_name]).order_by('-updated_on')
 

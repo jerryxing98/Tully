@@ -21,7 +21,7 @@ from attachments.models import Attachment
 
 from .models import Bookmark
 from .forms import BookmarkForm, BKCommentForm
-
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 
 
@@ -56,6 +56,9 @@ def random(request, template_name="bookmark/bookmarks.html"):
     ctx['bookmarks'] = Bookmark.objects.get_random_bookmarks()
     return render(request, template_name, ctx)
 
+def tags(request, template_name="timeline/tags.html"):
+    ctx = {}
+    return render(request, template_name, ctx)
 
 
 def tag(request, tag_name, template_name="bookmark/bookmarks.html"):
@@ -137,3 +140,21 @@ def edit(request, pk):
     ctx['form'] = form
     ctx['bml'] = bookmark
     return render(request, template_name, ctx)
+
+
+
+
+def get_pagination_page(page=1):
+    items = range(0, 100)
+    paginator = Paginator(items, 2)
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+
+    try:
+        items = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        items = paginator.page(paginator.num_pages)
+
+    return items

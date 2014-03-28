@@ -1,51 +1,4 @@
-{% extends 'userena/base_userena.html' %}
-
-{% load bookmark_widget_tags %}
-
-{% block title %} 
-  {% if pg == "hot" %} 热门 {% endif %}
-  {% if pg == "last" %} 最新 {% endif %}
-  {% if pg == "recommend" %} 推荐 {% endif %}
-  {% if pg == "random" %} 发现 {% endif %}
-  {% if pg == "tag" %} 标签 {{ tag.name }} {% endif %}
-  -
-  翻墙乐趣 - stay hungry stay foolish 
-{% endblock %}
-
-{% block content_title %}
-<div class="page-header">  
-<h1>
-  {% if pg == "hot" %} 热门 {% endif %}
-  {% if pg == "last" %} 最新 {% endif %}
-  {% if pg == "recommend" %} 推荐 {% endif %}
-  {% if pg == "random" %} 发现 {% endif %}
-  {% if pg == "tag" %} 标签 {{ tag.name }} {% endif %}
-</h1>
-
-</div>
-{% endblock %}
-
-{% block sidebar %}
-  <div class="sidebar">
-    <div class="well">
-      <h4>最新发现</h4>
-      <ul>
-        {% tl_last %}
-      </ul>
-    </div>
-  </div>
-{% endblock %}
-
-
-
-
-
-
-{% block content %} 
-
-
-<div id="content" class="content">
-  {% load pagination_tags %}
+	{% load pagination_tags %}
     {% autopaginate bookmarks %}
     {% load favorite_tags %}
 	{% for o in bookmarks %}
@@ -67,9 +20,10 @@
 				 <dl class="dl-horizontal span5 pull-right">
 				     <dt class="user-option pull-right">
 						<div>
+							<a ><i class="icon-globe"></i>浏览 {{ o.num_views }}</a>
 							{% favorite_link o %}
 							<a onclick="Keep.share({{ o.title }},'{% url bookmark_detail o.pk %}', '{{ o.get_thumbnail_url }}', this)" href="javascript:;"><i class="icons icon-share"></i>分享</a>
-							<a onclick="keep_comment_get({{ o.pk }})"><i class="icons icon-comment"></i>评论 </a>
+							<a id="lk_{{ o.pk }}" onclick="keep_comment_get({{ o.pk }})"><i class="icons icon-comment"></i>评论 {{ o.num_replies }} </a>
 							<p>
 							<a class="username" href="#" target="_blank">{{ o.user.username }}</a>
 						    <span class="time"> - 10/28 11:11收藏了</span>
@@ -95,14 +49,4 @@
   </dl>
    {% endfor %}
 
-  </div>
-  <span ><button id="loading-bar" type="button" class="span6 btn btn-primary" data-loading-text="加载中..." >加载更多</button></span>
-  {% comment %}
-  {% paginate %}
-  {% endcomment %}
-{% endblock %}
-
-
-
-
-
+  
