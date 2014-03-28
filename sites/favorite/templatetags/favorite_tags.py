@@ -33,6 +33,36 @@ def favorite_button(context, target):
 
 
 @register.simple_tag(takes_context=True)
+def favorite_link(context, target):
+    user = context['request'].user
+
+    target_model = '.'.join((target._meta.app_label, target._meta.object_name))
+    target_content_type = ContentType.objects.get_for_model(target)
+    target_object_id = target.id
+    num_favorites = Favorite.objects.filter(target_content_type=target_content_type,
+                                        target_object_id=target_object_id).count()
+
+    undo = False
+    # do nothing when user isn't authenticated
+    if not user.is_authenticated():
+        return render_to_string('favorite/link.html',
+                            {'o':target,'target_model': target_model, 'target_object_id': target_object_id,
+                             'num_favorites': num_favorites, 'undo': undo,'is_auth':False})
+
+
+    
+    if user.favorite_set.filter(target_content_type=target_content_type,
+                                target_object_id=target_object_id):
+        undo = True
+
+    return render_to_string('favorite/link.html',
+                            {'o':target,'target_model': target_model, 'target_object_id': target_object_id,
+                             'num_favorites': num_favorites, 'undo': undo,'is_auth':True})
+
+
+
+
+@register.simple_tag(takes_context=True)
 def  login_modal(context):
     user = context['request'].user
     '''
