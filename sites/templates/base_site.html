@@ -52,6 +52,7 @@
                 </ul>
 			</div>
 			</li>
+			<div id='nav-signin'>
             {% if user.is_authenticated %}
               <li><a href="{% url userena_profile_detail user.username %}#id_tls"><span>我的Profile</span></a></li>
               <li>
@@ -66,14 +67,15 @@
                   </span>
                 </a>
               </li>
-              <li><a href="{% url userena_signout %}"><span>退出</span></a></li>
+              <li><a onclick="keep_logout();" href="javascript:void()"><span>退出</span></a></li>
             {% else %}
 			  {% comment %}
               <li><a class="signin_link" href="{% url userena_signin %}"><span>{% trans 'Signin' %}</span></a></li>
 			  {% endcomment %}
-			  <li><a id="signin_link" href="javascript:void()"><span>{% trans 'Signin' %}</span></a></li>
+			  <li><a onclick="keep_login_get();" href="javascript:void()"><span>{% trans 'Signin' %}</span></a></li>
               <li><a href="{% url userena_signup %}"><span>{% trans 'Signup' %}</span></a></li>
             {% endif %}
+			</div>
           </ul>
         </div>
       </div>

@@ -100,6 +100,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
+    'dajaxice.finders.DajaxiceFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -200,6 +201,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'south',
+    'dajaxice',
     'ajax_validation',
     'compressor',
     'djangohelper',
@@ -273,6 +275,9 @@ LOGGING = {
     }
 }
 
+
+#pagination
+PAGINATION_DEFAULT_PAGINATION=2
 
 
 #thumbnail

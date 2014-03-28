@@ -1,0 +1,20 @@
+{% if user.is_authenticated %}
+      <div>
+        <form action="" method="post" id="comment_from">
+		<h3>发表评论</h3>
+		<fieldset>
+		
+          {% csrf_token %}
+		  {{ form.as_div }}
+		  <div class="form-actions">
+          <p>
+          </p>
+          <p style="clear:both;">
+            <input type="button" onclick="keep_comment_post({{ bk.pk }})" name="post" class="btn btn-primary" id="id_btn_submit" value="提交" >
+          </p>
+		  </div>
+        </fieldset>
+		</form>
+
+      </div>
+{% endif %}

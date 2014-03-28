@@ -11,10 +11,13 @@ from filebrowser.sites import site
 from django.conf.urls.static import static
 from userena.contrib.umessages import views as messages_views
 from account.forms import BsComposeForm
-admin.autodiscover()
+from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 
+admin.autodiscover()
+dajaxice_autodiscover()
 
 urlpatterns = patterns('',
+url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     # Examples:
     # url(r'^$', 'ChineBlog.views.home', name='home'),
     # url(r'^ChineBlog/', include('ChineBlog.foo.urls')),
