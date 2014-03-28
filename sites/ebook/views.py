@@ -42,6 +42,11 @@ def random(request, template_name="ebook/products.html"):
     ctx['products'] = Product.objects.get_random_products()
     return render(request, template_name, ctx)
 
+def tags(request, template_name="timeline/tags.html"):
+    ctx = {}
+    return render(request, template_name, ctx)
+
+
 def tag(request, tag_name, template_name="ebook/products.html"):
     ctx = {}
     ctx['pg'] = 'tag'

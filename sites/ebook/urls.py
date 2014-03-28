@@ -20,4 +20,6 @@ urlpatterns = patterns('',
     #url(r'^bk/(?P<pk>\d+)/postcomment_/$', views.postcomment_, name='product_postcomment_'),
     url(r'^pd/(?P<pk>\d+)/$', views.detail, name='product_detail'),
     url(r'^pd/(?P<pk>\d+)/edit/$', views.edit, name='product_edit'),
+    url(r'^tags/$', views.tags, name='product_tags'),
+    url(r'^tag/(?P<tag_name>[^/]+)/$', views.tag, name='product_tag'),
 )
