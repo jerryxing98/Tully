@@ -34,7 +34,6 @@ class UserProfileListView(ProfileListView):
         context = super(ProfileListView, self).get_context_data(**kwargs)
 '''     
 def profile_detail(request, username):
-    print '=========================================='
     ctx = {}
     view_user = get_object_or_404(User, username=username)
     if request.user.is_authenticated() and request.user.username == username:
@@ -69,7 +68,8 @@ def authapi_signin(request, auth_form=AuthenticationForm,
            template_name='authapi/signin_form.html',
            extra_context=None):
     form = auth_form()
-
+    form = AuthenticationForm()
+    
     if request.method == 'POST':
         form = auth_form(request.POST, request.FILES)
         if form.is_valid():
@@ -84,7 +84,6 @@ def authapi_signin(request, auth_form=AuthenticationForm,
             else:
                 result = False
     response = HttpResponse(json.dumps(result), mimetype = u'application/json')
-    time.sleep(1000)
     return response
 
 @login_required
