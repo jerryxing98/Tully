@@ -5,7 +5,7 @@ import logging
 
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
-
+from django.db.models import F
 from bookmark.models import Bookmark
 from timeline.models import Timeline
 from ebook.models import Product
@@ -45,11 +45,11 @@ def autoReduceFavorite(sender,**kwargs):
         timeline = Timeline.objects.get(id = instance.target_object_id)
         timeline.num_favorites = F("num_favorites")-1
         timeline.save()
-    if instance.__class__.model  == 'bookmark':
+    if instance.target_content_type.model  == 'bookmark':
         bookmark = Bookmark.objects.get(id = instance.target_object_id)
         bookmark.num_favorites = F("num_favorites")-1
         bookmark.save()
-    if instance.__class__.model  == 'product':
+    if instance.target_content_type.model  == 'product':
         product = Product.objects.get(id = instance.target_object_id)
         product.num_favorites = F("num_favorites")-1
         product.save()
