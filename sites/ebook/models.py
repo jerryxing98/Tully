@@ -100,7 +100,19 @@ class Product(models.Model):
     num_favorites = models.IntegerField(u'收藏数',default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    focus_date = models.CharField(u'初始日期', max_length=30, null=True, blank=True)
+    focus_date = models.CharField(u'初始日期',max_length=30, null=True, blank=True)
+    serialname = models.CharField(u'系列书名',max_length=128)
+    serialno   = models.CharField(u'书　　号',max_length=128)
+    publish_on = models.DateTimeField(u'出版日期') 
+    num_page   = models.CharField(u'页　　数',max_length=8)
+    price      = models.FloatField(u'定　　价')
+    publish_type = models.CharField(u'印刷方式',max_length=8)
+    about = models.TextField(blank=False)
+    origin_name = models.CharField(u'原书书名',max_length=128)
+    origin_serial=models.CharField(u'原书书号',max_length=12)
+    origin_country=models.CharField(u'原书国家',max_length=16)
+    origin_publish=models.CharField(u'原书出版社',max_length=32)
+    origin_num = models.CharField('原书页数',max_length=32)
     objects = ProductManager()
 
     '''
@@ -144,15 +156,16 @@ class ArticleManager(models.Manager):
         return Article.objects.filter(status='pub')
     def get_tag_articles(self):
         return self.get_all_articles().filter(tags__name__in=[tag_name]).order_by('-updated_on')
-    
-
+   
 
 class Article(models.Model):
+    
     title           = models.CharField(max_length=255, blank=False)
     status          = models.CharField(u"发布状态", max_length=16, default='draft', choices=STATUS_CHOICES)
     description     = models.CharField(max_length=255, blank=True, help_text="Please write some_things")
     shared          = models.IntegerField(choices=SHARED_CHOICES,default=1)
-
+    content         = models.TextField(blank=False)
+    
     '''
     THUMBNAIL_SETTINGS = {'size':(ebook_settings.EBOOK_THUMBNAIL_SIZE,
                                   ebook_settings.EBOOK_THUMBNAIL_SIZE),
@@ -172,8 +185,8 @@ class Article(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     focus_date = models.CharField(u'初始日期', max_length=30, null=True, blank=True)
-    objects = ArticleManager()    
-     '''
+    #objects = ArticleManager()   
+    '''
     update the Product models last update time.
     :param commit,default set True
     '''

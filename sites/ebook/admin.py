@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ebook.models import Product
+from ebook.models import Product,Article
 
 '''
 	ProductModel show in djangoAdmin
@@ -10,4 +10,11 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields       = ('title', 'created_by__username', )
     #raw_id_fields       = ('attachments', 'created_by')
 
+class ArticleAdmin(admin.ModelAdmin):
+	list_display =('created_by','status')
+	search_fields = ('title','created_by__username')
+
+admin.site.register(Article,ArticleAdmin)
 admin.site.register(Product, ProductAdmin)
+
+
