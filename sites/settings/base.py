@@ -68,7 +68,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = get_path('static')
+#STATIC_ROOT = get_path('root_static')
 #STATIC_ROOT = os.path.join(HERE, 'collectedstatic')
 
 
@@ -189,6 +189,8 @@ INSTALLED_APPS = (
     'grappelli.dashboard',
     'grappelli',
     'easy_thumbnails',
+    'sorl.thumbnail',
+    #'djcelery',
     'markdown',
     #'debug_toolbar',
     # Filebrowser
@@ -200,6 +202,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'thummer',
     'south',
     'dajaxice',
     'ajax_validation',

@@ -10,7 +10,7 @@ from attachments.models import Attachment
 from easy_thumbnails.fields import ThumbnailerImageField
 from taggit.managers import TaggableManager
 from django.template import Template, Context
-from  django.template.loader  import  get_template 
+from django.template.loader  import  get_template 
 
 STATUS_CHOICES = (('draft', u'草稿'), 
     ('pub', u'发布'),

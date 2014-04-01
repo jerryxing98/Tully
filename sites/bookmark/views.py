@@ -19,8 +19,8 @@ from ajax_validation.utils import render_string
 from attachments.views import _do_ajax_upload, ajax_delete, ajax_change_descn 
 from attachments.models import Attachment
 
-from .models import Bookmark
-from .forms import BookmarkForm, BKCommentForm
+from bookmark.models import Bookmark
+from bookmark.forms import BookmarkForm, BKCommentForm
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 

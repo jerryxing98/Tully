@@ -17,12 +17,20 @@ from dajaxice.utils import deserialize_form
 from  django.shortcuts import render_to_response
 from bookmark.models import Bookmark
 from ajax_validation.views import validate_form
+from thummer import get_thumbnail
 
 
 @dajaxice_register(method='GET')
 def ajax_recommend(request,page):
     html= recommend(request, template_name="authapi/bookmarks.html")    
     return simplejson.dumps({'message':html.content})
+
+@dajaxice_register(method='POST',name='bookmark.ajax_screenshot')
+def ajax_screenshot(request,url):
+    if request.method=='POST':
+        thumbnail = get_thumbnail(url, '400x400')
+        print "success=========================="
+    
 
 
 @dajaxice_register(method='GET',name='bookmark.ajax_comment_get')

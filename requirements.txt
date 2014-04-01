@@ -20,3 +20,4 @@ django-grappelli>=2.4.4
 django-filebrowser>=3.5.2
 django-mptt
 pyqqweibo
+git+git://github.com/jorgebastida/django-dajax.git

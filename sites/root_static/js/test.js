@@ -113,13 +113,30 @@ function login_post_callback(data){
 		$('#nav-signin').empty();
 		$('#nav-signin').html(data.message);
 		break;
-	case 'Fall':
+	case 'Fail':
 		break;
 	case 'Error':
 		$('#modal-body').empty();
 		$('#modal-body').html(data.message);
 		break;
 	}
+}
+
+function screenshot_callback(data){
+	switch(data.status){
+	case 'Success':
+		break;
+	case 'Fail':
+		break;
+	case 'Error':
+		break;
+	}
+}
+
+
+function keep_screenshot(){
+	alert($('#id_link').val());
+	Dajaxice.bookmark.ajax_screenshot(screenshot_callback,{'url':$('#id_link').val()});
 }
 
 function keep_login_get(){
