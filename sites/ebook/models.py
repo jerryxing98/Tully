@@ -57,9 +57,8 @@ class ProductManager(models.Manager):
         return self.get_all_products().order_by('-rec_on')
     def get_recommend_products(self):
         return self.get_all_products().order_by('?')
-    def get_tag_products(self):
+    def get_tag_products(self,tag_name):
         return self.get_all_products().filter(tags__name__in=[tag_name]).order_by('-updated_on')
-
 
 
 class Product(models.Model):
@@ -139,6 +138,60 @@ class Product(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('product_detail', (self.pk, ))
+
+class ArticleManager(models.Manager):
+    def get_all_articles(self):
+        return Article.objects.filter(status='pub')
+    def get_tag_articles(self):
+        return self.get_all_articles().filter(tags__name__in=[tag_name]).order_by('-updated_on')
+    
+
+
+class Article(models.Model):
+    title           = models.CharField(max_length=255, blank=False)
+    status          = models.CharField(u"发布状态", max_length=16, default='draft', choices=STATUS_CHOICES)
+    description     = models.CharField(max_length=255, blank=True, help_text="Please write some_things")
+    shared          = models.IntegerField(choices=SHARED_CHOICES,default=1)
+
+    '''
+    THUMBNAIL_SETTINGS = {'size':(ebook_settings.EBOOK_THUMBNAIL_SIZE,
+                                  ebook_settings.EBOOK_THUMBNAIL_SIZE),
+                          'crop':ebook_settings.EBOOK_THUMBNAIL_CROP_TYPE}
+    '''
+
+    tags = TaggableManager(blank=True)
+    created_by = models.ForeignKey(User)
+
+
+    rec = models.BooleanField(u'推荐', default=False)
+    rec_on = models.DateTimeField(blank=True, null=True)
+    num_views = models.IntegerField(u'浏览次数', default=0)
+    num_replies = models.PositiveSmallIntegerField(u'回复数', default=0)
+
+    num_favorites = models.IntegerField(u'收藏数',default=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    focus_date = models.CharField(u'初始日期', max_length=30, null=True, blank=True)
+    objects = ArticleManager()    
+     '''
+    update the Product models last update time.
+    :param commit,default set True
+    '''
+    def update_updated_on(self, commit=True):
+        self.updated_on = datetime.now()
+        if commit:
+            self.save()
+
+
+    '''
+    update the Comment count.
+    :param commit,default set True
+    '''
+    def update_num_replies(self, commit=True):
+        self.num_replies = self.comment_set.count()
+        if commit:
+    
+            self.save()
 
 
 class PdComment(models.Model):
