@@ -93,7 +93,7 @@ def index(request):
 
 def detail(request, pk):
     pdl = get_object_or_404(Product, pk=pk)
-    t=get_template('ebook/view_product.html')
+    t=get_template('ebook/detail.html')
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
 

@@ -199,6 +199,9 @@ INSTALLED_APPS = (
     'guardian',
     # mptt
     'mptt',
+    'kombu.transport.django',
+    'djcelery',
+    'dynamic_scraper',
     # Uncomment the next line to enable the admin:
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -225,8 +228,9 @@ INSTALLED_APPS = (
     'blog',
     'social',
     'qqweibo',
+    'dynamic_scraper',
 )
-
+    
 
 
 
@@ -405,6 +409,20 @@ ENABLE_EMAIL = False
 
 # Comment must contans Chinese
 ENABLE_COMMENT_CHN = False
+
+
+
+# django-celery settings
+import djcelery
+djcelery.setup_loader()
+
+BROKER_HOST = "localhost"
+BROKER_PORT = 5672
+BROKER_BACKEND = "django"
+BROKER_USER = "guest"
+BROKER_PASSWORD = "guest"
+BROKER_VHOST = "/"
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 #local settings
 try:
