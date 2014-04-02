@@ -3,12 +3,12 @@
 {% load ebook_widget_tags %}
 
 {% block title %}
-  {{ tl.title }}
+  {{ pdl.title }}
   - 精品书籍
 {% endblock %}
 
 {% block extra_header %}
-{{block.super}}
+{{ block.super }}
 <style type="text/css">
   .content hr {
     margin: 5px 0;
@@ -90,7 +90,7 @@
 
 {% block content %}
   <div class="content">
-
+	{% include "ebook/ebook.html" %}	
   <div>
     <div id="ckepop" style="float: right;">
       <span class="jiathis_txt">分享到：</span>
