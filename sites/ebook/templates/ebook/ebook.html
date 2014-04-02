@@ -1,0 +1,132 @@
+<div class="page">
+	<div id="main" class="clearfix">
+		<div class="row">
+			<div class="span2">
+				<div class="book-cover-col">
+	                <div class="book-cover-box wide">
+					<a href="{{ o.get_absolute_url }}">
+                        <img src="{{ o.get_absolute_url }}" class="bookcover">
+					</a>
+					<span class="ebook"></span>
+                </div>
+	            <div id="votediv" class="votecell">
+					<div class="vote">
+        				<a data-ajax="true" data-ajax-begin="$(&#39;#vote-1063&#39;).html(&#39;取消推荐&#39;)" data-ajax-mode="replace" data-ajax-update="#votediv" href="http://www.ituring.com.cn/book/vote/1063" id="vote-1063">推荐</a>
+
+        				<strong>8</strong>
+
+       					<a data-ajax="true" data-ajax-begin="$(&#39;#fav-1063&#39;).html(&#39;取消收藏&#39;)" data-ajax-mode="replace" data-ajax-update="#votediv" href="http://www.ituring.com.cn/book/fav/1063" id="fav-1063">收藏</a>
+    				</div>
+                </div>
+			</div>
+        </div>
+        <div class="span8">
+             <div class="book-header">
+                    <small><a href="#">{{ o.serialname }}</a></small>
+              		<h1>{{ o.title }}</h1><small>~{{ o.author }}
+				    </small>
+              <!-- JiaThis Button BEGIN -->
+                <div id="ckepop">
+                    <span class="jiathis_txt"></span><a class="jiathis_button_tsina" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina"></span></a><a class="jiathis_button_douban" title="分享到豆瓣"><span class="jiathis_txt jtico jtico_douban"></span></a><a class="jiathis_button_tqq" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq"></span></a><a class="jiathis_button_linkedin" title="分享到LinkedIn"><span class="jiathis_txt jtico jtico_linkedin"></span></a><a href="http://www.jiathis.com/share?uid=891559" target="_blank" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"></a><a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_21" title="累计分享6次">6</span></a>
+                </div>
+              <!-- JiaThis Button END -->
+            </div>
+            <div class="tabbable">
+              <ul class="nav nav-tabs tabs-primary" id="booktabs" bookid="1063">
+                <li class=""><a href="#ebook" data-toggle="tab">阅读内容</a></li>
+                <li class="active"><a href="#info" data-toggle="tab">图书信息</a></li>
+                <li><a href="#errata" data-toggle="tab">勘误</a></li>
+                <li><a href="#downloads" data-toggle="tab">随书下载</a></li>
+              </ul>
+               <div class="tab-content">
+					<div id="ebook" class="tab-pane" style="position: relative;">
+						{{ o.content }}
+					</div>
+					<div id="info" class="tab-pane active">
+							<table class="table table-condensed table-striped">
+                                <tbody>
+									<tr>
+										<th>系列书名</th>
+										<td>
+                                        {{ o.serialname }}
+										</td>
+									</tr>
+									<tr>
+										<th>书　　号</th>
+										<td>{{ o.serialno }}</td>
+									</tr>
+									<tr>
+										<th>出版日期</th>
+										<td>{{ o.publish_on }}</td>
+									</tr>
+									<tr>
+										<th>页　　数</th>
+										<td>{{  o.num_page }}</td>
+									</tr>
+									<tr>
+										<th>定　　价</th>
+										<td>
+											{{ o.price }} 元
+										</td>
+									</tr>									<tr>
+										<th>印刷方式</th>
+										<td>
+											{{ o.publish_type }}
+										</td>
+									</tr>
+									<tr>
+										<th>类　　别</th>
+										<td><a class="post-tag" href="http://www.ituring.com.cn/book/tagged/47" tagid="47">移动开发</a><a class="post-tag" href="http://www.ituring.com.cn/book/tagged/49" tagid="49">android</a>
+										</td>
+									</tr>
+								</tbody>
+						    </table>	
+                            <table class="table table-condensed table-striped">
+                                <tbody>
+								<tr>
+                                    <th class="span2">原书书名</th>
+                                    <td>
+                                            <a href="#" target="_blank"> {{ o.origin_name }} </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="span2">原书书号</th>
+                                    <td>{{ o.origin_num }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="span2">原书国家</th>
+                                    <td>{{ o.origin_country }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="span2">原书出版社</th>
+                                    <td>{{ o.origin_publish }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="span2">原书页数</th>
+                                    <td>{{ o.origin_num }}</td>
+                                </tr>
+								</tbody>
+							</table>
+                    </div>
+                    <div id="toc" class="tab-pane">
+                    </div>
+                    <div id="preface" class="tab-pane">
+                    </div>
+                    <div id="events" class="tab-pane">
+                    </div>
+                    <div id="errata" class="tab-pane">
+                    </div>
+                    <div id="articles" class="tab-pane">
+                    </div>
+                    <div id="downloads" class="tab-pane">
+                    </div>
+                    
+                </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+</div>
+
