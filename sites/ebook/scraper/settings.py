@@ -7,10 +7,11 @@
 #
 
 import os
-import imp
+import imp,sys
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 #imp.find_module('settings')
+sys.path.append(PROJECT_ROOT)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
 
