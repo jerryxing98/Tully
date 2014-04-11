@@ -1,3 +1,12 @@
+//$(function ()
+//{ //$('#btn_show_bk_media').popover({placement:'bottom'});
+//$("#show_bk_img").hide();
+//,template:'<div id="show_bk_img" class="simple popover fade bottom in" style="display: block; top: 693px; left: 426.5px;"><div class="arrow"></div><div class="popover-inner"><div class="popover-tab"><a class="close" href="###" onclick="$("#show_bk_img").hide()">×</a><p><a href="###" class="current">媒体文件</a></p></div><div class="popover-content"><p></p></div></div></div>'
+ //       alert("test");
+ //       $('#example').popover();
+//});
+
+
 var settings = { 
 			//nop     : 10, // The number of posts per scroll to be loaded
 			pagenum : 2, // Initial offset, begins at 0 in this case
@@ -125,8 +134,19 @@ function login_post_callback(data){
 function screenshot_callback(data){
 	switch(data.status){
 	case 'Success':
+	    html='<img src="/media/'+data.message[1]+'" class="img-polaroid">';
+	    //html=data.message[1]
+	    //$('#btn_show_bk_media').popover('show').content("erasdfasdf");
+		$('#btn_show_bk_media').attr("data-content",html);
+		//$('#btn_show_bk_media').popover('show');
+		$('hr').prepend('<div class="alert alert-error affix-top" data-dismiss="alert">成功! 恭喜你,你的URL有效,已经成功获得了预览图片.</div>');
 		break;
 	case 'Fail':
+			$('hr').prepend('<div class="alert alert-success affix-top" data-dismiss="alert">失败! 你的URL无效,无法获得预览图片.</div>');
+
+	html='不支持该类型媒体文件的预览'
+	$("#btn_show_bk_media").popover({ html: 'true',content:html,placement:'bottom',template:'<div id="show_bk_img" class="simple popover fade bottom in"><div class="arrow" style="position: absolute;left: 50%;"></div><div class="popover-inner"><div class="popover-tab"><a id="popoverclose" class="close" href="###" onclick="keep_popoverclose();">×</a><p><a href="###" class="current">媒体文件</a></p></div><div class="popover-content"><p></p></div></div></div>'});
+//$('#btn_show_bk_media').attr("data-content",'不支持该类型媒体文件的预览');
 		break;
 	case 'Error':
 		break;
@@ -134,11 +154,34 @@ function screenshot_callback(data){
 }
 
 
+
 function keep_screenshot(){
-	alert($('#id_link').val());
+	//alert($('#id_link').val());
 	Dajaxice.bookmark.ajax_screenshot(screenshot_callback,{'url':$('#id_link').val()});
 }
 
+
+function keep_popoverclose(){
+     $('#btn_show_bk_media').popover('hide');
+}	
+/*
+function keep_shot(){
+	//$('#btn_show_bk_media').popover('show');		 
+
+	//$("#btn_show_bk_media").click(function(){
+	alert("test");
+    showSimplePop($("#show_bk_img"));
+    //$("#insert_bk_img").hide();
+    var media = $('#id_media').val();
+    if (getMediaType(media) == 'picture') {
+      $('#show_bk_img .popover-content').html('<p><img src="' + media + '"/></p>')
+    } else {
+      $('#show_bk_img .popover-content').html('<p>不支持该类型媒体文件的预览</p>')
+    }
+  //});
+
+}
+*/
 function keep_login_get(){
 Dajaxice.account.ajax_login_get(login_get_callback,{'form':''});
 }
