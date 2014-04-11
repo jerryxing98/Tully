@@ -18,7 +18,7 @@ from  django.shortcuts import render_to_response
 from bookmark.models import Bookmark
 from ajax_validation.views import validate_form
 from thummer import get_thumbnail
-
+from thummer.models import WebpageSnapshot
 
 @dajaxice_register(method='GET')
 def ajax_recommend(request,page):
@@ -28,9 +28,16 @@ def ajax_recommend(request,page):
 @dajaxice_register(method='POST',name='bookmark.ajax_screenshot')
 def ajax_screenshot(request,url):
     if request.method=='POST':
-        thumbnail = get_thumbnail(url, '400x400')
-        print "success=========================="
-    
+        try:
+            thumbnail = get_thumbnail(url, '400x400')
+            status='Success'
+            #thumbnail = get_object_or_404(WebpageSnapshot, url=url)
+            print "image.url===================",str(thumbnail)
+            message=[url,str(thumbnail)]
+        except:
+            status='Fail'
+            message=[url,'errors:the image capture errors!']
+        return simplejson.dumps({'status':status,'message':message})
 
 
 @dajaxice_register(method='GET',name='bookmark.ajax_comment_get')
