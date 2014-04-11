@@ -3,11 +3,12 @@
     <div class="controls">
         {{ bf }}
         <p class="help-block">
-          <a  id="btn_insert_tl_img"  onclick="keep_screenshot()"> 
+          <a  id="btn_insert_bk_img"   onclick="keep_screenshot()"> 
             <i  class="icon-picture"></i>获取远程图片 
           </a>
           |
-          <a id="btn_show_tl_media" href="###"> 显示媒体文件 </a>
+          <a href="#" id="btn_show_bk_media"  rel="popover"> 显示媒体文件 </a>
+        </ul>
         </p>
         {% if errors %}
         <span class="help-inline">{{ errors }}</span>

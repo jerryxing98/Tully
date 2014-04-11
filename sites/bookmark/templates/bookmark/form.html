@@ -49,12 +49,15 @@
   </div>
 {% endblock %}
 
+
 {% block content %}
   <div class="content">
     <hr/>
+
     <form action="" enctype="multipart/form-data" method="post" class="form-horizontal">
       <fieldset>
         {% csrf_token %}
+
         {{ form.as_div }}
         <div class="form-actions" class="form-horizontal">
           <p>
