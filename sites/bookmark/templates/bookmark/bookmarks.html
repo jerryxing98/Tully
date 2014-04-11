@@ -53,8 +53,10 @@
 	   <div class="media" style="height: 180px;">
 	 
 		  <a class="pull-left" href="#">
-	        {% comment %}<img class="media-object"   src="{{ o.get_cover_url }}" alt=""> {% endcomment %}
+	        <img class="media-object"   src="{{ o.get_cover_url }}" alt="">
+	        {% comment %}
 			<img class="media-object"   src="{% thumbnail o.thumbnail 50x50 crop %}" value="{{ o.thumbnail.name }}" alt="">
+			{% endcomment %}
 	      </a>
 		  <div class="row">
 			 <div class="span5">
