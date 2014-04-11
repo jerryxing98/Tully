@@ -319,7 +319,7 @@ EMAIL_HOST_USER = 'jerry_xing8@126.com'
 EMAIL_HOST_PASSWORD = '5612259'
 DEFAULT_FROM_EMAIL = u'jerry_xing8@126.com'
 EMAIL_USE_TLS = False
-
+DEFAULT_DRIVER='PhantomJS'
 
 # Self define
 BLOG_THEME = 'coolblue'
