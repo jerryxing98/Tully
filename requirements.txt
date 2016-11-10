@@ -1,4 +1,4 @@
-Django>=1.4
+Django=1.6
 south
 dj-scaffold
 django-devserver

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 #coding=utf-8
 '''
 Created on 2012-9-6
@@ -13,15 +13,36 @@ import sys
 # pkg_resources is in setuptools
 from pkg_resources import parse_version
 
-packages = (('PIL', None, 'Image'),
+packages = (('Pillow', None, 'Image'),
             ('django-grappelli', '2.4.4', 'grappelli'),
             ('django-filebrowser', '3.5.2', 'filebrowser'),
-            ('django-mptt', None, 'mptt'),
-            ('south', None, 'south'),
-            ('pyqqweibo', None, 'qqweibo'))
-blog_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'ChineBlog')
-print 'current_blog_dir path %s' % blog_dir
-sys.path.insert(0, os.path.dirname(blog_dir))
+            ('django-mptt', '0.7.4', 'mptt'),
+            ('south', '1.0.0', 'south'),
+            ('pyqqweibo', None, 'qqweibo'),
+			('django-celery', None, 'celery'),
+			('django-devserver', None, 'devserver'),
+			('sorl-thumbnail', None,'sorl-thumbnail'),
+			('django-userena', '1.0.1', 'userena'),
+			('django-debug-toolbar', '1.0','toolbar'),
+			('django-taggit', None,'taggit'),
+			('django-taggit-templatetags', None,'templatetags'),
+			('django-pagination', None,'pagination'),
+			('django_compressor', '1.4','compressor'),
+			('Markdown', None,'markdown'),
+			('BeautifulSoup', None,'beautifulSoup'),
+			('raven', None,'raven'),
+			('django-helper', None,'helper'),
+			('django-bootstrap', None,'boostrap'),
+			('easy-thumbnails', None,'easy-thumbnails'),
+			('django-ajax-validation', None,'ajax-validation'),
+			('django-lb-attachments', None,'lb-attachments'),
+			('django-dajax', None,'ajax'),
+			('django-friendship',None,'friendship'),
+			('django-thummer', None,'thummer')
+			)
+jerryminds_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sites')
+print 'current_jerryminds_dir path %s' % jerryminds_dir
+sys.path.insert(0, os.path.dirname(jerryminds_dir))
 has_mistake = False
 
 def _call(*args, **kwargs):
@@ -40,7 +61,7 @@ def deal_mistake(func):
 def cmp_version(ver1, ver2):
     def _get_version(ver):
         if isinstance(ver, tuple):
-            ver = '.'.join((str(itm) for itm in ver))
+            ver = '.'.join((str(itm) for itm in ver[0:2]))
         return parse_version(str(ver))
     ver1 = _get_version(ver1)
     ver2 = _get_version(ver2)
@@ -61,7 +82,7 @@ def is_django_version_suitable():
         return True
 
 def install_package(name, version):
-    cmd = "easy_install %s" % name
+    cmd = "pip install %s" % name
     if version:
         cmd = cmd + "==%s" % version
     return _call(cmd, shell=True)
@@ -81,14 +102,13 @@ def setup_env():
 
 @deal_mistake            
 def setup_db():
-    from ChineBlog.settings import DATABASES
-    
+    from sites.settings import DATABASES
     db = DATABASES['default']['ENGINE'].split('.')[-1]
     if db == 'sqlite3':
-        db_dir = os.path.join(blog_dir, 'db')
+        db_dir = os.path.join(jerryminds_dir, 'db')
         if not os.path.exists(db_dir):
             os.mkdir(db_dir)
-        db_file = os.path.join(db_dir, 'chine.db')
+        db_file = os.path.join(db_dir, 'jerrymind.db')
         if os.path.exists(db_file) and os.path.getsize(db_file) > 0:
             print u'数据库已安装，将执行下一步...'
             print u'************************************'
@@ -101,17 +121,38 @@ def setup_db():
     print u'将开始数据库设置...'
     print u'请务必设置超级用户（superuser），并记住超级用户名!'
     # Change dir to blog directory.
-    os.chdir(blog_dir)
-    _call('python manage.py syncdb', shell=True)
-    _call('python manage.py migrate', shell=True)
+    os.chdir(jerryminds_dir)
+    if db == 'sqlite3':
+        db_dir = os.path.join(jerryminds_dir, 'db')
+        if not os.path.exists(db_dir):
+            os.mkdir(db_dir)
+        db_file = os.path.join(db_dir, 'jerrymind.db')
+        if os.path.exists(db_file) and os.path.getsize(db_file) > 0:
+            print u'数据库同步数据库...'
+            print u'************************************'
+            _call('python manage.py syncdb', shell=True)
+            print u'数据库迁移数据库...'
+            print u'************************************'
+            _call('python manage.py schemamigration timeline --auto', shell=True)
+            _call('python manage.py schemamigration ebook --auto', shell=True)
+            return
+        else:
+            print u'数据库同步数据库...'
+            print u'************************************'
+            _call('python manage.py syncdb', shell=True)
+            print u'数据库迁移数据库...'
+            print u'************************************'
+            _call('python manage.py schemamigration timeline --initial', shell=True)
+            _call('python manage.py schemamigration ebook --initial', shell=True)
+            return
     print u'./manage.py migrate完成'
     print u'数据库设置完成'
     print u'************************************'
-  
+
 @deal_mistake  
 def setup_local_settings():
     print u'开始进行本地设置'
-    local_settings_file = os.path.join(blog_dir, 'local_settings.py')
+    local_settings_file = os.path.join(jerryminds_dir, 'local_settings.py')
     if not os.path.exists(local_settings_file):
         admin = raw_input('Please input superuser name: ')
         admin_email = raw_input('Please input superuser email: ')
@@ -132,7 +173,7 @@ def setup_local_settings():
 
 @deal_mistake
 def run_server(port=None):
-    os.chdir(blog_dir)
+    os.chdir(jerryminds_dir)
     print u'开始启动服务，启动完成后可以访问：http://127.0.0.1:%d/来使用博客服务...' \
         % (8000 if not port else port)
     if port:

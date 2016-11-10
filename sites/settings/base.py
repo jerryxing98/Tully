@@ -1,20 +1,25 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 #coding=utf-8
 # Django settings for ChineBlog project.
 
 import os,sys
-
 from utils import get_path
+
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 HERE = os.path.join(HERE, '../')
+
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = True
 
+
 ADMINS = (
-	('Jerry','jerry_xing8@163.com'),
+    ('jerrymind', 'jerry.xing98@gmail.com'),
 )
+
 
 MANAGERS = ADMINS
 
@@ -22,7 +27,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         #'NAME': get_path(('db', 'chine.db')),                      # Or path to database file if using sqlite3.
-        'NAME':'db/chine.db',
+        'NAME':'db/jerrymind.db',
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -56,7 +61,6 @@ USE_L10N = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 #MEDIA_ROOT = get_path(('static', 'uploads')) if not DEBUG else get_path(('blog', 'static', 'uploads'))
-#MEDIA_ROOT = get_path('media')
 MEDIA_ROOT = get_path('media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -68,7 +72,11 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-#STATIC_ROOT = get_path('root_static')
+
+STATIC_ROOT = get_path('static') 
+#STATIC_ROOT = os.path.join(HERE, 'static')
+
+
 #STATIC_ROOT = os.path.join(HERE, 'collectedstatic')
 
 
@@ -86,6 +94,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    #os.path.join(HERE, 'root_static'),
     get_path('root_static'),
     #os.path.join(HERE, 'static/'),
     #get_path('static'),
@@ -201,7 +210,6 @@ INSTALLED_APPS = (
     'mptt',
     'kombu.transport.django',
     'djcelery',
-    'dynamic_scraper',
     # Uncomment the next line to enable the admin:
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -217,6 +225,7 @@ INSTALLED_APPS = (
     'userena.contrib.umessages',
     #'django-groundwork',
     'friendship',
+	'dynamic_scraper',
     'account',
     'timeline',
     'bookmark',
@@ -227,8 +236,7 @@ INSTALLED_APPS = (
     'attachments',
     'blog',
     'social',
-    'qqweibo',
-    'dynamic_scraper',
+    'qqweibo'
 )
     
 
@@ -330,7 +338,7 @@ BLOG_THEMES = ('coolblue', 'dopetrope')
 # Needed install: PIL
 # Grappelli
 GRAPPELLI_ADMIN_TITLE = "翻墙乐趣的博客"
-GRAPPELLI_INDEX_DASHBOARD = 'ChineBlog.dashboard.CustomIndexDashboard'
+GRAPPELLI_INDEX_DASHBOARD = 'sites.dashboard.CustomIndexDashboard'
 # Filebrowser
 FILEBROWSER_DIRECTORY = ''
 FILEBROWSER_VERSIONS = {
